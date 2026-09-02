@@ -1,0 +1,844 @@
+{
+  "name": "nist_ai_governance_golden_40",
+  "version": "1.0",
+  "collection": "nist_ai_governance",
+  "description": "Forty manually reviewed retrieval cases covering ten NIST publications on AI risk management, generative AI, adversarial ML, synthetic content, bias, explainability, standards, and evaluation.",
+  "annotation_policy": {
+    "relevance": "strict",
+    "created_by": "human-style manual annotation",
+    "notes": "Ground truth was assigned from complete Chroma chunk text and adjacent-chunk review, not from retrieval rank. A relevant chunk must directly answer the query or supply indispensable core evidence; topic-only, table-of-contents, bibliography, URL-only, and malformed table chunks are excluded. Unanswerable cases are retained for separate robustness evaluation and are not ordinary positive retrieval cases."
+  },
+  "test_cases": [
+    {
+      "id": "ai_rmf_use_case_profile",
+      "category": "exact_term",
+      "query": "In AI RMF 1.0, what is an AI RMF use-case profile?",
+      "answerable": true,
+      "reference_answer": "It is an implementation of AI RMF functions, categories, and subcategories for a specific setting or application, tailored to the user's requirements, risk tolerance, and resources.",
+      "expected_chunk_ids": ["afc3bec1_0123_d5573055"],
+      "expected_sources": ["01_ai_rmf_1_0.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "afc3bec1_0123_d5573055",
+          "source": "01_ai_rmf_1_0.pdf",
+          "reason": "This chunk directly defines AI RMF use-case profiles and explains their purpose.",
+          "supporting_text": "AI RMF use-case profiles are implementations of the AI RMF functions, categories, and subcategories for a specific setting or application"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "dev",
+      "notes": "Exact NIST framework term; the preceding chunk only introduces the section and is not needed."
+    },
+    {
+      "id": "gai_automation_bias_definition",
+      "category": "exact_term",
+      "query": "How does the Generative AI Profile describe automation bias?",
+      "answerable": true,
+      "reference_answer": "Automation bias is excessive deference to automated systems, including over-reliance on GAI or unjustifiably judging its content as higher quality than other sources; it can worsen confabulation and bias or homogenization risks.",
+      "expected_chunk_ids": ["95e05ede_0044_45f91009"],
+      "expected_sources": ["02_genai_profile.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "95e05ede_0044_45f91009",
+          "source": "02_genai_profile.pdf",
+          "reason": "This chunk explicitly names automation bias, defines it as excessive deference, and states which GAI risks it can exacerbate.",
+          "supporting_text": "This phenomenon is an example of automation bias, or excessive deference to automated systems. Automation bias can exacerbate other risks of GAI"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "dev",
+      "notes": "This fact is in a non-adjacent chunk from the Test confabulation evidence. It replaces the Dev confabulation case to prevent sharing chunk 95e05ede_0019_c30528ca across splits."
+    },
+    {
+      "id": "indirect_prompt_injection_resource_control",
+      "category": "exact_term",
+      "query": "In the AML taxonomy, how does RESOURCE CONTROL enable an INDIRECT PROMPT INJECTION attack against a RAG application?",
+      "answerable": true,
+      "reference_answer": "Resource control lets an attacker modify documents or web pages ingested at runtime, thereby injecting prompts through the data channel without directly interacting with the RAG application.",
+      "expected_chunk_ids": ["f051552b_0162_5d7fde6e", "f051552b_0184_ad84fd0a", "f051552b_0185_d19fff4f"],
+      "expected_sources": ["03_adversarial_ml.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "f051552b_0162_5d7fde6e",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "This taxonomy chunk defines resource control as modifying runtime-ingested resources such as documents or web pages.",
+          "supporting_text": "RESOURCE CONTROL: The attacker might modify resources ... that will be ingested by the GenAI model at runtime."
+        },
+        {
+          "chunk_id": "f051552b_0184_ad84fd0a",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "This chunk ties indirect prompt injection to resource control and the blurred data/instruction channels of retrieval.",
+          "supporting_text": "INDIRECT PROMPT INJECTION attacks are enabled by RESOURCE CONTROL so that an attacker can indirectly ... inject system"
+        },
+        {
+          "chunk_id": "f051552b_0185_d19fff4f",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "The continuation completes the split sentence and states that no direct interaction with the RAG application is needed.",
+          "supporting_text": "prompts without directly interacting with the RAG application"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "The resource-control definition appears in chunk 162; an adjacent-chunk dependency between chunks 184 and 185 completes how it injects prompts without direct RAG interaction."
+    },
+    {
+      "id": "glossary_polysemy_handling",
+      "category": "exact_term",
+      "query": "How did the NIST trustworthy AI glossary handle terms that exhibited polysemy?",
+      "answerable": true,
+      "reference_answer": "It added definitions in some cases because polysemous terms are used in multiple ways and with multiple meanings.",
+      "expected_chunk_ids": ["c62ece9a_0016_f16390b4"],
+      "expected_sources": ["04_trustworthy_ai_glossary.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c62ece9a_0016_f16390b4",
+          "source": "04_trustworthy_ai_glossary.pdf",
+          "reason": "This chunk explicitly states the treatment of polysemy in definition selection.",
+          "supporting_text": "additional defnitions were added when terms exhibited polysemy (were used in multiple ways and with multiple meanings)"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "Uses the publication's exact linguistic term rather than a generic request for definitions."
+    },
+    {
+      "id": "c2pa_provenance_specification",
+      "category": "exact_term",
+      "query": "What is C2PA, and what provenance information does its specification allow organizations to store and sign?",
+      "answerable": true,
+      "reference_answer": "C2PA is the Coalition on Content Provenance and Authenticity, an industry-led group whose specification supports storing and signing metadata about content origins, edit history, and chain of provenance.",
+      "expected_chunk_ids": ["582a908c_0091_a3b3de7e"],
+      "expected_sources": ["05_synthetic_content_risks.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "582a908c_0091_a3b3de7e",
+          "source": "05_synthetic_content_risks.pdf",
+          "reason": "The chunk expands C2PA and describes the metadata assertions supported by its specification.",
+          "supporting_text": "allows storing and signing metadata, including assertions about origins, edit history, and ... chain of provenance"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "The next chunk adds supported media and cryptographic details, but those are outside this query."
+    },
+    {
+      "id": "simpsons_paradox_bias_detection",
+      "category": "exact_term",
+      "query": "According to NIST SP 1270, how can SIMPSON'S PARADOX be used when examining AI datasets for bias?",
+      "answerable": true,
+      "reference_answer": "Analysis using Simpson's paradox can help detect bias in datasets and may sometimes help mitigate it.",
+      "expected_chunk_ids": ["22da1acb_0083_8aebc3d6"],
+      "expected_sources": ["06_ai_bias.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "22da1acb_0083_8aebc3d6",
+          "source": "06_ai_bias.pdf",
+          "reason": "It explicitly names Simpson's paradox as a dataset-bias detection and possible mitigation technique.",
+          "supporting_text": "analysis using statistical phenomena ... SIMPSON'S PARADOX ... can be used to detect bias in datasets"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "dev",
+      "notes": "Exact named statistical phenomenon intended to exercise lexical retrieval."
+    },
+    {
+      "id": "xai_knowledge_limits_principle",
+      "category": "exact_term",
+      "query": "What does the Knowledge Limits principle require of an explainable AI system?",
+      "answerable": true,
+      "reference_answer": "The system should operate only under conditions for which it was designed and only when it reaches sufficient confidence in its output.",
+      "expected_chunk_ids": ["a6cbb0d2_0006_6f78c76a"],
+      "expected_sources": ["07_explainable_ai_principles.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "a6cbb0d2_0006_6f78c76a",
+          "source": "07_explainable_ai_principles.pdf",
+          "reason": "This chunk lists and defines all four principles, including Knowledge Limits.",
+          "supporting_text": "A system only operates under conditions for which it was designed and when it reaches sufficient confidence in its output."
+        }
+      ],
+      "difficulty": "easy",
+      "split": "test",
+      "notes": "Exact principle name disambiguates it from explanation accuracy and meaningfulness."
+    },
+    {
+      "id": "fuzzy_trace_theory_precision",
+      "category": "exact_term",
+      "query": "What does Fuzzy-Trace Theory say about the precision of mental representations people prefer for decisions?",
+      "answerable": true,
+      "reference_answer": "People encode multiple representations in parallel at different precision levels and prefer the least precise representation that still makes a meaningful distinction.",
+      "expected_chunk_ids": ["4fcc5244_0056_da3220ca"],
+      "expected_sources": ["08_explainability_psychology.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "4fcc5244_0056_da3220ca",
+          "source": "08_explainability_psychology.pdf",
+          "reason": "It states the central Fuzzy-Trace Theory claim about parallel representations and preferred precision.",
+          "supporting_text": "humans encode stimuli into multiple mental representations simultaneously and in parallel"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "The query preserves the named theory while asking for its substantive claim."
+    },
+    {
+      "id": "horizontal_vertical_ai_standards",
+      "category": "exact_term",
+      "query": "How does the global AI standards plan distinguish horizontal standards from vertical standards?",
+      "answerable": true,
+      "reference_answer": "Horizontal standards apply across sectors, while vertical standards are designed for a particular sector's needs.",
+      "expected_chunk_ids": ["ed47770d_0009_013def74"],
+      "expected_sources": ["09_global_ai_standards.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "ed47770d_0009_013def74",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "The chunk defines both quoted scope terms in one sentence.",
+          "supporting_text": "“horizontal” (applicable across sectors) and “vertical” (designed for the needs of a particular sector)"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "test",
+      "notes": "Exact standards terminology; no other chunk is needed for the distinction."
+    },
+    {
+      "id": "briermax_definition",
+      "category": "exact_term",
+      "query": "In the NIST GenAI pilot, how is BrierMax defined and which direction is better for discriminator systems?",
+      "answerable": true,
+      "reference_answer": "BrierMax is the maximum of BrierT and BrierN; lower values are better for discriminators.",
+      "expected_chunk_ids": ["c7eb822c_0078_6b07384d"],
+      "expected_sources": ["10_genai_evaluation.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c7eb822c_0078_6b07384d",
+          "source": "10_genai_evaluation.pdf",
+          "reason": "It explicitly defines BrierMax and gives the preferred direction for discriminator performance.",
+          "supporting_text": "BrierMax ... is the maximum of BrierT and BrierN ... a lower BrierMax score is better for discriminators."
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Exact metric name and directional interpretation."
+    },
+    {
+      "id": "organizational_willingness_to_bear_risk",
+      "category": "semantic_paraphrase",
+      "query": "What does the framework call an organization's readiness to accept possible harm in pursuit of its objectives, and why can that readiness change?",
+      "answerable": true,
+      "reference_answer": "It is risk tolerance. It is context- and use-case-specific and may change as AI systems, policies, norms, priorities, and resource considerations evolve.",
+      "expected_chunk_ids": ["afc3bec1_0028_bde289f3"],
+      "expected_sources": ["01_ai_rmf_1_0.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "afc3bec1_0028_bde289f3",
+          "source": "01_ai_rmf_1_0.pdf",
+          "reason": "This section defines the concept and enumerates contextual reasons it varies over time and between organizations.",
+          "supporting_text": "readiness to bear the risk in order to achieve its objectives"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "The query describes the concept without using the source term 'risk tolerance'."
+    },
+    {
+      "id": "upstream_component_accountability_risk",
+      "category": "semantic_paraphrase",
+      "query": "Which generative-AI risk covers opaque incorporation of third-party data or components, weak supplier vetting, and reduced accountability for downstream users?",
+      "answerable": true,
+      "reference_answer": "Value Chain and Component Integration.",
+      "expected_chunk_ids": ["95e05ede_0025_405cff1d"],
+      "expected_sources": ["02_genai_profile.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "95e05ede_0025_405cff1d",
+          "source": "02_genai_profile.pdf",
+          "reason": "The chunk defines the risk using each of the described third-party integration and accountability conditions.",
+          "supporting_text": "Non-transparent or untraceable integration of upstream third-party components"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "The official risk label is omitted from the query; CBRN text later in the same chunk is unrelated."
+    },
+    {
+      "id": "infer_training_record_membership",
+      "category": "semantic_paraphrase",
+      "query": "What attack tries to determine whether one particular person's record was included in the dataset used to train a model?",
+      "answerable": true,
+      "reference_answer": "A membership inference attack.",
+      "expected_chunk_ids": ["f051552b_0127_6c93042b"],
+      "expected_sources": ["03_adversarial_ml.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "f051552b_0127_6c93042b",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "It directly defines the attack goal in terms of deciding whether a record was in the training dataset.",
+          "supporting_text": "determine whether a particular record or data sample was part of the training dataset"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Avoids the exact attack name and distinguishes the fact from model extraction and property inference."
+    },
+    {
+      "id": "glossary_multiple_meanings_goal",
+      "category": "semantic_paraphrase",
+      "query": "Why did NIST's trustworthy-AI vocabulary resource avoid declaring one authoritative meaning for every term?",
+      "answerable": true,
+      "reference_answer": "Because its goal is to build shared understanding across an interdisciplinary field by exposing users to the multiple meanings commonly used for a term, not imposing one meaning.",
+      "expected_chunk_ids": ["c62ece9a_0005_a8e75b54"],
+      "expected_sources": ["04_trustworthy_ai_glossary.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c62ece9a_0005_a8e75b54",
+          "source": "04_trustworthy_ai_glossary.pdf",
+          "reason": "The glossary aims section explicitly contrasts a single declared meaning with awareness of multiple interdisciplinary meanings.",
+          "supporting_text": "not to declare one specifc meaning ... but to provide ... broader awareness of the multiple meanings"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "Natural-language purpose question; it does not reuse the separate polysemy-handling fact."
+    },
+    {
+      "id": "transparency_without_guaranteed_trust",
+      "category": "semantic_paraphrase",
+      "query": "Why can knowing where a digital item came from still fail to make it trustworthy?",
+      "answerable": true,
+      "reference_answer": "Origin and history information can reveal misrepresentation but cannot prevent nontechnical misuse, such as placing legitimate content out of context; effectiveness and user interpretation also matter.",
+      "expected_chunk_ids": ["582a908c_0011_8074573f"],
+      "expected_sources": ["05_synthetic_content_risks.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "582a908c_0011_8074573f",
+          "source": "05_synthetic_content_risks.pdf",
+          "reason": "It explains both the non-guarantee and the out-of-context manipulation counterexample.",
+          "supporting_text": "may contribute to trustworthiness but does not guarantee it"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "The query avoids source phrases such as 'digital content transparency' and 'provenance'."
+    },
+    {
+      "id": "fairness_not_single_formula",
+      "category": "semantic_paraphrase",
+      "query": "Why can't one mathematical rule settle whether an AI system treats people fairly in every deployment context?",
+      "answerable": true,
+      "reference_answer": "Some mathematical fairness constraints are mutually incompatible except in special cases, and fairness is dynamic, social, application-specific, and context-specific, so it requires a socio-technical approach.",
+      "expected_chunk_ids": ["22da1acb_0139_768f7aa7"],
+      "expected_sources": ["06_ai_bias.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "22da1acb_0139_768f7aa7",
+          "source": "06_ai_bias.pdf",
+          "reason": "The chunk gives both the incompatibility argument and the contextual socio-technical conclusion.",
+          "supporting_text": "fairness cannot be reduced to a concise mathematical definition"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "Semantic question intended to retrieve the argument, not merely chunks containing the word fairness."
+    },
+    {
+      "id": "local_vs_global_posthoc_explanations",
+      "category": "semantic_paraphrase",
+      "query": "How do after-the-fact explanations for one prediction differ from an explanation that approximates an opaque model's behavior overall?",
+      "answerable": true,
+      "reference_answer": "A local post-hoc explanation covers a subset of decisions, usually one input or decision; a global explanation builds a model that approximates the non-interpretable model overall.",
+      "expected_chunk_ids": ["a6cbb0d2_0069_f73b1d5c"],
+      "expected_sources": ["07_explainable_ai_principles.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "a6cbb0d2_0069_f73b1d5c",
+          "source": "07_explainable_ai_principles.pdf",
+          "reason": "This chunk directly contrasts local and global post-hoc explanations.",
+          "supporting_text": "A local explanation explains a subset of decisions ... A global explanation produces a model that approximates the non-interpretable model."
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Uses descriptive phrasing rather than the source labels 'local' and 'global'."
+    },
+    {
+      "id": "tailor_outputs_to_user_differences",
+      "category": "semantic_paraphrase",
+      "query": "Why should the way a machine-learning system communicates its reasoning be adapted for different audiences?",
+      "answerable": true,
+      "reference_answer": "People systematically differ in skills and personality and therefore in their ability and preference to use detailed mechanistic explanations versus less precise, meaningful interpretations; outputs should be tailored accordingly.",
+      "expected_chunk_ids": ["4fcc5244_0003_5dbfe540", "4fcc5244_0004_43fb8431"],
+      "expected_sources": ["08_explainability_psychology.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "4fcc5244_0003_5dbfe540",
+          "source": "08_explainability_psychology.pdf",
+          "reason": "It establishes systematic individual differences in preferences for explanations versus interpretations.",
+          "supporting_text": "humans differ from one another in systematic ways ... detailed explanations versus less precise interpretations"
+        },
+        {
+          "chunk_id": "4fcc5244_0004_43fb8431",
+          "source": "08_explainability_psychology.pdf",
+          "reason": "The adjacent continuation connects those differences to the explicit design implication.",
+          "supporting_text": "This implies that system output should be tailored to different types of users."
+        }
+      ],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "Adjacent-chunk dependency: the evidence for the individual-difference premise and design conclusion is split across chunks 3 and 4. Audited against the source PDF: the gold answer is supported by the abstract, but the ingested raw text has missing-space corruption in the same passage and later sections also contain valid supporting evidence about differing audiences, intended users, and individual differences."
+    },
+    {
+      "id": "standards_activity_lifecycle",
+      "category": "semantic_paraphrase",
+      "query": "What stages of work does the U.S. plan include from the research before a formal AI standard exists through practical adoption support?",
+      "answerable": true,
+      "reference_answer": "It includes foundational technical work before standardization, collaborative consensus-standard development, and complementary implementation tools.",
+      "expected_chunk_ids": ["ed47770d_0009_013def74"],
+      "expected_sources": ["09_global_ai_standards.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "ed47770d_0009_013def74",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "It defines the full standards-activity lifecycle using exactly these three phases.",
+          "supporting_text": "foundational technical work ... developing a consensus standard ... complementary tools to help with implementing the standard"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "The query paraphrases 'full lifecycle' and asks for its substantive phases."
+    },
+    {
+      "id": "genai_pilot_scope_limitations",
+      "category": "semantic_paraphrase",
+      "query": "Why might the pilot's findings about spotting machine-written summaries not transfer cleanly to chat, creative prose, or jointly authored text?",
+      "answerable": true,
+      "reference_answer": "The pilot was limited to summarization and assumed a strict binary between AI and human authorship, whereas other text modalities and hybrid human-AI authorship require broader or more nuanced evaluation.",
+      "expected_chunk_ids": ["c7eb822c_0137_ca07ef81"],
+      "expected_sources": ["10_genai_evaluation.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c7eb822c_0137_ca07ef81",
+          "source": "10_genai_evaluation.pdf",
+          "reason": "The limitations section explicitly identifies both restricted text domains and the strict authorship assumption.",
+          "supporting_text": "focuses on summarization tasks ... Assumption of Strict AI-Vs.-Human Authorship Distinction"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "The question is a substantive paraphrase of two limitations, not a request for the section heading."
+    },
+    {
+      "id": "trustworthy_attribute_tradeoffs",
+      "category": "cross_document",
+      "query": "Why does AI RMF 1.0 reject treating a highly accurate but opaque system as trustworthy merely because it performs well?",
+      "answerable": true,
+      "reference_answer": "Trustworthiness characteristics influence one another; an accurate but opaque and uninterpretable system is undesirable, so risk management must balance tradeoffs across all characteristics.",
+      "expected_chunk_ids": ["afc3bec1_0047_6112e28c"],
+      "expected_sources": ["01_ai_rmf_1_0.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "afc3bec1_0047_6112e28c",
+          "source": "01_ai_rmf_1_0.pdf",
+          "reason": "This is the chunk that states the accurate-but-opaque example and the required balancing conclusion.",
+          "supporting_text": "accurate but opaque and uninterpretable systems ... are all undesirable"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "Explainability PDFs are plausible candidates, but only AI RMF supplies this explicit cross-characteristic tradeoff judgment."
+    },
+    {
+      "id": "confabulation_vs_information_integrity",
+      "category": "cross_document",
+      "query": "In the Generative AI Profile, how is a model confidently producing false content different from lowering the barrier to large-scale misinformation campaigns?",
+      "answerable": true,
+      "reference_answer": "The former is confabulation: confidently stated erroneous content that misleads users. The latter is information integrity risk: easier creation and exchange of content that blurs fact, opinion, and fiction or supports disinformation campaigns.",
+      "expected_chunk_ids": ["95e05ede_0019_c30528ca", "95e05ede_0021_0a459075"],
+      "expected_sources": ["02_genai_profile.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "95e05ede_0019_c30528ca",
+          "source": "02_genai_profile.pdf",
+          "reason": "It provides the strict definition of confabulation needed for the first half of the contrast.",
+          "supporting_text": "Confabulation: The production of confidently stated but erroneous or false content"
+        },
+        {
+          "chunk_id": "95e05ede_0021_0a459075",
+          "source": "02_genai_profile.pdf",
+          "reason": "It provides the distinct information-integrity definition needed for the second half.",
+          "supporting_text": "could be leveraged for large-scale dis- and mis-information campaigns"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "Two easily conflated GAI risks must both be retrieved; topic-only misinformation discussions elsewhere are not strict evidence."
+    },
+    {
+      "id": "evasion_vs_poisoning_stage",
+      "category": "cross_document",
+      "query": "At what lifecycle stage does an evasion attack act on minimally perturbed test samples, and at what stage does a poisoning attack act?",
+      "answerable": true,
+      "reference_answer": "Evasion changes test samples at deployment time, whereas poisoning attacks the training stage.",
+      "expected_chunk_ids": ["f051552b_0060_9b3c5ecf", "f051552b_0088_25a2e5ef"],
+      "expected_sources": ["03_adversarial_ml.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "f051552b_0060_9b3c5ecf",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "It defines evasion through minimally perturbed testing samples at deployment time.",
+          "supporting_text": "testing samples whose classifcation can be changed at deployment time ... with only minimal perturbation"
+        },
+        {
+          "chunk_id": "f051552b_0088_25a2e5ef",
+          "source": "03_adversarial_ml.pdf",
+          "reason": "It defines poisoning attacks as attacks during the ML algorithm's training stage.",
+          "supporting_text": "poisoning attacks ... are broadly defned as adversarial attacks during the training stage"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Reverified smoke fact. Both chunks are indispensable because the query asks for a lifecycle-stage contrast."
+    },
+    {
+      "id": "glossary_definition_source_selection",
+      "category": "cross_document",
+      "query": "Which source types did the NIST trustworthy AI glossary prioritize when selecting definitions, and what quality rationale was given?",
+      "answerable": true,
+      "reference_answer": "It prioritized NIST publications; IEEE, ISO, and ANSI standards; and peer-reviewed journals, conference proceedings, and textbooks across disciplines because those sources were well vetted and often well cited, while also using some other sources for dynamic terms and context.",
+      "expected_chunk_ids": ["c62ece9a_0013_e4fcfdcd"],
+      "expected_sources": ["04_trustworthy_ai_glossary.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c62ece9a_0013_e4fcfdcd",
+          "source": "04_trustworthy_ai_glossary.pdf",
+          "reason": "The definition-selection section names the preferred source classes and explains why they were chosen.",
+          "supporting_text": "NIST publications; standards published by IEEE, ISO, and ANSI; and peer-reviewed journals, conference proceedings, and textbooks"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Standards and bibliography chunks in other PDFs are plausible lexical distractors but do not describe this glossary's selection policy."
+    },
+    {
+      "id": "content_authentication_vs_detection",
+      "category": "cross_document",
+      "query": "How does the synthetic-content report distinguish content authentication from synthetic content detection?",
+      "answerable": true,
+      "reference_answer": "Content authentication uses provenance tracking, provenance detection, and labeling on non-synthetic content to establish authenticity. Synthetic content detection classifies whether content is synthetic, using provenance artifacts or other content characteristics.",
+      "expected_chunk_ids": ["582a908c_0023_412a28ed", "582a908c_0026_afd8d84c"],
+      "expected_sources": ["05_synthetic_content_risks.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "582a908c_0023_412a28ed",
+          "source": "05_synthetic_content_risks.pdf",
+          "reason": "It defines synthetic content detection and describes the evidence it may inspect.",
+          "supporting_text": "Techniques, methods, and tools used to classify whether a given piece of content is synthetic or not."
+        },
+        {
+          "chunk_id": "582a908c_0026_afd8d84c",
+          "source": "05_synthetic_content_risks.pdf",
+          "reason": "It narrowly defines content authentication and warns that it is not a synonym for all transparency techniques.",
+          "supporting_text": "using provenance data tracking methods to determine that a piece of content is authentic"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "The concepts overlap operationally, so both definition chunks are required; generic AI-detector material is not sufficient."
+    },
+    {
+      "id": "bias_beyond_dataset_representation",
+      "category": "cross_document",
+      "query": "Why does NIST SP 1270 say that balancing datasets and adjusting fairness algorithms alone are too narrow for managing AI bias?",
+      "answerable": true,
+      "reference_answer": "Because human and systemic institutional and societal factors are also significant sources of bias, management must look beyond the ML pipeline and include socio-technical and human-factor practices.",
+      "expected_chunk_ids": ["22da1acb_0005_dc962631"],
+      "expected_sources": ["06_ai_bias.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "22da1acb_0005_dc962631",
+          "source": "06_ai_bias.pdf",
+          "reason": "It explicitly identifies the overlooked human and systemic sources and calls for expanding beyond the ML pipeline.",
+          "supporting_text": "human and systemic institutional and societal factors are significant sources of AI bias as well"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "GAI harmful-bias and AI RMF fairness chunks are plausible distractors; this query asks for SP 1270's broader-source argument."
+    },
+    {
+      "id": "meaningful_vs_explanation_accuracy",
+      "category": "cross_document",
+      "query": "Which explainable-AI principle concerns whether a user can understand an explanation, and which instead concerns whether it faithfully reflects the system's actual process?",
+      "answerable": true,
+      "reference_answer": "Meaningful concerns understandability to intended consumers; Explanation Accuracy concerns faithful reflection of the reason for the output or the system's process.",
+      "expected_chunk_ids": ["a6cbb0d2_0006_6f78c76a"],
+      "expected_sources": ["07_explainable_ai_principles.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "a6cbb0d2_0006_6f78c76a",
+          "source": "07_explainable_ai_principles.pdf",
+          "reason": "The two potentially confused principles are defined side by side in this chunk.",
+          "supporting_text": "Meaningful ... understandable to the intended consumer(s) ... Explanation Accuracy ... accurately reflects the system's process."
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "The psychology publication discusses a related interpretation/explanation distinction, but only this chunk maps the two NISTIR 8312 principle names."
+    },
+    {
+      "id": "interpretation_vs_mechanistic_explanation",
+      "category": "cross_document",
+      "query": "In NISTIR 8367, what separates contextualizing a model output for users from describing the mechanism that produced it?",
+      "answerable": true,
+      "reference_answer": "Interpretation contextualizes output relative to system purpose and users' goals, values, and preferences; explanation accurately describes the mechanism or implementation that led to the output.",
+      "expected_chunk_ids": ["4fcc5244_0003_5dbfe540"],
+      "expected_sources": ["08_explainability_psychology.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "4fcc5244_0003_5dbfe540",
+          "source": "08_explainability_psychology.pdf",
+          "reason": "The abstract directly defines and contrasts interpretation and explanation in these terms.",
+          "supporting_text": "interpretation refers to the ability to contextualize a model's output ... explanation ... accurately describe the mechanism"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "NISTIR 8312 contains nearby explainability vocabulary, but this specific psychological distinction belongs to NISTIR 8367."
+    },
+    {
+      "id": "standards_readiness_tevv_vs_explainability",
+      "category": "cross_document",
+      "query": "Which AI standards topics does the global engagement plan place in the urgent, ready tier, and how does that differ from interpretability and explainability?",
+      "answerable": true,
+      "reference_answer": "The ready tier includes terminology and taxonomy, TEVV methods and metrics, synthetic-content origin transparency, risk management, security and privacy, AI-actor transparency, incident response, and training-data practices. Interpretability and explainability are in the third tier, needing significant foundational work.",
+      "expected_chunk_ids": ["ed47770d_0013_2858bdf3", "ed47770d_0014_1808ee57"],
+      "expected_sources": ["09_global_ai_standards.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "ed47770d_0013_2858bdf3",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "It defines the tiering basis and provides the complete urgent-and-ready topic list.",
+          "supporting_text": "Urgently needed and ready for standardization ... terminology and taxonomy; testing, evaluation, verification, and validation"
+        },
+        {
+          "chunk_id": "ed47770d_0014_1808ee57",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "The adjacent chunk places interpretability and explainability in the tier requiring significant foundational work.",
+          "supporting_text": "Needed, but requiring significant foundational work ... interpretability and explainability"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "Adjacent-chunk dependency. Many PDFs discuss TEVV or explainability, but only these chunks assign standards-readiness tiers."
+    },
+    {
+      "id": "auc_random_and_perfect_detector",
+      "category": "cross_document",
+      "query": "For the GenAI pilot's text detector, what AUC values correspond to random guessing and perfect discrimination?",
+      "answerable": true,
+      "reference_answer": "An AUC of 0.5 corresponds to random guessing, and an AUC of 1 corresponds to perfect discrimination with no false positives or false negatives.",
+      "expected_chunk_ids": ["c7eb822c_0072_5bb1028c"],
+      "expected_sources": ["10_genai_evaluation.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c7eb822c_0072_5bb1028c",
+          "source": "10_genai_evaluation.pdf",
+          "reason": "The metric section explicitly anchors both random and perfect AUC values.",
+          "supporting_text": "random guessing has an AUC of 0.5 ... A perfect system ... has an AUC of 1"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "Synthetic-content detection chunks are plausible candidates, but this query requires the pilot's quantitative metric interpretation."
+    },
+    {
+      "id": "ai_rmf_core_functions",
+      "category": "structured_fact",
+      "query": "What are the four core functions of the AI Risk Management Framework?",
+      "answerable": true,
+      "reference_answer": "GOVERN, MAP, MEASURE, and MANAGE.",
+      "expected_chunk_ids": ["afc3bec1_0017_2b6c5094", "afc3bec1_0071_592e0754"],
+      "expected_sources": ["01_ai_rmf_1_0.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "afc3bec1_0017_2b6c5094",
+          "source": "01_ai_rmf_1_0.pdf",
+          "reason": "The executive material explicitly enumerates all four functions.",
+          "supporting_text": "These functions – GOVERN, MAP, MEASURE, and MANAGE"
+        },
+        {
+          "chunk_id": "afc3bec1_0071_592e0754",
+          "source": "01_ai_rmf_1_0.pdf",
+          "reason": "The Core section independently and directly enumerates all four functions.",
+          "supporting_text": "the Core is composed of four functions: GOVERN, MAP, MEASURE, and MANAGE"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "dev",
+      "notes": "Reverified smoke case. Both chunks independently satisfy strict relevance and are retained as multiple valid targets, not as an adjacency dependency."
+    },
+    {
+      "id": "gai_pwg_four_considerations",
+      "category": "structured_fact",
+      "query": "What four primary considerations limited the focus of the Generative AI Public Working Group?",
+      "answerable": true,
+      "reference_answer": "Governance, Content Provenance, Pre-deployment Testing, and Incident Disclosure.",
+      "expected_chunk_ids": ["95e05ede_0009_7215ff3a"],
+      "expected_sources": ["02_genai_profile.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "95e05ede_0009_7215ff3a",
+          "source": "02_genai_profile.pdf",
+          "reason": "It gives the complete four-item GAI PWG scope list in ordinary parsed text.",
+          "supporting_text": "Governance, Content Provenance, Pre-deployment Testing, and Incident Disclosure"
+        }
+      ],
+      "difficulty": "easy",
+      "split": "test",
+      "notes": "Verified as text in the ingested chunk, not an image-only list."
+    },
+    {
+      "id": "glossary_entry_fields",
+      "category": "structured_fact",
+      "query": "After the trustworthy AI glossary grew to approximately 500 terms, what definition and annotation fields could each term entry contain?",
+      "answerable": true,
+      "reference_answer": "Each term had space for up to five definitions, plus fields for legal-specific definitions, synonymous terms, related terms, and clarifying notes.",
+      "expected_chunk_ids": ["c62ece9a_0012_9ab806b4"],
+      "expected_sources": ["04_trustworthy_ai_glossary.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "c62ece9a_0012_9ab806b4",
+          "source": "04_trustworthy_ai_glossary.pdf",
+          "reason": "This chunk gives the approximate glossary size and enumerates every requested entry field in parsed text.",
+          "supporting_text": "each term provided the space for up to fve different ... as well as a column each for legal-specifc defnitions, synonymous terms, related terms, and a space for clarifying notes"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "dev",
+      "notes": "The list is selectable text rather than a figure. This replaces the Dev glossary-count case to prevent sharing chunk c62ece9a_0016_f16390b4 with a Test case."
+    },
+    {
+      "id": "debiasing_processing_stages",
+      "category": "structured_fact",
+      "query": "What are the three processing-stage categories of algorithmic debiasing methods, and what does each change?",
+      "answerable": true,
+      "reference_answer": "Pre-processing transforms training data; in-processing modifies the learning algorithm, objective, or constraints during training; post-processing treats the learned model as a black box and alters predictions using a function derived from holdout performance.",
+      "expected_chunk_ids": ["22da1acb_0125_03393552", "22da1acb_0126_a4a4a1bf"],
+      "expected_sources": ["06_ai_bias.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "22da1acb_0125_03393552",
+          "source": "06_ai_bias.pdf",
+          "reason": "It introduces the three-category list and fully defines pre-processing and in-processing.",
+          "supporting_text": "Pre-processing: transforming the data ... In-processing: techniques that modify the algorithms"
+        },
+        {
+          "chunk_id": "22da1acb_0126_a4a4a1bf",
+          "source": "06_ai_bias.pdf",
+          "reason": "The adjacent continuation supplies the third category and its holdout-based prediction adjustment.",
+          "supporting_text": "Post-processing ... the learned model is treated as a black box and its predictions are altered"
+        }
+      ],
+      "difficulty": "medium",
+      "split": "test",
+      "notes": "Adjacent-chunk dependency: the numbered list is split after item 2."
+    },
+    {
+      "id": "global_standards_four_outcomes",
+      "category": "structured_fact",
+      "query": "What four sets of outcomes are the global AI standards engagement activities intended to further?",
+      "answerable": true,
+      "reference_answer": "Scientifically sound, accessible, adoptable standards; standards reflecting diverse global stakeholders; open, transparent, consensus-driven development; and stronger international relationships through standards engagement.",
+      "expected_chunk_ids": ["ed47770d_0010_64e4631a", "ed47770d_0011_fd2ee545", "ed47770d_0012_a47e51bb"],
+      "expected_sources": ["09_global_ai_standards.pdf"],
+      "evidence": [
+        {
+          "chunk_id": "ed47770d_0010_64e4631a",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "It contains the first outcome concerning scientifically sound, accessible, adoptable standards.",
+          "supporting_text": "Scientifically sound AI standards that are accessible and amenable to adoption"
+        },
+        {
+          "chunk_id": "ed47770d_0011_fd2ee545",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "It contains the second outcome concerning diverse global stakeholder needs and inputs.",
+          "supporting_text": "AI standards that reflect the needs and inputs of diverse global stakeholders"
+        },
+        {
+          "chunk_id": "ed47770d_0012_a47e51bb",
+          "source": "09_global_ai_standards.pdf",
+          "reason": "It contains the third and fourth outcomes: open consensus processes and strengthened international relationships.",
+          "supporting_text": "open, transparent, and consensus-driven ... International relationships that are strengthened"
+        }
+      ],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "Adjacent-chunk dependency across three chunks because the four-item list crosses two chunk boundaries."
+    },
+    {
+      "id": "eu_ai_act_prohibited_practices",
+      "category": "unanswerable",
+      "query": "What are all prohibited AI practices under the current EU AI Act, including the article numbers for each prohibition?",
+      "answerable": false,
+      "reference_answer": null,
+      "expected_chunk_ids": [],
+      "expected_sources": [],
+      "evidence": [],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "The ten-document corpus is NIST-focused and does not reproduce the current EU AI Act's complete prohibited-practices provisions or article mapping. Topic-adjacent governance text is not an answer."
+    },
+    {
+      "id": "iso_42001_certification_audit_steps",
+      "category": "unanswerable",
+      "query": "What exact audit steps and evidence are required to obtain ISO/IEC 42001 certification?",
+      "answerable": false,
+      "reference_answer": null,
+      "expected_chunk_ids": [],
+      "expected_sources": [],
+      "evidence": [],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "The standards plan may mention standards organizations or related work, but the corpus does not provide an ISO/IEC 42001 certification audit procedure."
+    },
+    {
+      "id": "state_ai_law_effective_dates",
+      "category": "unanswerable",
+      "query": "Which U.S. state AI laws take effect in 2026, and what are their exact enforcement dates and penalties?",
+      "answerable": false,
+      "reference_answer": null,
+      "expected_chunk_ids": [],
+      "expected_sources": [],
+      "evidence": [],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "No document provides a current state-by-state legal inventory, effective-date table, or penalty schedule."
+    },
+    {
+      "id": "most_important_ai_risk_all_sectors",
+      "category": "unanswerable",
+      "query": "What is the single most important AI risk for every organization and sector?",
+      "answerable": false,
+      "reference_answer": null,
+      "expected_chunk_ids": [],
+      "expected_sources": [],
+      "evidence": [],
+      "difficulty": "hard",
+      "split": "test",
+      "notes": "The query lacks system and context information, and the corpus emphasizes contextual risk prioritization rather than a universal ranked risk. No chunk can uniquely answer it."
+    },
+    {
+      "id": "universal_best_transparency_technique",
+      "category": "unanswerable",
+      "query": "Which one digital content transparency technique is best for every content modality, threat model, and user population?",
+      "answerable": false,
+      "reference_answer": null,
+      "expected_chunk_ids": [],
+      "expected_sources": [],
+      "evidence": [],
+      "difficulty": "hard",
+      "split": "dev",
+      "notes": "The synthetic-content report compares techniques and context-dependent tradeoffs but does not identify a universal winner across all modalities, threats, and users."
+    }
+  ]
+}

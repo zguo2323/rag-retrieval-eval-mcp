@@ -1,0 +1,4244 @@
+{
+  "benchmark": "nist_ai_governance_golden_40",
+  "collection": "nist_ai_governance",
+  "split": "dev",
+  "query_count": 24,
+  "answerable_query_count": 21,
+  "unanswerable_query_count": 3,
+  "metric_cutoff": 5,
+  "query_expansion": false,
+  "llm_query_expansion": true,
+  "candidate_top_k": {
+    "dense": 20,
+    "sparse": 20,
+    "fusion": 20,
+    "rerank": 5
+  },
+  "aggregate": {
+    "dense": {
+      "hit_rate@5": 0.6190476190476191,
+      "mrr@5": 0.46825396825396826,
+      "recall@5": 0.5873015873015873,
+      "ndcg@5": 0.48395871753656083,
+      "p50_ms": 846.915853995597,
+      "p95_ms": 1607.3071043239902
+    },
+    "sparse": {
+      "hit_rate@5": 0.7142857142857143,
+      "mrr@5": 0.5349206349206349,
+      "recall@5": 0.6587301587301587,
+      "ndcg@5": 0.5448736760756638,
+      "p50_ms": 140.28560448787175,
+      "p95_ms": 427.53096257802093
+    },
+    "fusion": {
+      "hit_rate@5": 0.6666666666666666,
+      "mrr@5": 0.5555555555555556,
+      "recall@5": 0.6111111111111112,
+      "ndcg@5": 0.5470029184204169,
+      "p50_ms": 0.1549794978927821,
+      "p95_ms": 0.22972506121732292
+    },
+    "rerank": {
+      "hit_rate@5": 0.7619047619047619,
+      "mrr@5": 0.6126984126984127,
+      "recall@5": 0.6825396825396826,
+      "ndcg@5": 0.5970338966451619,
+      "p50_ms": 341.30720800021663,
+      "p95_ms": 594.4860087882262
+    }
+  },
+  "latency": {
+    "end_to_end_search_p50_ms": 2957.441667007515,
+    "end_to_end_search_p95_ms": 4573.826201813062,
+    "query_expansion_p50_ms": 2003.9568335050717,
+    "query_expansion_p95_ms": 2571.484107998549
+  },
+  "rerank_analysis": {
+    "mean_mrr_delta": 0.05714285714285715,
+    "improved_queries": 4,
+    "unchanged_queries": 16,
+    "degraded_queries": 1,
+    "candidate_retention_mean": 0.7894736842105263,
+    "candidate_retention_eligible_queries": 19,
+    "candidate_opportunity_loss_queries": 5
+  },
+  "fusion_weight_sweep": {},
+  "candidate_failure_counts": {
+    "dual_retrieval_miss": 1,
+    "fusion_drop": 1,
+    "partial_fusion_recall": 2,
+    "fusion_recalled": 17
+  },
+  "fallback_rate": 0.0,
+  "unanswerable_diagnostics": [
+    {
+      "id": "eu_ai_act_prohibited_practices",
+      "query": "What are all prohibited AI practices under the current EU AI Act, including the article numbers for each prohibition?",
+      "returned_counts": {
+        "dense": 5,
+        "sparse": 5,
+        "fusion": 5,
+        "rerank": 5
+      },
+      "top_ids": {
+        "dense": [
+          "a6cbb0d2_0019_81ff719f",
+          "ed47770d_0106_6f679608",
+          "ed47770d_0034_9ad0651c",
+          "ed47770d_0112_0e2e9ec7",
+          "f051552b_0025_10b7260a"
+        ],
+        "sparse": [
+          "ed47770d_0118_7967072b",
+          "ed47770d_0120_ae112e5f",
+          "ed47770d_0119_30fba772",
+          "22da1acb_0038_6e4bec46",
+          "ed47770d_0049_b6a8e38c"
+        ],
+        "fusion": [
+          "a6cbb0d2_0019_81ff719f",
+          "f051552b_0002_758c2af4",
+          "ed47770d_0118_7967072b",
+          "ed47770d_0106_6f679608",
+          "ed47770d_0120_ae112e5f"
+        ],
+        "rerank": [
+          "ed47770d_0118_7967072b",
+          "f051552b_0002_758c2af4",
+          "a6cbb0d2_0019_81ff719f",
+          "ed47770d_0119_30fba772",
+          "ed47770d_0034_9ad0651c"
+        ]
+      },
+      "note": "Diagnostic only: retrieval has no abstention decision yet."
+    },
+    {
+      "id": "state_ai_law_effective_dates",
+      "query": "Which U.S. state AI laws take effect in 2026, and what are their exact enforcement dates and penalties?",
+      "returned_counts": {
+        "dense": 5,
+        "sparse": 5,
+        "fusion": 5,
+        "rerank": 5
+      },
+      "top_ids": {
+        "dense": [
+          "582a908c_0204_68e3530b",
+          "582a908c_0230_1cc5c179",
+          "95e05ede_0202_122d527b",
+          "ed47770d_0034_9ad0651c",
+          "f051552b_0025_10b7260a"
+        ],
+        "sparse": [
+          "22da1acb_0035_53e5a4fa",
+          "582a908c_0194_b5688175",
+          "c7eb822c_0036_4825b91a",
+          "a6cbb0d2_0113_9304619d",
+          "a6cbb0d2_0068_e3ad4f45"
+        ],
+        "fusion": [
+          "582a908c_0231_b27dcb61",
+          "22da1acb_0035_53e5a4fa",
+          "582a908c_0204_68e3530b",
+          "582a908c_0194_b5688175",
+          "582a908c_0230_1cc5c179"
+        ],
+        "rerank": [
+          "582a908c_0204_68e3530b",
+          "ed47770d_0021_c48e19b1",
+          "ed47770d_0034_9ad0651c",
+          "582a908c_0231_b27dcb61",
+          "582a908c_0230_1cc5c179"
+        ]
+      },
+      "note": "Diagnostic only: retrieval has no abstention decision yet."
+    },
+    {
+      "id": "universal_best_transparency_technique",
+      "query": "Which one digital content transparency technique is best for every content modality, threat model, and user population?",
+      "returned_counts": {
+        "dense": 5,
+        "sparse": 5,
+        "fusion": 5,
+        "rerank": 5
+      },
+      "top_ids": {
+        "dense": [
+          "582a908c_0011_8074573f",
+          "582a908c_0197_7a54d273",
+          "582a908c_0025_9edd4177",
+          "582a908c_0010_6617a617",
+          "582a908c_0198_5eabbb43"
+        ],
+        "sparse": [
+          "582a908c_0004_419a8ff2",
+          "ed47770d_0052_381698b7",
+          "582a908c_0197_7a54d273",
+          "582a908c_0198_5eabbb43",
+          "582a908c_0003_f448ae59"
+        ],
+        "fusion": [
+          "582a908c_0197_7a54d273",
+          "582a908c_0004_419a8ff2",
+          "582a908c_0198_5eabbb43",
+          "582a908c_0293_463cf767",
+          "582a908c_0011_8074573f"
+        ],
+        "rerank": [
+          "582a908c_0197_7a54d273",
+          "582a908c_0198_5eabbb43",
+          "582a908c_0143_035d9cc6",
+          "582a908c_0199_b8312f63",
+          "582a908c_0004_419a8ff2"
+        ]
+      },
+      "note": "Diagnostic only: retrieval has no abstention decision yet."
+    }
+  ],
+  "queries": [
+    {
+      "id": "ai_rmf_use_case_profile",
+      "query": "In AI RMF 1.0, what is an AI RMF use-case profile?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "afc3bec1_0123_d5573055"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "afc3bec1_0123_d5573055": 1
+        },
+        "sparse": {
+          "afc3bec1_0123_d5573055": 1
+        },
+        "fusion": {
+          "afc3bec1_0123_d5573055": 1
+        },
+        "rerank": {
+          "afc3bec1_0123_d5573055": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST AI RMF 1.0 use-case profile definition",
+        "elapsed_ms": 2479.476708045695,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "afc3bec1_0123_d5573055",
+            "afc3bec1_0019_9116c211",
+            "582a908c_0247_923e1298",
+            "afc3bec1_0000_40caeb6b",
+            "95e05ede_0203_6b90ca73"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0123_d5573055",
+            "afc3bec1_0000_40caeb6b",
+            "582a908c_0247_923e1298",
+            "afc3bec1_0019_9116c211",
+            "afc3bec1_0002_7cf5aa35"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0123_d5573055",
+            "afc3bec1_0000_40caeb6b",
+            "afc3bec1_0019_9116c211",
+            "582a908c_0247_923e1298",
+            "afc3bec1_0124_1717e344"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "afc3bec1_0123_d5573055",
+            "afc3bec1_0124_1717e344",
+            "582a908c_0195_973c2dc9",
+            "afc3bec1_0019_9116c211",
+            "afc3bec1_0150_bbea2b28"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "afc3bec1_0123_d5573055",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 6.460131645202637,
+            "input_token_count": 240,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0123_d5573055",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 6.460131645202637,
+            "input_token_count": 240,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "afc3bec1_0124_1717e344",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.662123203277588,
+            "input_token_count": 233,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0195_973c2dc9",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 3.873560905456543,
+            "input_token_count": 204,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0073_c22a1463",
+            "fusion_rank": 14,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": 3.781825542449951,
+            "input_token_count": 232,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0150_bbea2b28",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 3.520172119140625,
+            "input_token_count": 240,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "gai_automation_bias_definition",
+      "query": "How does the Generative AI Profile describe automation bias?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "95e05ede_0044_45f91009"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "95e05ede_0044_45f91009": 4
+        },
+        "sparse": {
+          "95e05ede_0044_45f91009": 5
+        },
+        "fusion": {
+          "95e05ede_0044_45f91009": 1
+        },
+        "rerank": {
+          "95e05ede_0044_45f91009": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "\"Generative AI Profile\" automation bias description definition",
+        "elapsed_ms": 1961.5407910314389,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "95e05ede_0040_6f091151",
+            "c7eb822c_0026_b40818a0",
+            "95e05ede_0006_f5196de8",
+            "95e05ede_0044_45f91009",
+            "95e05ede_0008_ebe70a08"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.25,
+            "recall@5": 1.0,
+            "ndcg@5": 0.43067655807339306
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0247_923e1298",
+            "95e05ede_0000_c63e4f41",
+            "22da1acb_0119_a577b2e5",
+            "22da1acb_0118_29c2d724",
+            "95e05ede_0044_45f91009"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 1.0,
+            "ndcg@5": 0.38685280723454163
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "95e05ede_0044_45f91009",
+            "582a908c_0247_923e1298",
+            "95e05ede_0040_6f091151",
+            "95e05ede_0000_c63e4f41",
+            "c7eb822c_0026_b40818a0"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "95e05ede_0044_45f91009",
+            "95e05ede_0040_6f091151",
+            "582a908c_0247_923e1298",
+            "c7eb822c_0026_b40818a0",
+            "22da1acb_0030_e72e4a04"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "95e05ede_0044_45f91009",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.1443203687667847,
+            "input_token_count": 170,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "95e05ede_0040_6f091151",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.177742838859558,
+            "input_token_count": 217,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0044_45f91009",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.1443203687667847,
+            "input_token_count": 170,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "c7eb822c_0003_5dcd184d",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 3,
+            "combined_rank": 6,
+            "cross_encoder_score": 0.6109268069267273,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0030_e72e4a04",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 4,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.5905662178993225,
+            "input_token_count": 227,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0148_8e82f2b3",
+            "fusion_rank": 18,
+            "cross_encoder_rank": 5,
+            "combined_rank": 10,
+            "cross_encoder_score": 0.5773004293441772,
+            "input_token_count": 208,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "c2pa_provenance_specification",
+      "query": "What is C2PA, and what provenance information does its specification allow organizations to store and sign?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "582a908c_0091_a3b3de7e"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "582a908c_0091_a3b3de7e": 2
+        },
+        "sparse": {
+          "582a908c_0091_a3b3de7e": 2
+        },
+        "fusion": {
+          "582a908c_0091_a3b3de7e": 2
+        },
+        "rerank": {
+          "582a908c_0091_a3b3de7e": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "C2PA specification signed provenance metadata assertions ingredients actions content credentials",
+        "elapsed_ms": 2018.6291669961065,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0092_640a105d",
+            "582a908c_0091_a3b3de7e",
+            "582a908c_0095_ca60c3f0",
+            "582a908c_0202_32d33c55",
+            "582a908c_0268_7487ead8"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0269_d842eb05",
+            "582a908c_0091_a3b3de7e",
+            "582a908c_0092_640a105d",
+            "582a908c_0268_7487ead8",
+            "582a908c_0201_f4cdaaf8"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0092_640a105d",
+            "582a908c_0091_a3b3de7e",
+            "582a908c_0095_ca60c3f0",
+            "582a908c_0268_7487ead8",
+            "582a908c_0202_32d33c55"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0092_640a105d",
+            "582a908c_0091_a3b3de7e",
+            "582a908c_0095_ca60c3f0",
+            "582a908c_0268_7487ead8",
+            "582a908c_0093_a8a6d82c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "582a908c_0091_a3b3de7e",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 6.00571870803833,
+            "input_token_count": 202,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "582a908c_0092_640a105d",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 6.300807952880859,
+            "input_token_count": 213,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0091_a3b3de7e",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 6.00571870803833,
+            "input_token_count": 202,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "582a908c_0095_ca60c3f0",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.8793846368789673,
+            "input_token_count": 199,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0093_a8a6d82c",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 4,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.9092330932617188,
+            "input_token_count": 204,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0268_7487ead8",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": -0.3846413791179657,
+            "input_token_count": 319,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "simpsons_paradox_bias_detection",
+      "query": "According to NIST SP 1270, how can SIMPSON'S PARADOX be used when examining AI datasets for bias?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "22da1acb_0083_8aebc3d6"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "22da1acb_0083_8aebc3d6": 6
+        },
+        "sparse": {
+          "22da1acb_0083_8aebc3d6": 1
+        },
+        "fusion": {
+          "22da1acb_0083_8aebc3d6": 3
+        },
+        "rerank": {
+          "22da1acb_0083_8aebc3d6": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST SP 1270 Simpson’s paradox AI dataset bias subgroup analysis aggregation",
+        "elapsed_ms": 2364.562125003431,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "22da1acb_0000_226885c3",
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0073_98e035b0",
+            "22da1acb_0082_334bb9e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "22da1acb_0083_8aebc3d6",
+            "22da1acb_0000_226885c3",
+            "22da1acb_0002_a74ddff0",
+            "22da1acb_0001_1d7157d9",
+            "582a908c_0297_1b10d720"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "22da1acb_0000_226885c3",
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0083_8aebc3d6",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0082_334bb9e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 1.0,
+            "ndcg@5": 0.5
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "22da1acb_0083_8aebc3d6",
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0000_226885c3",
+            "22da1acb_0082_334bb9e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.6666666666666667,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "22da1acb_0083_8aebc3d6",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.8040040731430054,
+            "input_token_count": 233,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "22da1acb_0083_8aebc3d6",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.8040040731430054,
+            "input_token_count": 233,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "22da1acb_0001_1d7157d9",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 0.6993551254272461,
+            "input_token_count": 260,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0015_569cde2c",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.18346837162971497,
+            "input_token_count": 262,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0066_24858a8b",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": 0.04877807945013046,
+            "input_token_count": 265,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0082_334bb9e1",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -1.008681297302246,
+            "input_token_count": 224,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "fuzzy_trace_theory_precision",
+      "query": "What does Fuzzy-Trace Theory say about the precision of mental representations people prefer for decisions?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "4fcc5244_0056_da3220ca"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "4fcc5244_0056_da3220ca": 6
+        },
+        "sparse": {
+          "4fcc5244_0056_da3220ca": 2
+        },
+        "fusion": {
+          "4fcc5244_0056_da3220ca": 3
+        },
+        "rerank": {
+          "4fcc5244_0056_da3220ca": 3
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "Fuzzy-Trace Theory gist versus verbatim mental representations preferred decision precision",
+        "elapsed_ms": 2353.991499985568,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "4fcc5244_0090_ff947592",
+            "4fcc5244_0094_b8a94310",
+            "4fcc5244_0087_e51b1bb2",
+            "4fcc5244_0086_e86ed5da",
+            "4fcc5244_0093_82a3bfe9"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "4fcc5244_0090_ff947592",
+            "4fcc5244_0056_da3220ca",
+            "4fcc5244_0094_b8a94310",
+            "4fcc5244_0086_e86ed5da",
+            "4fcc5244_0198_c6108918"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "4fcc5244_0090_ff947592",
+            "4fcc5244_0094_b8a94310",
+            "4fcc5244_0056_da3220ca",
+            "4fcc5244_0086_e86ed5da",
+            "4fcc5244_0087_e51b1bb2"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 1.0,
+            "ndcg@5": 0.5
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "4fcc5244_0094_b8a94310",
+            "4fcc5244_0090_ff947592",
+            "4fcc5244_0056_da3220ca",
+            "4fcc5244_0087_e51b1bb2",
+            "4fcc5244_0092_ab9df1d3"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 1.0,
+            "ndcg@5": 0.5
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "4fcc5244_0056_da3220ca",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 6,
+            "combined_rank": 3,
+            "cross_encoder_score": 3.4876675605773926,
+            "input_token_count": 222,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "4fcc5244_0094_b8a94310",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.727344036102295,
+            "input_token_count": 240,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0090_ff947592",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 5.165519714355469,
+            "input_token_count": 258,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0092_ab9df1d3",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": 3.933194160461426,
+            "input_token_count": 274,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0079_f04ea123",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 3.828016519546509,
+            "input_token_count": 248,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0087_e51b1bb2",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": 3.5669069290161133,
+            "input_token_count": 226,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "briermax_definition",
+      "query": "In the NIST GenAI pilot, how is BrierMax defined and which direction is better for discriminator systems?",
+      "category": "exact_term",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "c7eb822c_0078_6b07384d"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c7eb822c_0078_6b07384d": 4
+        },
+        "sparse": {
+          "c7eb822c_0078_6b07384d": 1
+        },
+        "fusion": {
+          "c7eb822c_0078_6b07384d": 1
+        },
+        "rerank": {
+          "c7eb822c_0078_6b07384d": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST GenAI pilot BrierMax metric definition discriminator systems lower or higher better",
+        "elapsed_ms": 1896.900125022512,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c7eb822c_0079_2651673b",
+            "c7eb822c_0120_e5f9b770",
+            "c7eb822c_0133_e920a37f",
+            "c7eb822c_0078_6b07384d",
+            "c7eb822c_0039_20c4e680"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.25,
+            "recall@5": 1.0,
+            "ndcg@5": 0.43067655807339306
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c7eb822c_0078_6b07384d",
+            "c7eb822c_0028_64b99b93",
+            "c7eb822c_0039_20c4e680",
+            "c7eb822c_0038_997f228d",
+            "c7eb822c_0000_7cdd9441"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c7eb822c_0078_6b07384d",
+            "c7eb822c_0039_20c4e680",
+            "c7eb822c_0079_2651673b",
+            "c7eb822c_0076_d54f17b4",
+            "c7eb822c_0019_5639fd75"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c7eb822c_0078_6b07384d",
+            "c7eb822c_0079_2651673b",
+            "c7eb822c_0039_20c4e680",
+            "c7eb822c_0076_d54f17b4",
+            "c7eb822c_0028_64b99b93"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c7eb822c_0078_6b07384d",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.6255872249603271,
+            "input_token_count": 265,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c7eb822c_0079_2651673b",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": 2.704601526260376,
+            "input_token_count": 274,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0078_6b07384d",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.6255872249603271,
+            "input_token_count": 265,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "c7eb822c_0076_d54f17b4",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 3,
+            "combined_rank": 4,
+            "cross_encoder_score": -0.7331314086914062,
+            "input_token_count": 182,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0039_20c4e680",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 4,
+            "combined_rank": 3,
+            "cross_encoder_score": -0.8585489988327026,
+            "input_token_count": 248,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0028_64b99b93",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -0.9953479766845703,
+            "input_token_count": 240,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "organizational_willingness_to_bear_risk",
+      "query": "What does the framework call an organization's readiness to accept possible harm in pursuit of its objectives, and why can that readiness change?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "afc3bec1_0028_bde289f3"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "afc3bec1_0028_bde289f3": 2
+        },
+        "sparse": {
+          "afc3bec1_0028_bde289f3": 1
+        },
+        "fusion": {
+          "afc3bec1_0028_bde289f3": 1
+        },
+        "rerank": {
+          "afc3bec1_0028_bde289f3": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "organizational risk appetite definition and factors causing it to change",
+        "elapsed_ms": 2239.126208005473,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "afc3bec1_0029_ca48ac4c",
+            "afc3bec1_0028_bde289f3",
+            "afc3bec1_0030_89b6a864",
+            "afc3bec1_0003_8706a563",
+            "a6cbb0d2_0050_4bdb3809"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0028_bde289f3",
+            "a6cbb0d2_0050_4bdb3809",
+            "afc3bec1_0036_9df041e8",
+            "ed47770d_0044_3ba6a5d3",
+            "a6cbb0d2_0097_fb7614ba"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0028_bde289f3",
+            "a6cbb0d2_0050_4bdb3809",
+            "afc3bec1_0029_ca48ac4c",
+            "afc3bec1_0036_9df041e8",
+            "afc3bec1_0152_c79be98d"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "afc3bec1_0028_bde289f3",
+            "afc3bec1_0029_ca48ac4c",
+            "afc3bec1_0021_dde163e1",
+            "a6cbb0d2_0050_4bdb3809",
+            "afc3bec1_0152_c79be98d"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "afc3bec1_0028_bde289f3",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -1.7278900146484375,
+            "input_token_count": 252,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0016_b92a9a34",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 1,
+            "combined_rank": 6,
+            "cross_encoder_score": -1.3202221393585205,
+            "input_token_count": 206,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0028_bde289f3",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -1.7278900146484375,
+            "input_token_count": 252,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "afc3bec1_0029_ca48ac4c",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": -3.7430226802825928,
+            "input_token_count": 230,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0021_dde163e1",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 4,
+            "combined_rank": 3,
+            "cross_encoder_score": -3.9006786346435547,
+            "input_token_count": 272,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0044_3ba6a5d3",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": -4.721774578094482,
+            "input_token_count": 222,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "infer_training_record_membership",
+      "query": "What attack tries to determine whether one particular person's record was included in the dataset used to train a model?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "f051552b_0127_6c93042b"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "f051552b_0127_6c93042b": 1
+        },
+        "sparse": {
+          "f051552b_0127_6c93042b": 2
+        },
+        "fusion": {
+          "f051552b_0127_6c93042b": 1
+        },
+        "rerank": {
+          "f051552b_0127_6c93042b": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "membership inference attack training data inclusion",
+        "elapsed_ms": 1704.8652499797754,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "f051552b_0127_6c93042b",
+            "f051552b_0122_7ca655a4",
+            "f051552b_0128_1fb9c578",
+            "f051552b_0132_1b80b576",
+            "f051552b_0378_3c10013c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "f051552b_0121_b3d38df9",
+            "f051552b_0127_6c93042b",
+            "f051552b_0128_1fb9c578",
+            "f051552b_0132_1b80b576",
+            "f051552b_0378_3c10013c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "f051552b_0127_6c93042b",
+            "f051552b_0128_1fb9c578",
+            "f051552b_0132_1b80b576",
+            "f051552b_0378_3c10013c",
+            "f051552b_0121_b3d38df9"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "f051552b_0127_6c93042b",
+            "f051552b_0121_b3d38df9",
+            "f051552b_0378_3c10013c",
+            "f051552b_0128_1fb9c578",
+            "f051552b_0136_81329a52"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "f051552b_0127_6c93042b",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.493165493011475,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "f051552b_0127_6c93042b",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.493165493011475,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "f051552b_0121_b3d38df9",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.144978046417236,
+            "input_token_count": 210,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0139_b652504b",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 3,
+            "combined_rank": 8,
+            "cross_encoder_score": 2.809051036834717,
+            "input_token_count": 269,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0378_3c10013c",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 4,
+            "combined_rank": 3,
+            "cross_encoder_score": 2.020143508911133,
+            "input_token_count": 135,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0136_81329a52",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.6982015371322632,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "transparency_without_guaranteed_trust",
+      "query": "Why can knowing where a digital item came from still fail to make it trustworthy?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "582a908c_0011_8074573f"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "582a908c_0011_8074573f": null
+        },
+        "sparse": {
+          "582a908c_0011_8074573f": null
+        },
+        "fusion": {
+          "582a908c_0011_8074573f": null
+        },
+        "rerank": {
+          "582a908c_0011_8074573f": null
+        }
+      },
+      "candidate_failure": "dual_retrieval_miss",
+      "query_expansion": {
+        "rewrite": "digital provenance source authenticity trustworthiness limitations",
+        "elapsed_ms": 1989.284500014037,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0147_0591e817",
+            "582a908c_0146_5eb2eca3",
+            "582a908c_0153_a9ec3803",
+            "582a908c_0026_afd8d84c",
+            "95e05ede_0181_05521059"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0293_463cf767",
+            "582a908c_0268_7487ead8",
+            "95e05ede_0182_2b7a60d2",
+            "582a908c_0203_14bbd229",
+            "582a908c_0026_afd8d84c"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "95e05ede_0182_2b7a60d2",
+            "582a908c_0026_afd8d84c",
+            "582a908c_0293_463cf767",
+            "582a908c_0268_7487ead8",
+            "95e05ede_0183_e2f6ce9e"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0293_463cf767",
+            "582a908c_0146_5eb2eca3",
+            "582a908c_0026_afd8d84c",
+            "582a908c_0294_7a1f55a6",
+            "95e05ede_0180_10243311"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 0,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "582a908c_0011_8074573f",
+            "not_in_rerank_pool": true
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "582a908c_0146_5eb2eca3",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.6194145083427429,
+            "input_token_count": 187,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0293_463cf767",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -1.3201500177383423,
+            "input_token_count": 192,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0294_7a1f55a6",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 3,
+            "combined_rank": 4,
+            "cross_encoder_score": -2.417961359024048,
+            "input_token_count": 209,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0147_0591e817",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": -3.295069932937622,
+            "input_token_count": 84,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0180_10243311",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -4.804985046386719,
+            "input_token_count": 171,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "local_vs_global_posthoc_explanations",
+      "query": "How do after-the-fact explanations for one prediction differ from an explanation that approximates an opaque model's behavior overall?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "a6cbb0d2_0069_f73b1d5c"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "a6cbb0d2_0069_f73b1d5c": 1
+        },
+        "sparse": {
+          "a6cbb0d2_0069_f73b1d5c": 1
+        },
+        "fusion": {
+          "a6cbb0d2_0069_f73b1d5c": 1
+        },
+        "rerank": {
+          "a6cbb0d2_0069_f73b1d5c": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "local post-hoc explanation vs global surrogate model explanation for black-box predictions",
+        "elapsed_ms": 1913.020207954105,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "a6cbb0d2_0069_f73b1d5c",
+            "a6cbb0d2_0057_38828ba1",
+            "a6cbb0d2_0074_e7866f45",
+            "4fcc5244_0143_bb3f947d",
+            "a6cbb0d2_0072_56bb8d48"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0069_f73b1d5c",
+            "a6cbb0d2_0070_5466f9d1",
+            "a6cbb0d2_0012_1d23f93d",
+            "a6cbb0d2_0076_a1a8530a",
+            "a6cbb0d2_0091_9842f9a9"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0069_f73b1d5c",
+            "a6cbb0d2_0070_5466f9d1",
+            "a6cbb0d2_0074_e7866f45",
+            "a6cbb0d2_0076_a1a8530a",
+            "a6cbb0d2_0057_38828ba1"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "a6cbb0d2_0069_f73b1d5c",
+            "a6cbb0d2_0091_9842f9a9",
+            "a6cbb0d2_0078_7cb4f460",
+            "a6cbb0d2_0076_a1a8530a",
+            "a6cbb0d2_0074_e7866f45"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "a6cbb0d2_0069_f73b1d5c",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.9344053268432617,
+            "input_token_count": 229,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "a6cbb0d2_0069_f73b1d5c",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.9344053268432617,
+            "input_token_count": 229,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "a6cbb0d2_0091_9842f9a9",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -1.1955220699310303,
+            "input_token_count": 229,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0078_7cb4f460",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -1.489380121231079,
+            "input_token_count": 231,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0077_dc8cef1f",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": -2.1235108375549316,
+            "input_token_count": 243,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0164_2fe6d94a",
+            "fusion_rank": 20,
+            "cross_encoder_rank": 5,
+            "combined_rank": 10,
+            "cross_encoder_score": -2.1721792221069336,
+            "input_token_count": 248,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "tailor_outputs_to_user_differences",
+      "query": "Why should the way a machine-learning system communicates its reasoning be adapted for different audiences?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "4fcc5244_0003_5dbfe540",
+        "4fcc5244_0004_43fb8431"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "4fcc5244_0003_5dbfe540": 19,
+          "4fcc5244_0004_43fb8431": null
+        },
+        "sparse": {
+          "4fcc5244_0003_5dbfe540": 3,
+          "4fcc5244_0004_43fb8431": null
+        },
+        "fusion": {
+          "4fcc5244_0003_5dbfe540": 2,
+          "4fcc5244_0004_43fb8431": null
+        },
+        "rerank": {
+          "4fcc5244_0003_5dbfe540": 1,
+          "4fcc5244_0004_43fb8431": null
+        }
+      },
+      "candidate_failure": "partial_fusion_recall",
+      "query_expansion": {
+        "rewrite": "machine learning explanation communication adapted to audience expertise, skills, preferences, and interpretation",
+        "elapsed_ms": 2222.61354199145,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "4fcc5244_0166_24226e18",
+            "4fcc5244_0018_4becab69",
+            "a6cbb0d2_0007_e729660a",
+            "4fcc5244_0171_d72744ac",
+            "4fcc5244_0035_175d5164"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0029_cbf3fd6a",
+            "f051552b_0018_522f3964",
+            "4fcc5244_0003_5dbfe540",
+            "a6cbb0d2_0032_02129475",
+            "4fcc5244_0026_84e54a2f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 0.5,
+            "ndcg@5": 0.3065735963827292
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0032_02129475",
+            "4fcc5244_0003_5dbfe540",
+            "a6cbb0d2_0027_ff485e31",
+            "4fcc5244_0034_4388db93",
+            "4fcc5244_0166_24226e18"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 0.5,
+            "ndcg@5": 0.38685280723454163
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "4fcc5244_0003_5dbfe540",
+            "a6cbb0d2_0032_02129475",
+            "a6cbb0d2_0029_cbf3fd6a",
+            "4fcc5244_0034_4388db93",
+            "4fcc5244_0171_d72744ac"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.5,
+            "ndcg@5": 0.6131471927654584
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.5,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "4fcc5244_0003_5dbfe540",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 3,
+            "combined_rank": 1,
+            "cross_encoder_score": -2.6549603939056396,
+            "input_token_count": 256,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "4fcc5244_0004_43fb8431",
+            "not_in_rerank_pool": true
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "4fcc5244_0171_d72744ac",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 1,
+            "combined_rank": 5,
+            "cross_encoder_score": -2.1096489429473877,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0029_cbf3fd6a",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": -2.361276626586914,
+            "input_token_count": 199,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0003_5dbfe540",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 3,
+            "combined_rank": 1,
+            "cross_encoder_score": -2.6549603939056396,
+            "input_token_count": 256,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "4fcc5244_0034_4388db93",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": -2.7038700580596924,
+            "input_token_count": 235,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0032_02129475",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 5,
+            "combined_rank": 2,
+            "cross_encoder_score": -4.075582981109619,
+            "input_token_count": 112,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "genai_pilot_scope_limitations",
+      "query": "Why might the pilot's findings about spotting machine-written summaries not transfer cleanly to chat, creative prose, or jointly authored text?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "c7eb822c_0137_ca07ef81"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c7eb822c_0137_ca07ef81": 1
+        },
+        "sparse": {
+          "c7eb822c_0137_ca07ef81": 5
+        },
+        "fusion": {
+          "c7eb822c_0137_ca07ef81": 1
+        },
+        "rerank": {
+          "c7eb822c_0137_ca07ef81": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "generalizability of detecting machine-written summaries across chat, creative prose, and jointly authored text",
+        "elapsed_ms": 2292.793457978405,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c7eb822c_0137_ca07ef81",
+            "582a908c_0138_2090bbe4",
+            "c7eb822c_0003_5dcd184d",
+            "c7eb822c_0142_ab13be66",
+            "c7eb822c_0080_70f12c44"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c7eb822c_0069_e3d0f4d6",
+            "c7eb822c_0062_f7f4feff",
+            "c7eb822c_0061_22c292f4",
+            "c7eb822c_0058_e0403984",
+            "c7eb822c_0137_ca07ef81"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 1.0,
+            "ndcg@5": 0.38685280723454163
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c7eb822c_0137_ca07ef81",
+            "c7eb822c_0003_5dcd184d",
+            "c7eb822c_0069_e3d0f4d6",
+            "c7eb822c_0142_ab13be66",
+            "c7eb822c_0028_64b99b93"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c7eb822c_0003_5dcd184d",
+            "c7eb822c_0137_ca07ef81",
+            "c7eb822c_0028_64b99b93",
+            "c7eb822c_0142_ab13be66",
+            "c7eb822c_0069_e3d0f4d6"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": -0.5,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c7eb822c_0137_ca07ef81",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": -5.2293195724487305,
+            "input_token_count": 220,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c7eb822c_0003_5dcd184d",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.7795395851135254,
+            "input_token_count": 233,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0028_64b99b93",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": -3.8803486824035645,
+            "input_token_count": 245,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0137_ca07ef81",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": -5.2293195724487305,
+            "input_token_count": 220,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "c7eb822c_0142_ab13be66",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": -5.878244876861572,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0069_e3d0f4d6",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -7.424044609069824,
+            "input_token_count": 274,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "trustworthy_attribute_tradeoffs",
+      "query": "Why does AI RMF 1.0 reject treating a highly accurate but opaque system as trustworthy merely because it performs well?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "afc3bec1_0047_6112e28c"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "afc3bec1_0047_6112e28c": null
+        },
+        "sparse": {
+          "afc3bec1_0047_6112e28c": 6
+        },
+        "fusion": {
+          "afc3bec1_0047_6112e28c": 15
+        },
+        "rerank": {
+          "afc3bec1_0047_6112e28c": 5
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "AI RMF 1.0 trustworthy AI accuracy opaque systems transparency explainability performance alone",
+        "elapsed_ms": 2229.7712080180645,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "afc3bec1_0058_f1e0af7b",
+            "f051552b_0222_70a4cf7a",
+            "afc3bec1_0043_c67b312d",
+            "f051552b_0221_aa5103ae",
+            "a6cbb0d2_0016_eb241bf9"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0000_40caeb6b",
+            "95e05ede_0005_4e23ad13",
+            "afc3bec1_0019_9116c211",
+            "95e05ede_0058_93cd4f2d",
+            "afc3bec1_0002_7cf5aa35"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0058_f1e0af7b",
+            "f051552b_0221_aa5103ae",
+            "22da1acb_0024_c50be86e",
+            "a6cbb0d2_0005_1d0babd9",
+            "afc3bec1_0027_fac77d04"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "afc3bec1_0058_f1e0af7b",
+            "f051552b_0221_aa5103ae",
+            "22da1acb_0024_c50be86e",
+            "95e05ede_0058_93cd4f2d",
+            "afc3bec1_0047_6112e28c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 1.0,
+            "ndcg@5": 0.38685280723454163
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.2,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "afc3bec1_0047_6112e28c",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.2666161060333252,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0058_f1e0af7b",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.9879682064056396,
+            "input_token_count": 263,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0221_aa5103ae",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.3158875703811646,
+            "input_token_count": 241,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0047_6112e28c",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.2666161060333252,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "95e05ede_0058_93cd4f2d",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": 0.9423355460166931,
+            "input_token_count": 224,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0024_c50be86e",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.8427934646606445,
+            "input_token_count": 236,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "evasion_vs_poisoning_stage",
+      "query": "At what lifecycle stage does an evasion attack act on minimally perturbed test samples, and at what stage does a poisoning attack act?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "f051552b_0060_9b3c5ecf",
+        "f051552b_0088_25a2e5ef"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "f051552b_0060_9b3c5ecf": 3,
+          "f051552b_0088_25a2e5ef": 4
+        },
+        "sparse": {
+          "f051552b_0060_9b3c5ecf": null,
+          "f051552b_0088_25a2e5ef": null
+        },
+        "fusion": {
+          "f051552b_0060_9b3c5ecf": 13,
+          "f051552b_0088_25a2e5ef": 14
+        },
+        "rerank": {
+          "f051552b_0060_9b3c5ecf": 3,
+          "f051552b_0088_25a2e5ef": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "evasion attack inference testing stage minimally perturbed samples poisoning attack training stage",
+        "elapsed_ms": 1840.6802919926122,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "f051552b_0155_c38adbd7",
+            "f051552b_0042_0839502c",
+            "f051552b_0060_9b3c5ecf",
+            "f051552b_0088_25a2e5ef",
+            "f051552b_0093_2fe95ca8"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 1.0,
+            "ndcg@5": 0.5706417189553201
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "f051552b_0042_0839502c",
+            "f051552b_0045_c93c12a4",
+            "f051552b_0048_a5fc37d2",
+            "f051552b_0101_8b09569d",
+            "f051552b_0115_4b9c3b25"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "f051552b_0042_0839502c",
+            "f051552b_0101_8b09569d",
+            "f051552b_0102_708d1ed8",
+            "f051552b_0093_2fe95ca8",
+            "f051552b_0115_4b9c3b25"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "f051552b_0042_0839502c",
+            "f051552b_0103_5e663158",
+            "f051552b_0060_9b3c5ecf",
+            "f051552b_0102_708d1ed8",
+            "f051552b_0045_c93c12a4"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 0.5,
+            "ndcg@5": 0.3065735963827292
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.3333333333333333,
+      "fusion_candidate_relevant_count": 2,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 0.5,
+      "rerank_lost_relevant_ids": [
+        "f051552b_0088_25a2e5ef"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "f051552b_0060_9b3c5ecf",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 1,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.027929361909627914,
+            "input_token_count": 259,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "f051552b_0088_25a2e5ef",
+            "fusion_rank": 14,
+            "cross_encoder_rank": 9,
+            "combined_rank": 13,
+            "cross_encoder_score": -5.582766532897949,
+            "input_token_count": 252,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "f051552b_0060_9b3c5ecf",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 1,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.027929361909627914,
+            "input_token_count": 259,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "f051552b_0103_5e663158",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -2.133141040802002,
+            "input_token_count": 259,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0045_c93c12a4",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": -2.4299826622009277,
+            "input_token_count": 238,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0048_a5fc37d2",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": -2.727752208709717,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0042_0839502c",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 5,
+            "combined_rank": 1,
+            "cross_encoder_score": -3.079505443572998,
+            "input_token_count": 202,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "glossary_definition_source_selection",
+      "query": "Which source types did the NIST trustworthy AI glossary prioritize when selecting definitions, and what quality rationale was given?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "c62ece9a_0013_e4fcfdcd"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c62ece9a_0013_e4fcfdcd": 1
+        },
+        "sparse": {
+          "c62ece9a_0013_e4fcfdcd": null
+        },
+        "fusion": {
+          "c62ece9a_0013_e4fcfdcd": 9
+        },
+        "rerank": {
+          "c62ece9a_0013_e4fcfdcd": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST trustworthy AI glossary definition source prioritization and quality rationale",
+        "elapsed_ms": 2984.2022910015658,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c62ece9a_0013_e4fcfdcd",
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0005_a8e75b54",
+            "a6cbb0d2_0010_d78e2770"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c62ece9a_0003_18aa5fd2",
+            "582a908c_0292_10bbe9dd",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0007_cf8a6ccd"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0003_18aa5fd2",
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0002_02fddbe0"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0003_18aa5fd2",
+            "f051552b_0004_00716ee9",
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0006_af2b7b1c"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "c62ece9a_0013_e4fcfdcd"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c62ece9a_0013_e4fcfdcd",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 12,
+            "combined_rank": 10,
+            "cross_encoder_score": -0.6336392164230347,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c62ece9a_0005_a8e75b54",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.365581512451172,
+            "input_token_count": 227,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0003_18aa5fd2",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.4982812404632568,
+            "input_token_count": 266,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0004_00716ee9",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.3909627199172974,
+            "input_token_count": 204,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0009_e964c972",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 1.3132168054580688,
+            "input_token_count": 150,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0006_af2b7b1c",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.8932542204856873,
+            "input_token_count": 195,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "bias_beyond_dataset_representation",
+      "query": "Why does NIST SP 1270 say that balancing datasets and adjusting fairness algorithms alone are too narrow for managing AI bias?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "22da1acb_0005_dc962631"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "22da1acb_0005_dc962631": 11
+        },
+        "sparse": {
+          "22da1acb_0005_dc962631": 15
+        },
+        "fusion": {
+          "22da1acb_0005_dc962631": 6
+        },
+        "rerank": {
+          "22da1acb_0005_dc962631": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST SP 1270 AI bias dataset balancing fairness algorithms sociotechnical human factors lifecycle",
+        "elapsed_ms": 2587.720707990229,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "22da1acb_0082_334bb9e1",
+            "22da1acb_0140_79ce7fcf",
+            "22da1acb_0199_1a7941ff",
+            "afc3bec1_0066_24858a8b",
+            "22da1acb_0015_569cde2c"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "22da1acb_0000_226885c3",
+            "22da1acb_0139_768f7aa7",
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0002_a74ddff0",
+            "22da1acb_0082_334bb9e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "22da1acb_0082_334bb9e1",
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0000_226885c3",
+            "22da1acb_0008_af37409e",
+            "22da1acb_0015_569cde2c"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "22da1acb_0001_1d7157d9",
+            "22da1acb_0082_334bb9e1",
+            "22da1acb_0008_af37409e",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0000_226885c3"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "22da1acb_0005_dc962631"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "22da1acb_0005_dc962631",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 13,
+            "combined_rank": 9,
+            "cross_encoder_score": -2.9436914920806885,
+            "input_token_count": 266,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "22da1acb_0001_1d7157d9",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.4806485176086426,
+            "input_token_count": 261,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0082_334bb9e1",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.7347137331962585,
+            "input_token_count": 225,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0008_af37409e",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -0.7847329378128052,
+            "input_token_count": 246,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0015_569cde2c",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": -0.9794960618019104,
+            "input_token_count": 263,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0066_24858a8b",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.3864011764526367,
+            "input_token_count": 266,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "interpretation_vs_mechanistic_explanation",
+      "query": "In NISTIR 8367, what separates contextualizing a model output for users from describing the mechanism that produced it?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "4fcc5244_0003_5dbfe540"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "4fcc5244_0003_5dbfe540": 19
+        },
+        "sparse": {
+          "4fcc5244_0003_5dbfe540": null
+        },
+        "fusion": {
+          "4fcc5244_0003_5dbfe540": null
+        },
+        "rerank": {
+          "4fcc5244_0003_5dbfe540": null
+        }
+      },
+      "candidate_failure": "fusion_drop",
+      "query_expansion": {
+        "rewrite": null,
+        "elapsed_ms": 2321.201833023224,
+        "used_fallback": true,
+        "fallback_reason": "empty_or_invalid_rewrite"
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "a6cbb0d2_0059_93cd9a14",
+            "4fcc5244_0035_175d5164",
+            "4fcc5244_0001_473d30a8",
+            "4fcc5244_0144_5a58c55f",
+            "4fcc5244_0000_27b98a8a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "4fcc5244_0000_27b98a8a",
+            "4fcc5244_0001_473d30a8",
+            "ed47770d_0061_822ede57",
+            "4fcc5244_0171_d72744ac",
+            "a6cbb0d2_0129_71062831"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "4fcc5244_0001_473d30a8",
+            "4fcc5244_0000_27b98a8a",
+            "4fcc5244_0171_d72744ac",
+            "ed47770d_0061_822ede57",
+            "4fcc5244_0132_6d9439da"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "4fcc5244_0171_d72744ac",
+            "4fcc5244_0132_6d9439da",
+            "4fcc5244_0144_5a58c55f",
+            "ed47770d_0061_822ede57",
+            "4fcc5244_0025_57fe2549"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 0,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "4fcc5244_0003_5dbfe540",
+            "not_in_rerank_pool": true
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "4fcc5244_0025_57fe2549",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 1,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.7509937286376953,
+            "input_token_count": 333,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0144_5a58c55f",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.4468837976455688,
+            "input_token_count": 287,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0132_6d9439da",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": 0.0015037208795547485,
+            "input_token_count": 239,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0171_d72744ac",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 4,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.1350889801979065,
+            "input_token_count": 244,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0061_822ede57",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": -1.133270263671875,
+            "input_token_count": 188,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "auc_random_and_perfect_detector",
+      "query": "For the GenAI pilot's text detector, what AUC values correspond to random guessing and perfect discrimination?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "c7eb822c_0072_5bb1028c"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c7eb822c_0072_5bb1028c": null
+        },
+        "sparse": {
+          "c7eb822c_0072_5bb1028c": 1
+        },
+        "fusion": {
+          "c7eb822c_0072_5bb1028c": 12
+        },
+        "rerank": {
+          "c7eb822c_0072_5bb1028c": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "GenAI pilot text detector AUC random guessing perfect discrimination values",
+        "elapsed_ms": 1667.3037500004284,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c7eb822c_0101_4e89bd51",
+            "c7eb822c_0106_ebbeba31",
+            "c7eb822c_0107_87994ede",
+            "c7eb822c_0077_7008189d",
+            "c7eb822c_0112_31453432"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c7eb822c_0072_5bb1028c",
+            "c7eb822c_0106_ebbeba31",
+            "c7eb822c_0108_9f5c1adf",
+            "c7eb822c_0103_ed48c3cb",
+            "c7eb822c_0018_363092d8"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c7eb822c_0106_ebbeba31",
+            "c7eb822c_0103_ed48c3cb",
+            "c7eb822c_0112_31453432",
+            "c7eb822c_0003_5dcd184d",
+            "c7eb822c_0101_4e89bd51"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c7eb822c_0106_ebbeba31",
+            "c7eb822c_0003_5dcd184d",
+            "c7eb822c_0018_363092d8",
+            "c7eb822c_0103_ed48c3cb",
+            "c7eb822c_0028_64b99b93"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "c7eb822c_0072_5bb1028c"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c7eb822c_0072_5bb1028c",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 12,
+            "combined_rank": 11,
+            "cross_encoder_score": -4.130717754364014,
+            "input_token_count": 285,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c7eb822c_0003_5dcd184d",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": 3.8077259063720703,
+            "input_token_count": 225,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0106_ebbeba31",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.1756242513656616,
+            "input_token_count": 272,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0028_64b99b93",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": -0.6429218649864197,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0018_363092d8",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 4,
+            "combined_rank": 3,
+            "cross_encoder_score": -0.6575270891189575,
+            "input_token_count": 322,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0108_9f5c1adf",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.398733139038086,
+            "input_token_count": 96,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "ai_rmf_core_functions",
+      "query": "What are the four core functions of the AI Risk Management Framework?",
+      "category": "structured_fact",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "afc3bec1_0017_2b6c5094",
+        "afc3bec1_0071_592e0754"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "afc3bec1_0017_2b6c5094": 1,
+          "afc3bec1_0071_592e0754": 2
+        },
+        "sparse": {
+          "afc3bec1_0017_2b6c5094": 1,
+          "afc3bec1_0071_592e0754": 2
+        },
+        "fusion": {
+          "afc3bec1_0017_2b6c5094": 1,
+          "afc3bec1_0071_592e0754": 2
+        },
+        "rerank": {
+          "afc3bec1_0017_2b6c5094": 1,
+          "afc3bec1_0071_592e0754": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "NIST AI Risk Management Framework four core functions GOVERN MAP MEASURE MANAGE",
+        "elapsed_ms": 1639.4514170242473,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "afc3bec1_0017_2b6c5094",
+            "afc3bec1_0071_592e0754",
+            "afc3bec1_0142_8753ca3d",
+            "afc3bec1_0074_f4c8390a",
+            "afc3bec1_0115_84d157b7"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0017_2b6c5094",
+            "afc3bec1_0071_592e0754",
+            "afc3bec1_0115_84d157b7",
+            "afc3bec1_0072_ce4e6484",
+            "afc3bec1_0142_8753ca3d"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0017_2b6c5094",
+            "afc3bec1_0071_592e0754",
+            "afc3bec1_0115_84d157b7",
+            "afc3bec1_0142_8753ca3d",
+            "afc3bec1_0074_f4c8390a"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "afc3bec1_0017_2b6c5094",
+            "afc3bec1_0071_592e0754",
+            "afc3bec1_0142_8753ca3d",
+            "afc3bec1_0115_84d157b7",
+            "afc3bec1_0072_ce4e6484"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 2,
+      "rerank_retained_relevant_count": 2,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "afc3bec1_0017_2b6c5094",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.583352088928223,
+            "input_token_count": 246,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "afc3bec1_0071_592e0754",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 7.463784694671631,
+            "input_token_count": 272,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0017_2b6c5094",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.583352088928223,
+            "input_token_count": 246,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "afc3bec1_0071_592e0754",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 7.463784694671631,
+            "input_token_count": 272,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "afc3bec1_0072_ce4e6484",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": 5.217780113220215,
+            "input_token_count": 113,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0142_8753ca3d",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 4,
+            "combined_rank": 3,
+            "cross_encoder_score": 5.111504554748535,
+            "input_token_count": 243,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0115_84d157b7",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": 3.981006145477295,
+            "input_token_count": 212,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "glossary_entry_fields",
+      "query": "After the trustworthy AI glossary grew to approximately 500 terms, what definition and annotation fields could each term entry contain?",
+      "category": "structured_fact",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "c62ece9a_0012_9ab806b4"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c62ece9a_0012_9ab806b4": 1
+        },
+        "sparse": {
+          "c62ece9a_0012_9ab806b4": 1
+        },
+        "fusion": {
+          "c62ece9a_0012_9ab806b4": 1
+        },
+        "rerank": {
+          "c62ece9a_0012_9ab806b4": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "trustworthy AI glossary 500 terms definition annotation fields term entries",
+        "elapsed_ms": 1985.3482089820318,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c62ece9a_0012_9ab806b4",
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0009_e964c972",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0000_06f66f2f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c62ece9a_0012_9ab806b4",
+            "22da1acb_0016_c920b26d",
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0004_f3d07dc6",
+            "c7eb822c_0075_b80e1c41"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c62ece9a_0012_9ab806b4",
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0009_e964c972",
+            "c62ece9a_0000_06f66f2f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c62ece9a_0012_9ab806b4",
+            "c62ece9a_0009_e964c972",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0003_18aa5fd2",
+            "c62ece9a_0000_06f66f2f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c62ece9a_0012_9ab806b4",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.419100284576416,
+            "input_token_count": 208,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c62ece9a_0012_9ab806b4",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.419100284576416,
+            "input_token_count": 208,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "c62ece9a_0009_e964c972",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.4925615191459656,
+            "input_token_count": 149,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0005_a8e75b54",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -0.7152847647666931,
+            "input_token_count": 226,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0011_0e2a4d78",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.7431293725967407,
+            "input_token_count": 161,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0003_18aa5fd2",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": -2.014869451522827,
+            "input_token_count": 265,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "global_standards_four_outcomes",
+      "query": "What four sets of outcomes are the global AI standards engagement activities intended to further?",
+      "category": "structured_fact",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "ed47770d_0010_64e4631a",
+        "ed47770d_0011_fd2ee545",
+        "ed47770d_0012_a47e51bb"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "ed47770d_0010_64e4631a": 1,
+          "ed47770d_0011_fd2ee545": null,
+          "ed47770d_0012_a47e51bb": 20
+        },
+        "sparse": {
+          "ed47770d_0010_64e4631a": 1,
+          "ed47770d_0011_fd2ee545": null,
+          "ed47770d_0012_a47e51bb": 17
+        },
+        "fusion": {
+          "ed47770d_0010_64e4631a": 1,
+          "ed47770d_0011_fd2ee545": null,
+          "ed47770d_0012_a47e51bb": 11
+        },
+        "rerank": {
+          "ed47770d_0010_64e4631a": 1,
+          "ed47770d_0011_fd2ee545": null,
+          "ed47770d_0012_a47e51bb": null
+        }
+      },
+      "candidate_failure": "partial_fusion_recall",
+      "query_expansion": {
+        "rewrite": null,
+        "elapsed_ms": 2328.4647919936106,
+        "used_fallback": true,
+        "fallback_reason": "empty_or_invalid_rewrite"
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0065_68b4983e",
+            "ed47770d_0009_013def74",
+            "ed47770d_0042_8d4c04ea"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.46927872602275644
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0009_013def74",
+            "ed47770d_0005_2b459afe",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0065_68b4983e"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.46927872602275644
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0009_013def74",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0065_68b4983e",
+            "ed47770d_0042_8d4c04ea"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.46927872602275644
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0009_013def74",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0042_8d4c04ea",
+            "ed47770d_0065_68b4983e"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.46927872602275644
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 2,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 0.5,
+      "rerank_lost_relevant_ids": [
+        "ed47770d_0012_a47e51bb"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "ed47770d_0010_64e4631a",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.984697341918945,
+            "input_token_count": 140,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "ed47770d_0011_fd2ee545",
+            "not_in_rerank_pool": true
+          },
+          {
+            "chunk_id": "ed47770d_0012_a47e51bb",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 17,
+            "combined_rank": 15,
+            "cross_encoder_score": -1.6130449771881104,
+            "input_token_count": 175,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0010_64e4631a",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.984697341918945,
+            "input_token_count": 140,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "ed47770d_0009_013def74",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 6.166533946990967,
+            "input_token_count": 131,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0024_8cbd8205",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 3.473202705383301,
+            "input_token_count": 251,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0042_8d4c04ea",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": 3.3994300365448,
+            "input_token_count": 160,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0043_94545fa0",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 5,
+            "combined_rank": 6,
+            "cross_encoder_score": 3.276756763458252,
+            "input_token_count": 164,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "eu_ai_act_prohibited_practices",
+      "query": "What are all prohibited AI practices under the current EU AI Act, including the article numbers for each prohibition?",
+      "category": "unanswerable",
+      "split": "dev",
+      "answerable": false,
+      "relevant_ids": [],
+      "relevant_ranks": {
+        "dense": {},
+        "sparse": {},
+        "fusion": {},
+        "rerank": {}
+      },
+      "candidate_failure": null,
+      "query_expansion": {
+        "rewrite": "EU AI Act Article 5 prohibited AI practices list article numbers current law",
+        "elapsed_ms": 1668.5175000457093,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "a6cbb0d2_0019_81ff719f",
+            "ed47770d_0106_6f679608",
+            "ed47770d_0034_9ad0651c",
+            "ed47770d_0112_0e2e9ec7",
+            "f051552b_0025_10b7260a"
+          ],
+          "metrics": null
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "ed47770d_0118_7967072b",
+            "ed47770d_0120_ae112e5f",
+            "ed47770d_0119_30fba772",
+            "22da1acb_0038_6e4bec46",
+            "ed47770d_0049_b6a8e38c"
+          ],
+          "metrics": null
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0019_81ff719f",
+            "f051552b_0002_758c2af4",
+            "ed47770d_0118_7967072b",
+            "ed47770d_0106_6f679608",
+            "ed47770d_0120_ae112e5f"
+          ],
+          "metrics": null
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "ed47770d_0118_7967072b",
+            "f051552b_0002_758c2af4",
+            "a6cbb0d2_0019_81ff719f",
+            "ed47770d_0119_30fba772",
+            "ed47770d_0034_9ad0651c"
+          ],
+          "metrics": null
+        }
+      },
+      "rerank_mrr_delta": null,
+      "fusion_candidate_relevant_count": null,
+      "rerank_retained_relevant_count": null,
+      "rerank_candidate_retention": null,
+      "rerank_lost_relevant_ids": null,
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0118_7967072b",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": -2.4478495121002197,
+            "input_token_count": 183,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0002_758c2af4",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -5.799015522003174,
+            "input_token_count": 152,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0019_81ff719f",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -6.631898403167725,
+            "input_token_count": 257,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0119_30fba772",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": -6.886818885803223,
+            "input_token_count": 253,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0034_9ad0651c",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -7.004610061645508,
+            "input_token_count": 126,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "state_ai_law_effective_dates",
+      "query": "Which U.S. state AI laws take effect in 2026, and what are their exact enforcement dates and penalties?",
+      "category": "unanswerable",
+      "split": "dev",
+      "answerable": false,
+      "relevant_ids": [],
+      "relevant_ranks": {
+        "dense": {},
+        "sparse": {},
+        "fusion": {},
+        "rerank": {}
+      },
+      "candidate_failure": null,
+      "query_expansion": {
+        "rewrite": "U.S. state artificial intelligence laws effective in 2026 exact effective dates enforcement provisions civil penalties fines",
+        "elapsed_ms": 1833.7236249935813,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0204_68e3530b",
+            "582a908c_0230_1cc5c179",
+            "95e05ede_0202_122d527b",
+            "ed47770d_0034_9ad0651c",
+            "f051552b_0025_10b7260a"
+          ],
+          "metrics": null
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "22da1acb_0035_53e5a4fa",
+            "582a908c_0194_b5688175",
+            "c7eb822c_0036_4825b91a",
+            "a6cbb0d2_0113_9304619d",
+            "a6cbb0d2_0068_e3ad4f45"
+          ],
+          "metrics": null
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0231_b27dcb61",
+            "22da1acb_0035_53e5a4fa",
+            "582a908c_0204_68e3530b",
+            "582a908c_0194_b5688175",
+            "582a908c_0230_1cc5c179"
+          ],
+          "metrics": null
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0204_68e3530b",
+            "ed47770d_0021_c48e19b1",
+            "ed47770d_0034_9ad0651c",
+            "582a908c_0231_b27dcb61",
+            "582a908c_0230_1cc5c179"
+          ],
+          "metrics": null
+        }
+      },
+      "rerank_mrr_delta": null,
+      "fusion_candidate_relevant_count": null,
+      "rerank_retained_relevant_count": null,
+      "rerank_candidate_retention": null,
+      "rerank_lost_relevant_ids": null,
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0021_c48e19b1",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": -1.286058783531189,
+            "input_token_count": 232,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0204_68e3530b",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -5.238073348999023,
+            "input_token_count": 112,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0034_9ad0651c",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -5.509182453155518,
+            "input_token_count": 129,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0302_e682fadd",
+            "fusion_rank": 19,
+            "cross_encoder_rank": 4,
+            "combined_rank": 10,
+            "cross_encoder_score": -5.580599308013916,
+            "input_token_count": 340,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0080_ae467679",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 5,
+            "combined_rank": 8,
+            "cross_encoder_score": -6.684401512145996,
+            "input_token_count": 205,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "universal_best_transparency_technique",
+      "query": "Which one digital content transparency technique is best for every content modality, threat model, and user population?",
+      "category": "unanswerable",
+      "split": "dev",
+      "answerable": false,
+      "relevant_ids": [],
+      "relevant_ranks": {
+        "dense": {},
+        "sparse": {},
+        "fusion": {},
+        "rerank": {}
+      },
+      "candidate_failure": null,
+      "query_expansion": {
+        "rewrite": "universal digital content transparency technique across modalities, threat models, user expertise, skills, preferences, and accessibility needs",
+        "elapsed_ms": 1953.220291994512,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0011_8074573f",
+            "582a908c_0197_7a54d273",
+            "582a908c_0025_9edd4177",
+            "582a908c_0010_6617a617",
+            "582a908c_0198_5eabbb43"
+          ],
+          "metrics": null
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0004_419a8ff2",
+            "ed47770d_0052_381698b7",
+            "582a908c_0197_7a54d273",
+            "582a908c_0198_5eabbb43",
+            "582a908c_0003_f448ae59"
+          ],
+          "metrics": null
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0197_7a54d273",
+            "582a908c_0004_419a8ff2",
+            "582a908c_0198_5eabbb43",
+            "582a908c_0293_463cf767",
+            "582a908c_0011_8074573f"
+          ],
+          "metrics": null
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0197_7a54d273",
+            "582a908c_0198_5eabbb43",
+            "582a908c_0143_035d9cc6",
+            "582a908c_0199_b8312f63",
+            "582a908c_0004_419a8ff2"
+          ],
+          "metrics": null
+        }
+      },
+      "rerank_mrr_delta": null,
+      "fusion_candidate_relevant_count": null,
+      "rerank_retained_relevant_count": null,
+      "rerank_candidate_retention": null,
+      "rerank_lost_relevant_ids": null,
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "582a908c_0143_035d9cc6",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 1,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.080031394958496,
+            "input_token_count": 209,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0199_b8312f63",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 2,
+            "combined_rank": 4,
+            "cross_encoder_score": 0.7055038213729858,
+            "input_token_count": 192,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0197_7a54d273",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 3,
+            "combined_rank": 1,
+            "cross_encoder_score": 0.5623740553855896,
+            "input_token_count": 212,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0126_f17ac966",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": -0.0002932026982307434,
+            "input_token_count": 245,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0198_5eabbb43",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.11661738902330399,
+            "input_token_count": 181,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    }
+  ],
+  "latency_note": "P50/P95 use one run per selected query; add warmup and repeated runs before treating them as reportable latency benchmarks."
+}
