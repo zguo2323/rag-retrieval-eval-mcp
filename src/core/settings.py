@@ -129,6 +129,9 @@ class RetrievalSettings:
     sparse_top_k: int
     fusion_top_k: int
     rrf_k: int
+    fusion_min_dense: int = 0
+    fusion_min_sparse: int = 0
+    llm_query_expansion: Optional[Dict[str, Any]] = None
 
 
 @dataclass(frozen=True)
@@ -137,6 +140,10 @@ class RerankSettings:
     provider: str
     model: str
     top_k: int
+    timeout: float = 10.0
+    strategy: str = "cross_encoder"
+    fusion_rank_weight: float = 0.6
+    rank_fusion_k: int = 60
 
 
 @dataclass(frozen=True)
@@ -175,6 +182,7 @@ class IngestionSettings:
     batch_size: int
     chunk_refiner: Optional[Dict[str, Any]] = None  # 动态配置
     metadata_enricher: Optional[Dict[str, Any]] = None  # 动态配置
+    text_spacing_repair: Optional[Dict[str, Any]] = None
 
 
 @dataclass(frozen=True)
@@ -212,6 +220,7 @@ class Settings:
                 batch_size=_require_int(ingestion, "batch_size", "ingestion"),
                 chunk_refiner=ingestion.get("chunk_refiner"),  # 可选配置
                 metadata_enricher=ingestion.get("metadata_enricher"),  # 可选配置
+                text_spacing_repair=ingestion.get("text_spacing_repair"),
             )
 
         vision_llm_settings = None
@@ -261,12 +270,19 @@ class Settings:
                 sparse_top_k=_require_int(retrieval, "sparse_top_k", "retrieval"),
                 fusion_top_k=_require_int(retrieval, "fusion_top_k", "retrieval"),
                 rrf_k=_require_int(retrieval, "rrf_k", "retrieval"),
+                fusion_min_dense=int(retrieval.get("fusion_min_dense", 0)),
+                fusion_min_sparse=int(retrieval.get("fusion_min_sparse", 0)),
+                llm_query_expansion=retrieval.get("llm_query_expansion"),
             ),
             rerank=RerankSettings(
                 enabled=_require_bool(rerank, "enabled", "rerank"),
                 provider=_require_str(rerank, "provider", "rerank"),
                 model=_require_str(rerank, "model", "rerank"),
                 top_k=_require_int(rerank, "top_k", "rerank"),
+                timeout=float(rerank.get("timeout", 10.0)),
+                strategy=str(rerank.get("strategy", "cross_encoder")),
+                fusion_rank_weight=float(rerank.get("fusion_rank_weight", 0.6)),
+                rank_fusion_k=int(rerank.get("rank_fusion_k", 60)),
             ),
             evaluation=EvaluationSettings(
                 enabled=_require_bool(evaluation, "enabled", "evaluation"),
@@ -297,8 +313,20 @@ def validate_settings(settings: Settings) -> None:
         raise SettingsError("Missing required field: vector_store.provider")
     if not settings.retrieval.rrf_k:
         raise SettingsError("Missing required field: retrieval.rrf_k")
+    if settings.retrieval.fusion_min_dense < 0:
+        raise SettingsError("retrieval.fusion_min_dense cannot be negative")
+    if settings.retrieval.fusion_min_sparse < 0:
+        raise SettingsError("retrieval.fusion_min_sparse cannot be negative")
     if not settings.rerank.provider:
         raise SettingsError("Missing required field: rerank.provider")
+    if settings.rerank.strategy not in {"cross_encoder", "rank_fusion"}:
+        raise SettingsError(
+            "rerank.strategy must be one of: cross_encoder, rank_fusion"
+        )
+    if not 0.0 <= settings.rerank.fusion_rank_weight <= 1.0:
+        raise SettingsError("rerank.fusion_rank_weight must be between 0 and 1")
+    if settings.rerank.rank_fusion_k < 1:
+        raise SettingsError("rerank.rank_fusion_k must be at least 1")
     if not settings.evaluation.provider:
         raise SettingsError("Missing required field: evaluation.provider")
     if not settings.observability.log_level:

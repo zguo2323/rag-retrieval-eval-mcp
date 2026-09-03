@@ -536,3 +536,39 @@ class TestRRFFusionRealisticScenarios:
         
         # exact_match should be ranked first due to appearing in both
         assert fused[0].chunk_id == "exact_match"
+
+
+class TestRRFFusionRouteGuarantees:
+    def test_guarantees_keep_top_candidates_from_each_route(self, fusion_default):
+        dense = [
+            RetrievalResult(chunk_id=f"dense_{i}", score=1.0, text="", metadata={})
+            for i in range(1, 4)
+        ]
+        sparse = [
+            RetrievalResult(chunk_id=f"sparse_{i}", score=1.0, text="", metadata={})
+            for i in range(1, 4)
+        ]
+
+        fused = fusion_default.fuse_with_guarantees(
+            [dense, sparse], minimums=[2, 2], top_k=4
+        )
+
+        assert {result.chunk_id for result in fused} == {
+            "dense_1", "dense_2", "sparse_1", "sparse_2"
+        }
+
+    def test_guarantees_fill_overlap_from_rrf(self, fusion_default):
+        shared = RetrievalResult(chunk_id="shared", score=1.0, text="", metadata={})
+        dense = [shared, RetrievalResult("dense", 0.9, "", {})]
+        sparse = [shared, RetrievalResult("sparse", 2.0, "", {})]
+
+        fused = fusion_default.fuse_with_guarantees(
+            [dense, sparse], minimums=[1, 1], top_k=3
+        )
+
+        assert len(fused) == 3
+        assert fused[0].chunk_id == "shared"
+
+    def test_guarantees_validate_minimum_count(self, fusion_default):
+        with pytest.raises(ValueError, match="minimums length"):
+            fusion_default.fuse_with_guarantees([[]], minimums=[], top_k=5)

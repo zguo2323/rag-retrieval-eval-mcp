@@ -48,6 +48,9 @@ class RerankConfig:
     top_k: int = 5
     timeout: float = 30.0
     fallback_on_error: bool = True
+    strategy: str = "cross_encoder"
+    fusion_rank_weight: float = 0.6
+    rank_fusion_k: int = 60
 
 
 @dataclass
@@ -66,6 +69,7 @@ class RerankResult:
     fallback_reason: Optional[str] = None
     reranker_type: str = "none"
     original_order: Optional[List[RetrievalResult]] = None
+    ranked_results: Optional[List[RetrievalResult]] = None
 
 
 class CoreReranker:
@@ -142,8 +146,13 @@ class CoreReranker:
             return RerankConfig(
                 enabled=bool(rerank_settings.enabled) if rerank_settings else False,
                 top_k=int(rerank_settings.top_k) if rerank_settings and hasattr(rerank_settings, 'top_k') else 5,
-                timeout=float(getattr(rerank_settings, 'timeout', 30.0)) if rerank_settings else 30.0,
+                timeout=float(getattr(rerank_settings, 'timeout', 10.0)) if rerank_settings else 10.0,
                 fallback_on_error=True,
+                strategy=str(getattr(rerank_settings, 'strategy', 'cross_encoder')),
+                fusion_rank_weight=float(
+                    getattr(rerank_settings, 'fusion_rank_weight', 0.6)
+                ),
+                rank_fusion_k=int(getattr(rerank_settings, 'rank_fusion_k', 60)),
             )
         except AttributeError:
             logger.warning("Missing rerank configuration, using defaults (disabled)")
@@ -210,27 +219,80 @@ class CoreReranker:
                 original = id_to_original[chunk_id]
                 # Create new result with updated score
                 rerank_score = candidate.get("rerank_score", candidate.get("score", 0.0))
+                ranking_score = candidate.get("ranking_score", rerank_score)
                 results.append(RetrievalResult(
                     chunk_id=original.chunk_id,
-                    score=rerank_score,
+                    score=ranking_score,
                     text=original.text,
-                    metadata={
+                metadata={
                         **original.metadata,
                         "original_score": original.score,
                         "rerank_score": rerank_score,
+                        "ranking_score": ranking_score,
+                        "rerank_strategy": self.config.strategy,
                         "reranked": True,
+                        **{
+                            key: candidate[key]
+                            for key in (
+                                "fusion_rank",
+                                "cross_encoder_rank",
+                                "input_token_count",
+                                "model_max_length",
+                                "input_truncated",
+                            )
+                            if key in candidate
+                        },
                     },
                 ))
             else:
                 # Candidate not in original - build from candidate data
                 results.append(RetrievalResult(
                     chunk_id=chunk_id,
-                    score=candidate.get("rerank_score", candidate.get("score", 0.0)),
+                    score=candidate.get(
+                        "ranking_score",
+                        candidate.get("rerank_score", candidate.get("score", 0.0)),
+                    ),
                     text=candidate.get("text", ""),
                     metadata=candidate.get("metadata", {}),
                 ))
         
         return results
+
+    def _combine_rankings(
+        self,
+        original_candidates: List[Dict[str, Any]],
+        reranked_candidates: List[Dict[str, Any]],
+    ) -> List[Dict[str, Any]]:
+        """Combine Fusion and Cross-Encoder ranks with weighted RRF."""
+        if self.config.strategy == "cross_encoder":
+            return reranked_candidates
+        if self.config.strategy != "rank_fusion":
+            raise ValueError(f"Unsupported rerank strategy: {self.config.strategy}")
+
+        original_rank = {
+            candidate["id"]: rank
+            for rank, candidate in enumerate(original_candidates, start=1)
+        }
+        rerank_rank = {
+            candidate["id"]: rank
+            for rank, candidate in enumerate(reranked_candidates, start=1)
+        }
+        weight = self.config.fusion_rank_weight
+        constant = self.config.rank_fusion_k
+        combined: List[Dict[str, Any]] = []
+        for candidate in reranked_candidates:
+            candidate_copy = candidate.copy()
+            fusion_position = original_rank[candidate["id"]]
+            ce_position = rerank_rank[candidate["id"]]
+            candidate_copy["fusion_rank"] = fusion_position
+            candidate_copy["cross_encoder_rank"] = ce_position
+            candidate_copy["ranking_score"] = (
+                weight / (constant + fusion_position)
+                + (1.0 - weight) / (constant + ce_position)
+            )
+            combined.append(candidate_copy)
+
+        return sorted(combined, key=lambda item: item["ranking_score"], reverse=True)
     
     def rerank(
         self,
@@ -292,6 +354,10 @@ class CoreReranker:
                 **kwargs,
             )
             _elapsed = (time.monotonic() - _t0) * 1000.0
+
+            reranked_candidates = self._combine_rankings(
+                candidates, reranked_candidates
+            )
             
             # Convert back to RetrievalResult
             reranked_results = self._candidates_to_results(reranked_candidates, results)
@@ -323,6 +389,7 @@ class CoreReranker:
                 used_fallback=False,
                 reranker_type=self._reranker_type,
                 original_order=results[:],
+                ranked_results=reranked_results,
             )
             
         except Exception as e:

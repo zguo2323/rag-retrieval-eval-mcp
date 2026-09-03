@@ -1,112 +1,94 @@
 # Modular RAG MCP Server - Configuration
-# This is the main configuration file for the MCP Server.
-# Edit this file to configure LLM, Embedding, VectorStore, and other services.
 
-# =============================================================================
-# LLM Configuration
-# =============================================================================
 llm:
-  provider: "openai"  # Options: openai, azure, ollama, deepseek
-  model: "gpt-4o"
-  deployment_name: "gpt-4o"
-  azure_endpoint: "https://YOUR_ENDPOINT.openai.azure.com/"
-  api_version: "2024-02-15-preview"
-  api_key: "YOUR_API_KEY_HERE"
+  provider: "openai"
+  model: "gpt-5.6-terra"
+  deployment_name: ""
+  azure_endpoint: ""
+  api_version: ""
+  api_key: null  # Read from OPENAI_API_KEY
+  base_url: ""
   temperature: 0.0
   max_tokens: 4096
 
-# =============================================================================
-# Embedding Configuration
-# =============================================================================
 embedding:
-  provider: "openai"  # Options: openai, azure, ollama
+  provider: "openai"
   model: "text-embedding-ada-002"
-  dimensions: 1536  # text-embedding-ada-002 固定维度 (不传递给API, 仅用于验证)
-  # Azure-compatible settings (azure_endpoint triggers Azure compat mode):
-  azure_endpoint: "https://YOUR_ENDPOINT.openai.azure.com/"
-  deployment_name: "text-embedding-ada-002"
-  api_version: "2024-02-15-preview"
-  api_key: "YOUR_API_KEY_HERE"
-  # OpenAI-specific settings (if provider is openai):
-  # api_key: "YOUR_API_KEY_HERE"
+  dimensions: 1536
+  azure_endpoint: ""
+  deployment_name: ""
+  api_version: ""
+  api_key: null  # Read from OPENAI_API_KEY
+  base_url: ""
 
-# =============================================================================
-# Vision LLM Configuration (for Image Captioning)
-# =============================================================================
 vision_llm:
-  enabled: true  # Set to true to enable vision capabilities
-  provider: "openai"  # Options: openai, azure, ollama
-  model: "gpt-4o"  # Options: gpt-4o, gpt-4-vision-preview (OpenAI), llava (Ollama)
-  # Azure-compatible settings (azure_endpoint triggers Azure compat mode):
-  azure_endpoint: "https://YOUR_ENDPOINT.openai.azure.com/"
-  deployment_name: "gpt-4o"
-  api_version: "2024-02-15-preview"
-  api_key: "YOUR_API_KEY_HERE"
-  # Ollama-specific settings (if provider is ollama):
-  # base_url: "http://localhost:11434"
-  max_image_size: 2048  # Max dimension (width/height) for image compression
+  enabled: true
+  provider: "openai"
+  model: "gpt-5.6-terra"
+  azure_endpoint: ""
+  deployment_name: ""
+  api_version: ""
+  api_key: null  # Read from OPENAI_API_KEY
+  base_url: ""
+  max_image_size: 2048
 
-# =============================================================================
-# Vector Store Configuration
-# =============================================================================
 vector_store:
-  provider: "chroma"  # Options: chroma, qdrant, pinecone
+  provider: "chroma"
   persist_directory: "./data/db/chroma"
   collection_name: "knowledge_hub"
 
-# =============================================================================
-# Retrieval Configuration
-# =============================================================================
 retrieval:
   dense_top_k: 20
   sparse_top_k: 20
-  fusion_top_k: 10
-  rrf_k: 60  # RRF constant
+  fusion_top_k: 20
+  rrf_k: 60
+  fusion_min_dense: 10
+  fusion_min_sparse: 10
+  # Optional semantic retrieval rewrite. Keep disabled until Dev evaluation is frozen.
+  llm_query_expansion:
+    enabled: false
+    mode: "hard_fallback"
+    max_route_overlap: 0
+    max_tokens: 96
+    timeout_seconds: 8.0
 
-# =============================================================================
-# Rerank Configuration
-# =============================================================================
 rerank:
-  enabled: false
-  provider: "none"  # Options: none, cross_encoder, llm
+  enabled: true
+  provider: "cross_encoder"
   model: "cross-encoder/ms-marco-MiniLM-L-6-v2"
   top_k: 5
+  timeout: 10.0
+  strategy: "rank_fusion"
+  fusion_rank_weight: 0.4
+  rank_fusion_k: 60
 
-# =============================================================================
-# Evaluation Configuration
-# =============================================================================
 evaluation:
   enabled: false
-  provider: "custom"  # Options: ragas, deepeval, custom
+  provider: "custom"
   metrics:
     - "hit_rate"
     - "mrr"
     - "faithfulness"
 
-# =============================================================================
-# Observability Configuration
-# =============================================================================
 observability:
-  log_level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  log_level: "INFO"
   trace_enabled: true
   trace_file: "./logs/traces.jsonl"
   structured_logging: true
 
-# =============================================================================
-# Ingestion Configuration
-# =============================================================================
 ingestion:
   chunk_size: 1000
   chunk_overlap: 200
-  splitter: "recursive"  # Options: recursive, semantic, fixed_length
+  splitter: "recursive"
   batch_size: 100
-  
-  # Chunk Refiner Configuration (C5)
+  # Optional, deterministic PDF missing-space repair. Keep disabled until a
+  # single-document Dev A/B proves stable improvement.
+  text_spacing_repair:
+    enabled: false
+    min_run_length: 20
+    max_run_length: 120
+    max_repairs: 1000
   chunk_refiner:
-    use_llm: true  # Set to true to enable LLM-based refinement (requires LLM config)
-    # When use_llm is false or LLM call fails, falls back to rule-based refinement
-  
-  # Metadata Enricher Configuration (C6)
+    use_llm: true
   metadata_enricher:
-    use_llm: true  # Set to true to enable LLM-based enrichment (requires LLM config)
-    # When use_llm is false or LLM call fails, falls back to rule-based enrichment
+    use_llm: true

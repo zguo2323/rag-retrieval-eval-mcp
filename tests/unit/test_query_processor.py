@@ -282,6 +282,29 @@ class TestEdgeCases:
         assert "abcd" in result.keywords
 
 
+class TestQueryExpansion:
+    def test_disabled_by_default(self):
+        result = QueryProcessor().process("adapt reasoning for audiences")
+
+        assert result.expanded_terms == []
+
+    def test_enabled_adds_deduplicated_synonyms(self):
+        processor = QueryProcessor(
+            QueryProcessorConfig(enable_query_expansion=True)
+        )
+
+        result = processor.process(
+            "Why should reasoning be adapted for different audiences?"
+        )
+
+        assert result.expanded_terms == [
+            "explanation",
+            "rationale",
+            "tailored",
+            "users",
+        ]
+
+
 class TestProcessedQueryContract:
     """Test ProcessedQuery data contract."""
     

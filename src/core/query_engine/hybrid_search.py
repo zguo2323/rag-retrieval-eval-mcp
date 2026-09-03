@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     from src.core.query_engine.query_processor import QueryProcessor
     from src.core.query_engine.sparse_retriever import SparseRetriever
     from src.core.settings import Settings
+    from src.core.query_engine.llm_query_expander import LLMQueryExpander, QueryExpansion
 
 logger = logging.getLogger(__name__)
 
@@ -73,10 +74,14 @@ class HybridSearchConfig:
     dense_top_k: int = 20
     sparse_top_k: int = 20
     fusion_top_k: int = 10
+    fusion_min_dense: int = 0
+    fusion_min_sparse: int = 0
     enable_dense: bool = True
     enable_sparse: bool = True
     parallel_retrieval: bool = True
     metadata_filter_post: bool = True
+    llm_query_hard_fallback: bool = False
+    hard_fallback_max_route_overlap: int = 0
 
 
 @dataclass
@@ -99,6 +104,8 @@ class HybridSearchResult:
     sparse_error: Optional[str] = None
     used_fallback: bool = False
     processed_query: Optional[ProcessedQuery] = None
+    query_expansion: Optional[QueryExpansion] = None
+    rerank_query: Optional[str] = None
 
 
 class HybridSearch:
@@ -143,6 +150,7 @@ class HybridSearch:
         dense_retriever: Optional[DenseRetriever] = None,
         sparse_retriever: Optional[SparseRetriever] = None,
         fusion: Optional[RRFFusion] = None,
+        query_expander: Optional[LLMQueryExpander] = None,
         config: Optional[HybridSearchConfig] = None,
     ) -> None:
         """Initialize HybridSearch with components.
@@ -164,6 +172,7 @@ class HybridSearch:
         self.dense_retriever = dense_retriever
         self.sparse_retriever = sparse_retriever
         self.fusion = fusion
+        self.query_expander = query_expander
         
         # Extract config from settings or use provided/default
         self.config = config or self._extract_config(settings)
@@ -194,10 +203,21 @@ class HybridSearch:
             dense_top_k=getattr(retrieval_config, 'dense_top_k', 20),
             sparse_top_k=getattr(retrieval_config, 'sparse_top_k', 20),
             fusion_top_k=getattr(retrieval_config, 'fusion_top_k', 10),
+            fusion_min_dense=getattr(retrieval_config, 'fusion_min_dense', 0),
+            fusion_min_sparse=getattr(retrieval_config, 'fusion_min_sparse', 0),
             enable_dense=True,
             enable_sparse=True,
             parallel_retrieval=True,
             metadata_filter_post=True,
+            llm_query_hard_fallback=(
+                (getattr(retrieval_config, "llm_query_expansion", {}) or {}).get("mode")
+                == "hard_fallback"
+            ),
+            hard_fallback_max_route_overlap=int(
+                (getattr(retrieval_config, "llm_query_expansion", {}) or {}).get(
+                    "max_route_overlap", 0
+                )
+            ),
         )
     
     def search(
@@ -233,6 +253,11 @@ class HybridSearch:
         # Validate query
         if not query or not query.strip():
             raise ValueError("Query cannot be empty or whitespace-only")
+
+        if self.config.llm_query_hard_fallback and self.query_expander is not None:
+            return self._search_with_hard_query_fallback(
+                query, top_k, filters, trace, return_details
+            )
         
         effective_top_k = top_k if top_k is not None else self.config.fusion_top_k
         
@@ -241,6 +266,12 @@ class HybridSearch:
         # Step 1: Process query
         _t0 = time.monotonic()
         processed_query = self._process_query(query)
+        expansion = self._expand_query(query)
+        if expansion and expansion.rewrite:
+            processed_query.retrieval_rewrite = expansion.rewrite
+            processed_query.retrieval_rewrite_keywords = self._process_query(
+                expansion.rewrite
+            ).keywords
         _elapsed = (time.monotonic() - _t0) * 1000.0
         if trace is not None:
             trace.record_stage("query_processing", {
@@ -248,6 +279,13 @@ class HybridSearch:
                 "original_query": query,
                 "keywords": processed_query.keywords,
             }, elapsed_ms=_elapsed)
+            if expansion is not None:
+                trace.record_stage("query_expansion", {
+                    "method": "llm_retrieval_rewrite",
+                    "rewrite": expansion.rewrite,
+                    "used_fallback": expansion.used_fallback,
+                    "fallback_reason": expansion.fallback_reason,
+                }, elapsed_ms=expansion.elapsed_ms)
         
         # Merge explicit filters with query-extracted filters
         merged_filters = self._merge_filters(processed_query.filters, filters)
@@ -307,10 +345,70 @@ class HybridSearch:
                 sparse_error=sparse_error,
                 used_fallback=used_fallback,
                 processed_query=processed_query,
+                query_expansion=expansion,
+                rerank_query=(
+                    self._dense_query(processed_query)
+                    if expansion and expansion.rewrite
+                    else query
+                ),
             )
         
         return final_results
-    
+
+    def _search_with_hard_query_fallback(self, query, top_k, filters, trace, return_details):
+        """Add rewrite candidates only when the original routes do not agree."""
+        expander = self.query_expander
+        self.query_expander = None
+        try:
+            baseline = self.search(query, top_k, filters, trace, return_details=True)
+        finally:
+            self.query_expander = expander
+        assert isinstance(baseline, HybridSearchResult)
+        dense_ids = {result.chunk_id for result in (baseline.dense_results or [])[:5]}
+        sparse_ids = {result.chunk_id for result in (baseline.sparse_results or [])[:5]}
+        overlap = len(dense_ids & sparse_ids)
+        if overlap > self.config.hard_fallback_max_route_overlap:
+            return baseline if return_details else baseline.results
+
+        self.config.llm_query_hard_fallback = False
+        try:
+            expanded = self.search(query, top_k, filters, trace, return_details=True)
+        finally:
+            self.config.llm_query_hard_fallback = True
+        assert isinstance(expanded, HybridSearchResult)
+        effective_top_k = top_k if top_k is not None else self.config.fusion_top_k
+        ranking_lists = [
+            baseline.dense_results or [],
+            baseline.sparse_results or [],
+            expanded.dense_results or [],
+            expanded.sparse_results or [],
+        ]
+        # Four independent lists preserve each route's native rank. With 20
+        # slots, reserve five from each route rather than appending rewrite
+        # results after the original top-20 (where rank-1 became rank-21).
+        fused = self.fusion.fuse_with_guarantees(
+            ranking_lists=ranking_lists,
+            minimums=[5, 5, 5, 5],
+            top_k=effective_top_k,
+            weights=[1.0, 1.0, 1.5, 1.5],
+            trace=trace,
+        ) if self.fusion is not None else self._interleave_results(
+            baseline.results, expanded.results, effective_top_k
+        )
+        expanded.results = fused[:effective_top_k]
+        if trace is not None:
+            trace.record_stage("hard_query_fallback", {
+                "method": "candidate_preserving_llm_rewrite",
+                "route_overlap": overlap,
+                "triggered": True,
+                "ranking_lists": 4,
+                "per_route_reservation": 5,
+                "route_weights": [1.0, 1.0, 1.5, 1.5],
+                "original_dense_candidates": len(baseline.dense_results or []),
+                "original_sparse_candidates": len(baseline.sparse_results or []),
+            })
+        return expanded if return_details else expanded.results
+
     def _process_query(self, query: str) -> ProcessedQuery:
         """Process raw query using QueryProcessor.
         
@@ -331,6 +429,11 @@ class HybridSearch:
             )
         
         return self.query_processor.process(query)
+
+    def _expand_query(self, query: str) -> Optional[QueryExpansion]:
+        if self.query_expander is None:
+            return None
+        return self.query_expander.expand(query)
     
     def _merge_filters(
         self,
@@ -408,15 +511,33 @@ class HybridSearch:
             # Run sequentially
             if run_dense:
                 dense_results, dense_error = self._run_dense_retrieval(
-                    processed_query.original_query, filters, trace
+                    self._dense_query(processed_query), filters, trace
                 )
-            
+
             if run_sparse:
                 sparse_results, sparse_error = self._run_sparse_retrieval(
-                    processed_query.keywords, filters, trace
+                    self._sparse_terms(processed_query), filters, trace
                 )
-        
+
         return dense_results, sparse_results, dense_error, sparse_error
+
+    @staticmethod
+    def _dense_query(processed_query: ProcessedQuery) -> str:
+        additions = [
+            *processed_query.expanded_terms,
+            *([processed_query.retrieval_rewrite] if processed_query.retrieval_rewrite else []),
+        ]
+        if not additions:
+            return processed_query.original_query
+        return " ".join([processed_query.original_query, *additions])
+
+    @staticmethod
+    def _sparse_terms(processed_query: ProcessedQuery) -> List[str]:
+        return [
+            *processed_query.keywords,
+            *processed_query.expanded_terms,
+            *processed_query.retrieval_rewrite_keywords,
+        ]
     
     def _run_parallel_retrievals(
         self,
@@ -450,7 +571,7 @@ class HybridSearch:
             # Submit dense retrieval
             futures['dense'] = executor.submit(
                 self._run_dense_retrieval,
-                processed_query.original_query,
+                self._dense_query(processed_query),
                 filters,
                 trace,
             )
@@ -458,7 +579,7 @@ class HybridSearch:
             # Submit sparse retrieval
             futures['sparse'] = executor.submit(
                 self._run_sparse_retrieval,
-                processed_query.keywords,
+                self._sparse_terms(processed_query),
                 filters,
                 trace,
             )
@@ -617,11 +738,23 @@ class HybridSearch:
             return ranking_lists[0][:top_k]
         
         _t0 = time.monotonic()
-        fused = self.fusion.fuse(
-            ranking_lists=ranking_lists,
-            top_k=top_k,
-            trace=trace,
-        )
+        minimums = [
+            self.config.fusion_min_dense,
+            self.config.fusion_min_sparse,
+        ]
+        if any(minimums):
+            fused = self.fusion.fuse_with_guarantees(
+                ranking_lists=ranking_lists,
+                minimums=minimums,
+                top_k=top_k,
+                trace=trace,
+            )
+        else:
+            fused = self.fusion.fuse(
+                ranking_lists=ranking_lists,
+                top_k=top_k,
+                trace=trace,
+            )
         _elapsed = (time.monotonic() - _t0) * 1000.0
         if trace is not None:
             trace.record_stage("fusion", {
@@ -753,6 +886,7 @@ def create_hybrid_search(
     dense_retriever: Optional[DenseRetriever] = None,
     sparse_retriever: Optional[SparseRetriever] = None,
     fusion: Optional[RRFFusion] = None,
+    query_expander: Optional[LLMQueryExpander] = None,
 ) -> HybridSearch:
     """Factory function to create HybridSearch with default components.
     
@@ -777,6 +911,28 @@ def create_hybrid_search(
         ...     sparse_retriever=sparse_retriever,
         ... )
     """
+    # Instantiate the LLM only when explicitly enabled in config. Construction
+    # failures leave standard retrieval available.
+    if query_expander is None and settings is not None:
+        expansion_config = getattr(settings.retrieval, "llm_query_expansion", {}) or {}
+        if expansion_config.get("enabled", False):
+            try:
+                from src.core.query_engine.llm_query_expander import (
+                    LLMQueryExpander,
+                    LLMQueryExpanderConfig,
+                )
+                from src.libs.llm.llm_factory import LLMFactory
+
+                query_expander = LLMQueryExpander(
+                    LLMFactory.create(settings),
+                    LLMQueryExpanderConfig(
+                        max_tokens=int(expansion_config.get("max_tokens", 96)),
+                        timeout_seconds=float(expansion_config.get("timeout_seconds", 8.0)),
+                    ),
+                )
+            except Exception as exc:
+                logger.warning("LLM query expansion unavailable; using original query: %s", exc)
+
     # Create default fusion if not provided
     if fusion is None:
         from src.core.query_engine.fusion import RRFFusion
@@ -793,4 +949,5 @@ def create_hybrid_search(
         dense_retriever=dense_retriever,
         sparse_retriever=sparse_retriever,
         fusion=fusion,
+        query_expander=query_expander,
     )
