@@ -225,6 +225,23 @@ class TestOpenAILLM:
             assert response.content == "Test response"
             assert response.model == "gpt-4o-mini"
             assert response.usage["total_tokens"] == 30
+
+    def test_reasoning_model_uses_completion_token_parameter(self):
+        settings = MockSettings()
+        settings.llm.model = "gpt-5-example"
+        settings.llm.temperature = 0.0
+        llm = OpenAILLM(settings, api_key="test-key")
+
+        with patch("httpx.Client") as mock_client:
+            post = mock_client.return_value.__enter__.return_value.post
+            post.return_value = make_mock_response("ok", "gpt-5-example")
+
+            llm.chat([Message(role="user", content="Hello")], max_tokens=80)
+
+            payload = post.call_args.kwargs["json"]
+            assert payload["max_completion_tokens"] == 80
+            assert "max_tokens" not in payload
+            assert "temperature" not in payload
     
     def test_chat_empty_messages_error(self):
         """Should raise ValueError for empty messages list."""

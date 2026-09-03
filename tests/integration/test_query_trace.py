@@ -14,6 +14,7 @@ from src.core.query_engine.hybrid_search import (
     HybridSearch,
     HybridSearchConfig,
 )
+from src.core.query_engine.llm_query_expander import QueryExpansion
 from src.core.query_engine.reranker import CoreReranker, RerankConfig
 
 
@@ -59,6 +60,11 @@ class FakeFusion:
         return merged[:top_k]
 
 
+class FakeQueryExpander:
+    def expand(self, query: str) -> QueryExpansion:
+        return QueryExpansion("expanded retrieval query", 1.0, False)
+
+
 class FakeBaseReranker:
     """Minimal reranker that adds rerank_score."""
 
@@ -94,6 +100,21 @@ class TestHybridSearchTrace:
         engine.search("hello world", trace=trace)
         stage_names = [s["stage"] for s in trace.stages]
         assert "query_processing" in stage_names
+
+    def test_search_records_llm_query_expansion_without_sensitive_config(self) -> None:
+        engine = self._build_engine()
+        engine.query_expander = FakeQueryExpander()
+        trace = TraceContext(trace_type="query")
+
+        engine.search("hello world", trace=trace)
+
+        expansion_stage = next(s for s in trace.stages if s["stage"] == "query_expansion")
+        assert expansion_stage["data"] == {
+            "method": "llm_retrieval_rewrite",
+            "rewrite": "expanded retrieval query",
+            "used_fallback": False,
+            "fallback_reason": None,
+        }
 
     def test_search_records_dense_retrieval_stage(self) -> None:
         engine = self._build_engine()

@@ -78,8 +78,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--top-k",
         type=int,
-        default=10,
-        help="Max number of results (default: 10)"
+        default=None,
+        help="Override result count; defaults to settings values"
     )
 
     parser.add_argument(
@@ -185,15 +185,15 @@ def _run_query(
             top_k=top_k,
             filters=None,
             trace=trace,
-            return_details=verbose,
+            return_details=True,
         )
     except Exception as e:
         print(f"[FAIL] Hybrid search failed: {e}")
         TraceCollector().collect(trace)
         return 1
 
+    results = hybrid_result.results
     if verbose:
-        results = hybrid_result.results
         if hybrid_result.used_fallback:
             print(
                 f"[WARN] HybridSearch fallback used. "
@@ -208,8 +208,6 @@ def _run_query(
         _print_results(hybrid_result.dense_results or [], top_k=top_k, title="DENSE RESULTS")
         _print_results(hybrid_result.sparse_results or [], top_k=top_k, title="SPARSE RESULTS")
         _print_results(hybrid_result.results, top_k=top_k, title="FUSION RESULTS")
-    else:
-        results = hybrid_result
 
     effective_top_k = top_k if top_k is not None else len(results)
 
@@ -220,7 +218,12 @@ def _run_query(
     # Optional reranking
     if use_rerank and reranker.is_enabled:
         try:
-            rerank_result = reranker.rerank(query=query, results=results, top_k=top_k, trace=trace)
+            rerank_result = reranker.rerank(
+                query=hybrid_result.rerank_query or query,
+                results=results,
+                top_k=top_k,
+                trace=trace,
+            )
             results = rerank_result.results
             if verbose and rerank_result.used_fallback:
                 print(

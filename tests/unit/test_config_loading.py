@@ -65,7 +65,12 @@ def test_load_settings_success(tmp_path: Path) -> None:
     assert settings.embedding.dimensions == 1536
     assert settings.vector_store.collection_name == "knowledge_hub"
     assert settings.retrieval.rrf_k == 60
+    assert settings.retrieval.fusion_min_dense == 0
+    assert settings.retrieval.fusion_min_sparse == 0
+    assert settings.retrieval.llm_query_expansion is None
     assert settings.rerank.provider == "none"
+    assert settings.rerank.strategy == "cross_encoder"
+    assert settings.rerank.fusion_rank_weight == 0.6
     assert settings.evaluation.metrics == ["hit_rate", "mrr"]
     assert settings.observability.log_level == "INFO"
     assert settings.ingestion is not None

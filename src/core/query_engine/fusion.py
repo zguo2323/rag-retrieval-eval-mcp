@@ -283,6 +283,50 @@ class RRFFusion:
         
         return fused_results
 
+    def fuse_with_guarantees(
+        self,
+        ranking_lists: List[List[RetrievalResult]],
+        minimums: List[int],
+        top_k: int,
+        weights: Optional[List[float]] = None,
+        trace: Optional[Any] = None,
+    ) -> List[RetrievalResult]:
+        """Preserve route-level candidates while keeping their RRF order.
+
+        Each non-empty input route can reserve up to ``top_k / route_count``
+        positions. Remaining positions are filled from the ordinary RRF list.
+        """
+        if len(minimums) != len(ranking_lists):
+            raise ValueError("minimums length must match ranking_lists length")
+        if not isinstance(top_k, int) or top_k < 1:
+            raise ValueError("top_k must be a positive integer")
+        if any(not isinstance(value, int) or value < 0 for value in minimums):
+            raise ValueError("minimums must contain non-negative integers")
+
+        non_empty_count = sum(bool(ranking_list) for ranking_list in ranking_lists)
+        if non_empty_count == 0:
+            return []
+
+        per_route_cap = top_k // non_empty_count
+        selected_ids: set[str] = set()
+        for ranking_list, minimum in zip(ranking_lists, minimums):
+            effective_minimum = min(minimum, per_route_cap, len(ranking_list))
+            selected_ids.update(
+                result.chunk_id for result in ranking_list[:effective_minimum]
+            )
+
+        full_ranking = self.fuse_with_weights(
+            ranking_lists, weights=weights, top_k=None, trace=trace
+        )
+        for result in full_ranking:
+            if len(selected_ids) >= top_k:
+                break
+            selected_ids.add(result.chunk_id)
+
+        return [
+            result for result in full_ranking if result.chunk_id in selected_ids
+        ][:top_k]
+
 
 def rrf_score(rank: int, k: int = RRFFusion.DEFAULT_K) -> float:
     """Calculate RRF score contribution for a single rank position.

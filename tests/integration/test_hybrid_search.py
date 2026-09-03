@@ -26,6 +26,7 @@ from src.core.query_engine.hybrid_search import (
     create_hybrid_search,
 )
 from src.core.query_engine.query_processor import QueryProcessor
+from src.core.query_engine.llm_query_expander import QueryExpansion
 from src.core.query_engine.fusion import RRFFusion
 
 
@@ -101,6 +102,19 @@ class MockSparseRetriever:
             raise RuntimeError(self.error_message)
         
         return self.results[:top_k]
+
+
+class MockQueryExpander:
+    def __init__(self, rewrite: str | None = "tailored outputs for users with skills"):
+        self.rewrite = rewrite
+
+    def expand(self, query: str) -> QueryExpansion:
+        return QueryExpansion(
+            rewrite=self.rewrite,
+            elapsed_ms=1.5,
+            used_fallback=self.rewrite is None,
+            fallback_reason="provider_error" if self.rewrite is None else None,
+        )
 
 
 @pytest.fixture
@@ -216,6 +230,76 @@ class TestHybridSearchBasic:
         assert hybrid.config.sparse_top_k == 30
         assert hybrid.config.fusion_top_k == 15
         assert hybrid.config.parallel_retrieval is False
+
+    def test_llm_rewrite_is_added_to_dense_and_sparse_inputs(
+        self, query_processor, rrf_fusion, sample_dense_results, sample_sparse_results
+    ):
+        dense = MockDenseRetriever(results=sample_dense_results)
+        sparse = MockSparseRetriever(results=sample_sparse_results)
+        hybrid = HybridSearch(
+            query_processor=query_processor,
+            dense_retriever=dense,
+            sparse_retriever=sparse,
+            fusion=rrf_fusion,
+            query_expander=MockQueryExpander(),
+            config=HybridSearchConfig(parallel_retrieval=False),
+        )
+
+        detailed = hybrid.search("Why adapt explanations?", return_details=True)
+
+        assert "Why adapt explanations?" in dense.last_query
+        assert "tailored outputs for users with skills" in dense.last_query
+        assert "tailored" in sparse.last_keywords
+        assert detailed.query_expansion is not None
+        assert detailed.query_expansion.used_fallback is False
+
+    def test_llm_rewrite_failure_uses_original_query(
+        self, query_processor, rrf_fusion, sample_dense_results, sample_sparse_results
+    ):
+        dense = MockDenseRetriever(results=sample_dense_results)
+        sparse = MockSparseRetriever(results=sample_sparse_results)
+        hybrid = HybridSearch(
+            query_processor=query_processor,
+            dense_retriever=dense,
+            sparse_retriever=sparse,
+            fusion=rrf_fusion,
+            query_expander=MockQueryExpander(rewrite=None),
+            config=HybridSearchConfig(parallel_retrieval=False),
+        )
+
+        detailed = hybrid.search("Why adapt explanations?", return_details=True)
+
+        assert dense.last_query == "Why adapt explanations?"
+        assert detailed.query_expansion is not None
+        assert detailed.query_expansion.used_fallback is True
+
+    def test_hard_fallback_preserves_original_route_candidates(
+        self, query_processor, rrf_fusion, sample_dense_results, sample_sparse_results
+    ):
+        dense = MockDenseRetriever(results=sample_dense_results)
+        sparse = MockSparseRetriever(results=sample_sparse_results)
+        # No overlap in each route's first five positions triggers the fallback.
+        sparse.results = [
+            RetrievalResult(chunk_id="rewrite_only", score=1, text="", metadata={})
+        ]
+        hybrid = HybridSearch(
+            query_processor=query_processor,
+            dense_retriever=dense,
+            sparse_retriever=sparse,
+            fusion=rrf_fusion,
+            query_expander=MockQueryExpander(),
+            config=HybridSearchConfig(
+                parallel_retrieval=False, llm_query_hard_fallback=True
+            ),
+        )
+
+        detailed = hybrid.search("Why adapt explanations?", return_details=True)
+
+        assert dense.call_count == 2
+        assert sparse.call_count == 2
+        assert {r.chunk_id for r in sample_dense_results} <= {
+            r.chunk_id for r in detailed.dense_results
+        }
     
     def test_search_returns_results(
         self,

@@ -92,7 +92,8 @@ class OpenAILLM(BaseLLM):
             if not self.api_version:
                 self.api_version = "2024-02-15-preview"
         else:
-            self.base_url = self.DEFAULT_BASE_URL
+            settings_base_url = getattr(settings.llm, 'base_url', None)
+            self.base_url = settings_base_url if settings_base_url else self.DEFAULT_BASE_URL
             self._use_azure_auth = False
         
         # Store any additional kwargs for future use
@@ -124,6 +125,7 @@ class OpenAILLM(BaseLLM):
         # Prepare request parameters
         temperature = kwargs.get("temperature", self.default_temperature)
         max_tokens = kwargs.get("max_tokens", self.default_max_tokens)
+        timeout = kwargs.get("timeout", 60.0)
         model = kwargs.get("model", self.model)
         
         # Convert messages to API format
@@ -136,6 +138,7 @@ class OpenAILLM(BaseLLM):
                 model=model,
                 temperature=temperature,
                 max_tokens=max_tokens,
+                timeout=timeout,
             )
             
             # Parse response
@@ -165,6 +168,7 @@ class OpenAILLM(BaseLLM):
         model: str,
         temperature: float,
         max_tokens: int,
+        timeout: float = 60.0,
     ) -> Dict[str, Any]:
         """Make the actual API call to OpenAI.
         
@@ -198,15 +202,22 @@ class OpenAILLM(BaseLLM):
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json",
             }
-        payload = {
+        payload: Dict[str, Any] = {
             "model": model,
             "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
         }
+        reasoning_model = model.lower().startswith(("gpt-5", "o1", "o3", "o4"))
+        if reasoning_model:
+            payload["max_completion_tokens"] = max_tokens
+            # Reasoning models may reject non-default sampling temperatures.
+            if temperature == 1:
+                payload["temperature"] = temperature
+        else:
+            payload["max_tokens"] = max_tokens
+            payload["temperature"] = temperature
         
         try:
-            with httpx.Client(timeout=60.0) as client:
+            with httpx.Client(timeout=timeout) as client:
                 response = client.post(url, json=payload, headers=headers)
                 
                 if response.status_code != 200:
@@ -218,7 +229,7 @@ class OpenAILLM(BaseLLM):
                 return response.json()
         except httpx.TimeoutException as e:
             raise OpenAILLMError(
-                f"[OpenAI] Request timed out after 60 seconds"
+                f"[OpenAI] Request timed out after {timeout} seconds"
             ) from e
         except httpx.RequestError as e:
             raise OpenAILLMError(

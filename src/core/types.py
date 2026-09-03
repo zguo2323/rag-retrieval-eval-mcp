@@ -238,7 +238,8 @@ class ProcessedQuery:
         original_query: The raw user query string
         keywords: List of extracted keywords after stopword removal
         filters: Dictionary of filter conditions (e.g., {"collection": "api-docs"})
-        expanded_terms: Optional list of synonyms/expanded terms (for future use)
+        expanded_terms: Optional list of deterministic synonyms/expanded terms
+        retrieval_rewrite: Optional LLM-generated rewrite used only for retrieval
     
     Example:
         >>> pq = ProcessedQuery(
@@ -252,6 +253,8 @@ class ProcessedQuery:
     keywords: List[str] = field(default_factory=list)
     filters: Dict[str, Any] = field(default_factory=dict)
     expanded_terms: List[str] = field(default_factory=list)
+    retrieval_rewrite: Optional[str] = None
+    retrieval_rewrite_keywords: List[str] = field(default_factory=list)
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization."""

@@ -73,6 +73,18 @@ ENGLISH_STOPWORDS: Set[str] = {
 # Combined default stopwords
 DEFAULT_STOPWORDS: Set[str] = CHINESE_STOPWORDS | ENGLISH_STOPWORDS
 
+# Small, domain-independent vocabulary bridges for deterministic expansion.
+# Expansion remains disabled unless explicitly enabled in QueryProcessorConfig.
+DEFAULT_SYNONYMS: Dict[str, List[str]] = {
+    "audience": ["users"],
+    "audiences": ["users"],
+    "adapt": ["tailor"],
+    "adapted": ["tailored"],
+    "communicate": ["present", "output"],
+    "communicates": ["presents", "output"],
+    "reasoning": ["explanation", "rationale"],
+}
+
 # Pattern for filter syntax: key:value
 FILTER_PATTERN: Pattern = re.compile(r'(\w+):([^\s]+)')
 
@@ -91,6 +103,10 @@ class QueryProcessorConfig:
     min_keyword_length: int = 1
     max_keywords: int = 20
     enable_filter_parsing: bool = True
+    enable_query_expansion: bool = False
+    synonyms: Dict[str, List[str]] = field(
+        default_factory=lambda: {key: value[:] for key, value in DEFAULT_SYNONYMS.items()}
+    )
 
 
 class QueryProcessor:
@@ -141,12 +157,29 @@ class QueryProcessor:
         
         # Filter stopwords and apply constraints
         keywords = self._filter_keywords(tokens)
+        expanded_terms = self._expand_terms(tokens)
         
         return ProcessedQuery(
             original_query=query,
             keywords=keywords,
-            filters=filters
+            filters=filters,
+            expanded_terms=expanded_terms,
         )
+
+    def _expand_terms(self, tokens: List[str]) -> List[str]:
+        """Return deterministic synonyms for terms present in the query."""
+        if not self.config.enable_query_expansion:
+            return []
+        existing = {token.casefold() for token in tokens}
+        expanded: List[str] = []
+        seen = set(existing)
+        for token in tokens:
+            for synonym in self.config.synonyms.get(token.casefold(), []):
+                normalized = synonym.casefold()
+                if normalized not in seen:
+                    seen.add(normalized)
+                    expanded.append(synonym)
+        return expanded
     
     def _normalize(self, query: str) -> str:
         """Normalize query string.
