@@ -1,0 +1,2825 @@
+{
+  "benchmark": "nist_ai_governance_golden_40",
+  "collection": "nist_ai_governance",
+  "split": "test",
+  "query_count": 16,
+  "answerable_query_count": 14,
+  "unanswerable_query_count": 2,
+  "metric_cutoff": 5,
+  "query_expansion": false,
+  "llm_query_expansion": false,
+  "llm_query_hard_fallback": false,
+  "candidate_top_k": {
+    "dense": 20,
+    "sparse": 20,
+    "fusion": 20,
+    "rerank": 5
+  },
+  "aggregate": {
+    "dense": {
+      "hit_rate@5": 0.5,
+      "mrr@5": 0.34523809523809523,
+      "recall@5": 0.44047619047619047,
+      "ndcg@5": 0.34731456800999605,
+      "p50_ms": 1139.05327100656,
+      "p95_ms": 4205.624260779587
+    },
+    "sparse": {
+      "hit_rate@5": 0.7857142857142857,
+      "mrr@5": 0.5738095238095238,
+      "recall@5": 0.6309523809523809,
+      "ndcg@5": 0.5510614228590188,
+      "p50_ms": 120.57075000484474,
+      "p95_ms": 338.9810207299888
+    },
+    "fusion": {
+      "hit_rate@5": 0.7142857142857143,
+      "mrr@5": 0.5380952380952381,
+      "recall@5": 0.6309523809523809,
+      "ndcg@5": 0.516509873797548,
+      "p50_ms": 0.16756250988692045,
+      "p95_ms": 0.8327187824761495
+    },
+    "rerank": {
+      "hit_rate@5": 0.7857142857142857,
+      "mrr@5": 0.6214285714285714,
+      "recall@5": 0.6904761904761905,
+      "ndcg@5": 0.5922668252936057,
+      "p50_ms": 218.51818799041212,
+      "p95_ms": 812.8623224765761
+    }
+  },
+  "latency": {
+    "end_to_end_search_p50_ms": 1141.0035000008065,
+    "end_to_end_search_p95_ms": 4299.744426971301,
+    "query_expansion_p50_ms": 0.0,
+    "query_expansion_p95_ms": 0.0
+  },
+  "rerank_analysis": {
+    "mean_mrr_delta": 0.08333333333333334,
+    "improved_queries": 3,
+    "unchanged_queries": 11,
+    "degraded_queries": 0,
+    "candidate_retention_mean": 0.8205128205128205,
+    "candidate_retention_eligible_queries": 13,
+    "candidate_opportunity_loss_queries": 3
+  },
+  "fusion_weight_sweep": {},
+  "candidate_failure_counts": {
+    "dual_retrieval_miss": 1,
+    "fusion_drop": 0,
+    "partial_fusion_recall": 3,
+    "fusion_recalled": 10
+  },
+  "fallback_rate": 0.0,
+  "llm_query_expansion_fallback_rate": 0.0,
+  "unanswerable_diagnostics": [
+    {
+      "id": "iso_42001_certification_audit_steps",
+      "query": "What exact audit steps and evidence are required to obtain ISO/IEC 42001 certification?",
+      "returned_counts": {
+        "dense": 5,
+        "sparse": 5,
+        "fusion": 5,
+        "rerank": 5
+      },
+      "top_ids": {
+        "dense": [
+          "582a908c_0238_e2ddcd71",
+          "ed47770d_0104_8c98d9be",
+          "ed47770d_0023_c2905979",
+          "ed47770d_0049_b6a8e38c",
+          "95e05ede_0165_f6dcfa1a"
+        ],
+        "sparse": [
+          "582a908c_0241_cb00b2b8",
+          "ed47770d_0105_684fff84",
+          "ed47770d_0114_67fa4a93",
+          "ed47770d_0106_6f679608",
+          "ed47770d_0110_01fc6d82"
+        ],
+        "fusion": [
+          "582a908c_0241_cb00b2b8",
+          "ed47770d_0105_684fff84",
+          "582a908c_0238_e2ddcd71",
+          "582a908c_0239_292f8518",
+          "ed47770d_0104_8c98d9be"
+        ],
+        "rerank": [
+          "582a908c_0241_cb00b2b8",
+          "ed47770d_0114_67fa4a93",
+          "582a908c_0238_e2ddcd71",
+          "ed47770d_0106_6f679608",
+          "ed47770d_0053_a6f8997c"
+        ]
+      },
+      "note": "Diagnostic only: retrieval has no abstention decision yet."
+    },
+    {
+      "id": "most_important_ai_risk_all_sectors",
+      "query": "What is the single most important AI risk for every organization and sector?",
+      "returned_counts": {
+        "dense": 5,
+        "sparse": 5,
+        "fusion": 5,
+        "rerank": 5
+      },
+      "top_ids": {
+        "dense": [
+          "95e05ede_0018_01fce51b",
+          "afc3bec1_0138_7a041beb",
+          "22da1acb_0003_1b84336a",
+          "afc3bec1_0027_fac77d04",
+          "afc3bec1_0031_20843337"
+        ],
+        "sparse": [
+          "f051552b_0153_72af3fb8",
+          "f051552b_0202_ce94de04",
+          "22da1acb_0187_25c4bc15",
+          "ed47770d_0092_923d3378",
+          "95e05ede_0060_8943164b"
+        ],
+        "fusion": [
+          "afc3bec1_0024_7805b671",
+          "95e05ede_0018_01fce51b",
+          "f051552b_0153_72af3fb8",
+          "afc3bec1_0138_7a041beb",
+          "f051552b_0202_ce94de04"
+        ],
+        "rerank": [
+          "95e05ede_0018_01fce51b",
+          "afc3bec1_0024_7805b671",
+          "afc3bec1_0031_20843337",
+          "afc3bec1_0138_7a041beb",
+          "afc3bec1_0032_ab22d186"
+        ]
+      },
+      "note": "Diagnostic only: retrieval has no abstention decision yet."
+    }
+  ],
+  "queries": [
+    {
+      "id": "indirect_prompt_injection_resource_control",
+      "query": "In the AML taxonomy, how does RESOURCE CONTROL enable an INDIRECT PROMPT INJECTION attack against a RAG application?",
+      "category": "exact_term",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "f051552b_0162_5d7fde6e",
+        "f051552b_0184_ad84fd0a",
+        "f051552b_0185_d19fff4f"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "f051552b_0162_5d7fde6e": 17,
+          "f051552b_0184_ad84fd0a": 4,
+          "f051552b_0185_d19fff4f": 3
+        },
+        "sparse": {
+          "f051552b_0162_5d7fde6e": 10,
+          "f051552b_0184_ad84fd0a": 7,
+          "f051552b_0185_d19fff4f": 2
+        },
+        "fusion": {
+          "f051552b_0162_5d7fde6e": 11,
+          "f051552b_0184_ad84fd0a": 6,
+          "f051552b_0185_d19fff4f": 1
+        },
+        "rerank": {
+          "f051552b_0162_5d7fde6e": null,
+          "f051552b_0184_ad84fd0a": 4,
+          "f051552b_0185_d19fff4f": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "In the AML taxonomy, how does RESOURCE CONTROL enable an INDIRECT PROMPT INJECTION attack against a RAG application?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "f051552b_0186_bf814a30",
+            "f051552b_0187_9b54fbbf",
+            "f051552b_0185_d19fff4f",
+            "f051552b_0184_ad84fd0a",
+            "f051552b_0147_3eb3ba20"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 0.6666666666666666,
+            "ndcg@5": 0.4367467095119258
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "f051552b_0148_df35ceda",
+            "f051552b_0185_d19fff4f",
+            "f051552b_0147_3eb3ba20",
+            "f051552b_0187_9b54fbbf",
+            "f051552b_0186_bf814a30"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.2960819109658652
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "f051552b_0185_d19fff4f",
+            "f051552b_0186_bf814a30",
+            "f051552b_0187_9b54fbbf",
+            "f051552b_0148_df35ceda",
+            "f051552b_0147_3eb3ba20"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.3333333333333333,
+            "ndcg@5": 0.46927872602275644
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "f051552b_0185_d19fff4f",
+            "f051552b_0187_9b54fbbf",
+            "f051552b_0186_bf814a30",
+            "f051552b_0184_ad84fd0a",
+            "f051552b_0188_97e263e4"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.6666666666666666,
+            "ndcg@5": 0.6713860725233041
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 3,
+      "rerank_retained_relevant_count": 2,
+      "rerank_candidate_retention": 0.6666666666666666,
+      "rerank_lost_relevant_ids": [
+        "f051552b_0162_5d7fde6e"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "f051552b_0162_5d7fde6e",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 6,
+            "combined_rank": 7,
+            "cross_encoder_score": 0.5275124311447144,
+            "input_token_count": 231,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "f051552b_0184_ad84fd0a",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": 2.2546567916870117,
+            "input_token_count": 104,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "f051552b_0185_d19fff4f",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.126124858856201,
+            "input_token_count": 192,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "f051552b_0187_9b54fbbf",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.451698303222656,
+            "input_token_count": 230,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0185_d19fff4f",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 4.126124858856201,
+            "input_token_count": 192,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "f051552b_0186_bf814a30",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 3.8290133476257324,
+            "input_token_count": 223,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0184_ad84fd0a",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": 2.2546567916870117,
+            "input_token_count": 104,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "f051552b_0188_97e263e4",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.6070863008499146,
+            "input_token_count": 113,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "glossary_polysemy_handling",
+      "query": "How did the NIST trustworthy AI glossary handle terms that exhibited polysemy?",
+      "category": "exact_term",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "c62ece9a_0016_f16390b4"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c62ece9a_0016_f16390b4": 2
+        },
+        "sparse": {
+          "c62ece9a_0016_f16390b4": 1
+        },
+        "fusion": {
+          "c62ece9a_0016_f16390b4": 1
+        },
+        "rerank": {
+          "c62ece9a_0016_f16390b4": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "How did the NIST trustworthy AI glossary handle terms that exhibited polysemy?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0012_9ab806b4",
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0006_af2b7b1c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0003_18aa5fd2",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0000_06f66f2f",
+            "95e05ede_0010_3d122f42"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0012_9ab806b4"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c62ece9a_0016_f16390b4",
+            "c62ece9a_0010_7f5c9a89",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0006_af2b7b1c",
+            "c62ece9a_0000_06f66f2f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c62ece9a_0016_f16390b4",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.5169777870178223,
+            "input_token_count": 146,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c62ece9a_0016_f16390b4",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.5169777870178223,
+            "input_token_count": 146,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "c62ece9a_0005_a8e75b54",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": 2.0883920192718506,
+            "input_token_count": 218,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0010_7f5c9a89",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.7966524362564087,
+            "input_token_count": 211,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0006_af2b7b1c",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": 1.4409513473510742,
+            "input_token_count": 186,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0003_18aa5fd2",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": 1.1853692531585693,
+            "input_token_count": 257,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "xai_knowledge_limits_principle",
+      "query": "What does the Knowledge Limits principle require of an explainable AI system?",
+      "category": "exact_term",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "a6cbb0d2_0006_6f78c76a"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "a6cbb0d2_0006_6f78c76a": 2
+        },
+        "sparse": {
+          "a6cbb0d2_0006_6f78c76a": 8
+        },
+        "fusion": {
+          "a6cbb0d2_0006_6f78c76a": 2
+        },
+        "rerank": {
+          "a6cbb0d2_0006_6f78c76a": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "What does the Knowledge Limits principle require of an explainable AI system?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "a6cbb0d2_0024_f442ba99",
+            "a6cbb0d2_0006_6f78c76a",
+            "a6cbb0d2_0002_24b06b85",
+            "a6cbb0d2_0118_cb23f367",
+            "a6cbb0d2_0035_c17cd82a"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0080_19e4f2a9",
+            "a6cbb0d2_0035_c17cd82a",
+            "a6cbb0d2_0111_9373a1bc",
+            "a6cbb0d2_0034_b5b7c5d3",
+            "a6cbb0d2_0055_58c96346"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0035_c17cd82a",
+            "a6cbb0d2_0006_6f78c76a",
+            "a6cbb0d2_0002_24b06b85",
+            "a6cbb0d2_0116_c1cb2edb",
+            "a6cbb0d2_0034_b5b7c5d3"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "a6cbb0d2_0002_24b06b85",
+            "a6cbb0d2_0006_6f78c76a",
+            "a6cbb0d2_0116_c1cb2edb",
+            "a6cbb0d2_0035_c17cd82a",
+            "a6cbb0d2_0051_d0c722db"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "a6cbb0d2_0006_6f78c76a",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 6.8301496505737305,
+            "input_token_count": 212,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "a6cbb0d2_0002_24b06b85",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 7.1446452140808105,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0006_6f78c76a",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 6.8301496505737305,
+            "input_token_count": 212,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "a6cbb0d2_0116_c1cb2edb",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 6.087510108947754,
+            "input_token_count": 283,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0021_f427ed76",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 4.806555271148682,
+            "input_token_count": 166,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0051_d0c722db",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 4.680389404296875,
+            "input_token_count": 147,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "horizontal_vertical_ai_standards",
+      "query": "How does the global AI standards plan distinguish horizontal standards from vertical standards?",
+      "category": "exact_term",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "ed47770d_0009_013def74"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "ed47770d_0009_013def74": 6
+        },
+        "sparse": {
+          "ed47770d_0009_013def74": 2
+        },
+        "fusion": {
+          "ed47770d_0009_013def74": 2
+        },
+        "rerank": {
+          "ed47770d_0009_013def74": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "How does the global AI standards plan distinguish horizontal standards from vertical standards?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "ed47770d_0099_11d9807d",
+            "ed47770d_0028_f1c8d91f",
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0129_2693d686",
+            "ed47770d_0100_8c81b34a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "ed47770d_0099_11d9807d",
+            "ed47770d_0009_013def74",
+            "ed47770d_0068_3669dc52",
+            "ed47770d_0000_05aee380",
+            "ed47770d_0103_c845f7c2"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "ed47770d_0099_11d9807d",
+            "ed47770d_0009_013def74",
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0103_c845f7c2",
+            "ed47770d_0028_f1c8d91f"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "ed47770d_0099_11d9807d",
+            "ed47770d_0009_013def74",
+            "ed47770d_0028_f1c8d91f",
+            "ed47770d_0010_64e4631a",
+            "ed47770d_0103_c845f7c2"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "ed47770d_0009_013def74",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 3.5949201583862305,
+            "input_token_count": 129,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0099_11d9807d",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.928257465362549,
+            "input_token_count": 147,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0009_013def74",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 3.5949201583862305,
+            "input_token_count": 129,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "ed47770d_0028_f1c8d91f",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 2.976240873336792,
+            "input_token_count": 162,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0068_3669dc52",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 2.916018486022949,
+            "input_token_count": 143,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0010_64e4631a",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": 2.581700325012207,
+            "input_token_count": 138,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "upstream_component_accountability_risk",
+      "query": "Which generative-AI risk covers opaque incorporation of third-party data or components, weak supplier vetting, and reduced accountability for downstream users?",
+      "category": "semantic_paraphrase",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "95e05ede_0025_405cff1d"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "95e05ede_0025_405cff1d": null
+        },
+        "sparse": {
+          "95e05ede_0025_405cff1d": 1
+        },
+        "fusion": {
+          "95e05ede_0025_405cff1d": 5
+        },
+        "rerank": {
+          "95e05ede_0025_405cff1d": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "Which generative-AI risk covers opaque incorporation of third-party data or components, weak supplier vetting, and reduced accountability for downstream users?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "95e05ede_0035_3d0e4e03",
+            "95e05ede_0057_3095fc71",
+            "95e05ede_0086_46bc3411",
+            "95e05ede_0053_ee8fdea7",
+            "582a908c_0021_9183d519"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "95e05ede_0025_405cff1d",
+            "95e05ede_0057_3095fc71",
+            "afc3bec1_0135_ef2ceff1",
+            "afc3bec1_0097_e485e080",
+            "f051552b_0013_0611caa4"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "95e05ede_0057_3095fc71",
+            "95e05ede_0086_46bc3411",
+            "95e05ede_0168_abe8719a",
+            "95e05ede_0167_ed161cb1",
+            "95e05ede_0025_405cff1d"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 1.0,
+            "ndcg@5": 0.38685280723454163
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "95e05ede_0057_3095fc71",
+            "95e05ede_0025_405cff1d",
+            "95e05ede_0086_46bc3411",
+            "afc3bec1_0097_e485e080",
+            "95e05ede_0168_abe8719a"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.3,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "95e05ede_0025_405cff1d",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 3.095641851425171,
+            "input_token_count": 206,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "95e05ede_0057_3095fc71",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 3.126176118850708,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0025_405cff1d",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 3.095641851425171,
+            "input_token_count": 206,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "afc3bec1_0097_e485e080",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 3,
+            "combined_rank": 4,
+            "cross_encoder_score": -0.7790001630783081,
+            "input_token_count": 294,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0149_13d715a1",
+            "fusion_rank": 14,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": -0.9325147271156311,
+            "input_token_count": 220,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0098_fa234ba8",
+            "fusion_rank": 17,
+            "cross_encoder_rank": 5,
+            "combined_rank": 8,
+            "cross_encoder_score": -0.9793599843978882,
+            "input_token_count": 159,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "glossary_multiple_meanings_goal",
+      "query": "Why did NIST's trustworthy-AI vocabulary resource avoid declaring one authoritative meaning for every term?",
+      "category": "semantic_paraphrase",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "c62ece9a_0005_a8e75b54"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "c62ece9a_0005_a8e75b54": 2
+        },
+        "sparse": {
+          "c62ece9a_0005_a8e75b54": 2
+        },
+        "fusion": {
+          "c62ece9a_0005_a8e75b54": 1
+        },
+        "rerank": {
+          "c62ece9a_0005_a8e75b54": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "Why did NIST's trustworthy-AI vocabulary resource avoid declaring one authoritative meaning for every term?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "c62ece9a_0000_06f66f2f",
+            "c62ece9a_0005_a8e75b54",
+            "f051552b_0004_00716ee9",
+            "c62ece9a_0002_02fddbe0",
+            "c62ece9a_0010_7f5c9a89"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0299_473a3907",
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0007_cf8a6ccd",
+            "95e05ede_0010_3d122f42",
+            "f051552b_0015_a791cf91"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0006_af2b7b1c",
+            "c62ece9a_0007_cf8a6ccd",
+            "c62ece9a_0012_9ab806b4",
+            "22da1acb_0023_bf9b582a"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "c62ece9a_0005_a8e75b54",
+            "c62ece9a_0006_af2b7b1c",
+            "f051552b_0004_00716ee9",
+            "c62ece9a_0007_cf8a6ccd",
+            "f051552b_0015_a791cf91"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "c62ece9a_0005_a8e75b54",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.6185872554779053,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "c62ece9a_0005_a8e75b54",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.6185872554779053,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "f051552b_0004_00716ee9",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.9736631512641907,
+            "input_token_count": 198,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0015_a791cf91",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.42745622992515564,
+            "input_token_count": 215,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0006_af2b7b1c",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 4,
+            "combined_rank": 2,
+            "cross_encoder_score": 0.37077608704566956,
+            "input_token_count": 189,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c62ece9a_0003_18aa5fd2",
+            "fusion_rank": 19,
+            "cross_encoder_rank": 5,
+            "combined_rank": 11,
+            "cross_encoder_score": -0.7104987502098083,
+            "input_token_count": 260,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "fairness_not_single_formula",
+      "query": "Why can't one mathematical rule settle whether an AI system treats people fairly in every deployment context?",
+      "category": "semantic_paraphrase",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "22da1acb_0139_768f7aa7"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "22da1acb_0139_768f7aa7": null
+        },
+        "sparse": {
+          "22da1acb_0139_768f7aa7": null
+        },
+        "fusion": {
+          "22da1acb_0139_768f7aa7": null
+        },
+        "rerank": {
+          "22da1acb_0139_768f7aa7": null
+        }
+      },
+      "candidate_failure": "dual_retrieval_miss",
+      "query_expansion": null,
+      "rerank_query": "Why can't one mathematical rule settle whether an AI system treats people fairly in every deployment context?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "22da1acb_0092_b331fa79",
+            "22da1acb_0140_79ce7fcf",
+            "22da1acb_0082_334bb9e1",
+            "f051552b_0222_70a4cf7a",
+            "22da1acb_0141_f57007aa"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0113_0b044580",
+            "4fcc5244_0137_d46e7478",
+            "4fcc5244_0023_114f4611",
+            "22da1acb_0096_f83cf62a",
+            "22da1acb_0003_1b84336a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "22da1acb_0092_b331fa79",
+            "afc3bec1_0113_0b044580",
+            "22da1acb_0140_79ce7fcf",
+            "4fcc5244_0137_d46e7478",
+            "22da1acb_0082_334bb9e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "22da1acb_0092_b331fa79",
+            "22da1acb_0082_334bb9e1",
+            "afc3bec1_0113_0b044580",
+            "22da1acb_0003_1b84336a",
+            "4fcc5244_0137_d46e7478"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 0,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "22da1acb_0139_768f7aa7",
+            "not_in_rerank_pool": true
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "22da1acb_0092_b331fa79",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.7744454145431519,
+            "input_token_count": 232,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0082_334bb9e1",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -1.9629294872283936,
+            "input_token_count": 219,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0176_98216246",
+            "fusion_rank": 19,
+            "cross_encoder_rank": 3,
+            "combined_rank": 7,
+            "cross_encoder_score": -3.308114528656006,
+            "input_token_count": 255,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0138_9aaaa837",
+            "fusion_rank": 18,
+            "cross_encoder_rank": 4,
+            "combined_rank": 9,
+            "cross_encoder_score": -4.256649971008301,
+            "input_token_count": 208,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0003_1b84336a",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": -4.269389629364014,
+            "input_token_count": 212,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "standards_activity_lifecycle",
+      "query": "What stages of work does the U.S. plan include from the research before a formal AI standard exists through practical adoption support?",
+      "category": "semantic_paraphrase",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "ed47770d_0009_013def74"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "ed47770d_0009_013def74": 10
+        },
+        "sparse": {
+          "ed47770d_0009_013def74": 1
+        },
+        "fusion": {
+          "ed47770d_0009_013def74": 3
+        },
+        "rerank": {
+          "ed47770d_0009_013def74": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "What stages of work does the U.S. plan include from the research before a formal AI standard exists through practical adoption support?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0014_1808ee57",
+            "ed47770d_0018_fdbe54cf",
+            "ed47770d_0019_3846d73f",
+            "ed47770d_0022_0db5c419"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "ed47770d_0009_013def74",
+            "ed47770d_0095_476d3b57",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0022_0db5c419",
+            "ed47770d_0026_ab9cfcd2"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0022_0db5c419",
+            "ed47770d_0009_013def74",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0014_1808ee57"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 1.0,
+            "ndcg@5": 0.5
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "ed47770d_0009_013def74",
+            "ed47770d_0022_0db5c419",
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0024_8cbd8205",
+            "ed47770d_0016_59d263e3"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.6666666666666667,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "ed47770d_0009_013def74",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.0394043922424316,
+            "input_token_count": 141,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0009_013def74",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.0394043922424316,
+            "input_token_count": 141,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "ed47770d_0022_0db5c419",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 0.7904391288757324,
+            "input_token_count": 208,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0095_476d3b57",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 3,
+            "combined_rank": 6,
+            "cross_encoder_score": 0.5856852531433105,
+            "input_token_count": 199,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0016_59d263e3",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 4,
+            "combined_rank": 5,
+            "cross_encoder_score": 0.12681235373020172,
+            "input_token_count": 193,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0069_3b071526",
+            "fusion_rank": 17,
+            "cross_encoder_rank": 5,
+            "combined_rank": 9,
+            "cross_encoder_score": -1.0009641647338867,
+            "input_token_count": 222,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "confabulation_vs_information_integrity",
+      "query": "In the Generative AI Profile, how is a model confidently producing false content different from lowering the barrier to large-scale misinformation campaigns?",
+      "category": "cross_document",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "95e05ede_0019_c30528ca",
+        "95e05ede_0021_0a459075"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "95e05ede_0019_c30528ca": null,
+          "95e05ede_0021_0a459075": null
+        },
+        "sparse": {
+          "95e05ede_0019_c30528ca": null,
+          "95e05ede_0021_0a459075": 1
+        },
+        "fusion": {
+          "95e05ede_0019_c30528ca": null,
+          "95e05ede_0021_0a459075": 6
+        },
+        "rerank": {
+          "95e05ede_0019_c30528ca": null,
+          "95e05ede_0021_0a459075": 5
+        }
+      },
+      "candidate_failure": "partial_fusion_recall",
+      "query_expansion": null,
+      "rerank_query": "In the Generative AI Profile, how is a model confidently producing false content different from lowering the barrier to large-scale misinformation campaigns?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "95e05ede_0048_1e36c3f7",
+            "95e05ede_0047_c8d51ae6",
+            "582a908c_0151_4b2503ef",
+            "95e05ede_0031_da569221",
+            "95e05ede_0032_96dffcda"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "95e05ede_0021_0a459075",
+            "95e05ede_0048_1e36c3f7",
+            "95e05ede_0046_9e2a4883",
+            "c7eb822c_0037_0d5ce2da",
+            "582a908c_0021_9183d519"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.5,
+            "ndcg@5": 0.6131471927654584
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "95e05ede_0048_1e36c3f7",
+            "582a908c_0009_d51535d5",
+            "95e05ede_0046_9e2a4883",
+            "c7eb822c_0037_0d5ce2da",
+            "f051552b_0189_bd28c2e1"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "95e05ede_0048_1e36c3f7",
+            "c7eb822c_0037_0d5ce2da",
+            "582a908c_0009_d51535d5",
+            "582a908c_0021_9183d519",
+            "95e05ede_0021_0a459075"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 0.5,
+            "ndcg@5": 0.23719771276929622
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.2,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "95e05ede_0019_c30528ca",
+            "not_in_rerank_pool": true
+          },
+          {
+            "chunk_id": "95e05ede_0021_0a459075",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -0.5453512072563171,
+            "input_token_count": 184,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "95e05ede_0048_1e36c3f7",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 2.4050889015197754,
+            "input_token_count": 189,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0021_9183d519",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 2,
+            "combined_rank": 4,
+            "cross_encoder_score": 0.031630851328372955,
+            "input_token_count": 189,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0145_931ff909",
+            "fusion_rank": 19,
+            "cross_encoder_rank": 3,
+            "combined_rank": 10,
+            "cross_encoder_score": 0.011166896671056747,
+            "input_token_count": 251,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0037_0d5ce2da",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 4,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.47060734033584595,
+            "input_token_count": 230,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0021_0a459075",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -0.5453512072563171,
+            "input_token_count": 184,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "content_authentication_vs_detection",
+      "query": "How does the synthetic-content report distinguish content authentication from synthetic content detection?",
+      "category": "cross_document",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "582a908c_0023_412a28ed",
+        "582a908c_0026_afd8d84c"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "582a908c_0023_412a28ed": null,
+          "582a908c_0026_afd8d84c": null
+        },
+        "sparse": {
+          "582a908c_0023_412a28ed": 20,
+          "582a908c_0026_afd8d84c": 3
+        },
+        "fusion": {
+          "582a908c_0023_412a28ed": null,
+          "582a908c_0026_afd8d84c": 7
+        },
+        "rerank": {
+          "582a908c_0023_412a28ed": null,
+          "582a908c_0026_afd8d84c": null
+        }
+      },
+      "candidate_failure": "partial_fusion_recall",
+      "query_expansion": null,
+      "rerank_query": "How does the synthetic-content report distinguish content authentication from synthetic content detection?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0107_54d3e4e0",
+            "582a908c_0018_2d15df47",
+            "582a908c_0108_bb0fa750",
+            "582a908c_0148_cf928038",
+            "582a908c_0112_4c842593"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0200_ac518ae5",
+            "582a908c_0015_045dd7f0",
+            "582a908c_0026_afd8d84c",
+            "95e05ede_0180_10243311",
+            "582a908c_0020_e6cd335a"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.3333333333333333,
+            "recall@5": 0.5,
+            "ndcg@5": 0.3065735963827292
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0200_ac518ae5",
+            "582a908c_0107_54d3e4e0",
+            "582a908c_0020_e6cd335a",
+            "582a908c_0015_045dd7f0",
+            "582a908c_0199_b8312f63"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0107_54d3e4e0",
+            "582a908c_0108_bb0fa750",
+            "95e05ede_0180_10243311",
+            "582a908c_0199_b8312f63",
+            "582a908c_0200_ac518ae5"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "582a908c_0026_afd8d84c"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "582a908c_0023_412a28ed",
+            "not_in_rerank_pool": true
+          },
+          {
+            "chunk_id": "582a908c_0026_afd8d84c",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 10,
+            "combined_rank": 9,
+            "cross_encoder_score": 3.0406653881073,
+            "input_token_count": 180,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "582a908c_0107_54d3e4e0",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.9399261474609375,
+            "input_token_count": 187,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0108_bb0fa750",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.54465389251709,
+            "input_token_count": 191,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0180_10243311",
+            "fusion_rank": 10,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 4.467550277709961,
+            "input_token_count": 169,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0160_4590610b",
+            "fusion_rank": 14,
+            "cross_encoder_rank": 4,
+            "combined_rank": 8,
+            "cross_encoder_score": 4.321962833404541,
+            "input_token_count": 197,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0111_3abfc495",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": 4.063946723937988,
+            "input_token_count": 200,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "meaningful_vs_explanation_accuracy",
+      "query": "Which explainable-AI principle concerns whether a user can understand an explanation, and which instead concerns whether it faithfully reflects the system's actual process?",
+      "category": "cross_document",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "a6cbb0d2_0006_6f78c76a"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "a6cbb0d2_0006_6f78c76a": 8
+        },
+        "sparse": {
+          "a6cbb0d2_0006_6f78c76a": null
+        },
+        "fusion": {
+          "a6cbb0d2_0006_6f78c76a": 16
+        },
+        "rerank": {
+          "a6cbb0d2_0006_6f78c76a": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "Which explainable-AI principle concerns whether a user can understand an explanation, and which instead concerns whether it faithfully reflects the system's actual process?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "a6cbb0d2_0024_f442ba99",
+            "a6cbb0d2_0002_24b06b85",
+            "a6cbb0d2_0007_e729660a",
+            "a6cbb0d2_0117_52d05ea6",
+            "a6cbb0d2_0118_cb23f367"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0026_678203f7",
+            "4fcc5244_0035_bd102955",
+            "a6cbb0d2_0080_19e4f2a9",
+            "a6cbb0d2_0101_34b8a30d",
+            "a6cbb0d2_0030_a3c4109a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0026_678203f7",
+            "a6cbb0d2_0051_d0c722db",
+            "4fcc5244_0035_bd102955",
+            "a6cbb0d2_0024_f442ba99",
+            "a6cbb0d2_0030_a3c4109a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "a6cbb0d2_0026_678203f7",
+            "a6cbb0d2_0051_d0c722db",
+            "a6cbb0d2_0002_24b06b85",
+            "a6cbb0d2_0037_005fbe44",
+            "a6cbb0d2_0007_e729660a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "a6cbb0d2_0006_6f78c76a"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "a6cbb0d2_0006_6f78c76a",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": 4.548155307769775,
+            "input_token_count": 229,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "a6cbb0d2_0026_678203f7",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.567429065704346,
+            "input_token_count": 218,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0002_24b06b85",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": 4.775082111358643,
+            "input_token_count": 231,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0051_d0c722db",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.629462718963623,
+            "input_token_count": 164,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0006_6f78c76a",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": 4.548155307769775,
+            "input_token_count": 229,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "a6cbb0d2_0007_e729660a",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": 4.270051002502441,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "standards_readiness_tevv_vs_explainability",
+      "query": "Which AI standards topics does the global engagement plan place in the urgent, ready tier, and how does that differ from interpretability and explainability?",
+      "category": "cross_document",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "ed47770d_0013_2858bdf3",
+        "ed47770d_0014_1808ee57"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "ed47770d_0013_2858bdf3": 1,
+          "ed47770d_0014_1808ee57": 3
+        },
+        "sparse": {
+          "ed47770d_0013_2858bdf3": 1,
+          "ed47770d_0014_1808ee57": 2
+        },
+        "fusion": {
+          "ed47770d_0013_2858bdf3": 1,
+          "ed47770d_0014_1808ee57": 2
+        },
+        "rerank": {
+          "ed47770d_0013_2858bdf3": 1,
+          "ed47770d_0014_1808ee57": 4
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "Which AI standards topics does the global engagement plan place in the urgent, ready tier, and how does that differ from interpretability and explainability?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "ed47770d_0013_2858bdf3",
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0014_1808ee57",
+            "ed47770d_0046_edbd5121",
+            "ed47770d_0018_fdbe54cf"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 0.9197207891481876
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "ed47770d_0013_2858bdf3",
+            "ed47770d_0014_1808ee57",
+            "ed47770d_0046_edbd5121",
+            "ed47770d_0045_53590f3c",
+            "ed47770d_0000_05aee380"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "ed47770d_0013_2858bdf3",
+            "ed47770d_0014_1808ee57",
+            "ed47770d_0046_edbd5121",
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0065_68b4983e"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "ed47770d_0013_2858bdf3",
+            "ed47770d_0043_94545fa0",
+            "ed47770d_0046_edbd5121",
+            "ed47770d_0014_1808ee57",
+            "ed47770d_0065_68b4983e"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 0.8772153153380493
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 2,
+      "rerank_retained_relevant_count": 2,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "ed47770d_0013_2858bdf3",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.587655067443848,
+            "input_token_count": 225,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "ed47770d_0014_1808ee57",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 6,
+            "combined_rank": 4,
+            "cross_encoder_score": 1.229381799697876,
+            "input_token_count": 157,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0013_2858bdf3",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 5.587655067443848,
+            "input_token_count": 225,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "ed47770d_0043_94545fa0",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": 4.207642555236816,
+            "input_token_count": 177,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0046_edbd5121",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 3.4578824043273926,
+            "input_token_count": 205,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0065_68b4983e",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 4,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.9018528461456299,
+            "input_token_count": 202,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0042_8d4c04ea",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 5,
+            "combined_rank": 7,
+            "cross_encoder_score": 1.2940163612365723,
+            "input_token_count": 173,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "gai_pwg_four_considerations",
+      "query": "What four primary considerations limited the focus of the Generative AI Public Working Group?",
+      "category": "structured_fact",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "95e05ede_0009_7215ff3a"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "95e05ede_0009_7215ff3a": 1
+        },
+        "sparse": {
+          "95e05ede_0009_7215ff3a": 1
+        },
+        "fusion": {
+          "95e05ede_0009_7215ff3a": 1
+        },
+        "rerank": {
+          "95e05ede_0009_7215ff3a": 1
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "What four primary considerations limited the focus of the Generative AI Public Working Group?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "95e05ede_0009_7215ff3a",
+            "ed47770d_0043_94545fa0",
+            "95e05ede_0161_856c2617",
+            "c7eb822c_0137_ca07ef81",
+            "c7eb822c_0138_9b125239"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "95e05ede_0009_7215ff3a",
+            "95e05ede_0161_856c2617",
+            "95e05ede_0002_9679ddf2",
+            "ed47770d_0056_f79edf45",
+            "582a908c_0074_83379c36"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "95e05ede_0009_7215ff3a",
+            "95e05ede_0161_856c2617",
+            "ed47770d_0043_94545fa0",
+            "95e05ede_0002_9679ddf2",
+            "c7eb822c_0137_ca07ef81"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "95e05ede_0009_7215ff3a",
+            "95e05ede_0161_856c2617",
+            "c7eb822c_0137_ca07ef81",
+            "582a908c_0074_83379c36",
+            "95e05ede_0002_9679ddf2"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "95e05ede_0009_7215ff3a",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.562458038330078,
+            "input_token_count": 153,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "95e05ede_0009_7215ff3a",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 8.562458038330078,
+            "input_token_count": 153,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "582a908c_0074_83379c36",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 2,
+            "combined_rank": 4,
+            "cross_encoder_score": 1.8150064945220947,
+            "input_token_count": 204,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "c7eb822c_0137_ca07ef81",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 0.6210542321205139,
+            "input_token_count": 206,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0161_856c2617",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 4,
+            "combined_rank": 2,
+            "cross_encoder_score": 0.4099055528640747,
+            "input_token_count": 226,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0002_9679ddf2",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -1.7777553796768188,
+            "input_token_count": 214,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "debiasing_processing_stages",
+      "query": "What are the three processing-stage categories of algorithmic debiasing methods, and what does each change?",
+      "category": "structured_fact",
+      "split": "test",
+      "answerable": true,
+      "relevant_ids": [
+        "22da1acb_0125_03393552",
+        "22da1acb_0126_a4a4a1bf"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "22da1acb_0125_03393552": 1,
+          "22da1acb_0126_a4a4a1bf": null
+        },
+        "sparse": {
+          "22da1acb_0125_03393552": 5,
+          "22da1acb_0126_a4a4a1bf": null
+        },
+        "fusion": {
+          "22da1acb_0125_03393552": 1,
+          "22da1acb_0126_a4a4a1bf": null
+        },
+        "rerank": {
+          "22da1acb_0125_03393552": 1,
+          "22da1acb_0126_a4a4a1bf": null
+        }
+      },
+      "candidate_failure": "partial_fusion_recall",
+      "query_expansion": null,
+      "rerank_query": "What are the three processing-stage categories of algorithmic debiasing methods, and what does each change?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "22da1acb_0125_03393552",
+            "4fcc5244_0043_03f4df1f",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0041_6bf00129",
+            "22da1acb_0092_b331fa79"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.5,
+            "ndcg@5": 0.6131471927654584
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0042_a74fd1f3",
+            "582a908c_0115_517c1354",
+            "22da1acb_0130_5f7b7e0c",
+            "f051552b_0368_bcc82e51",
+            "22da1acb_0125_03393552"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 0.5,
+            "ndcg@5": 0.23719771276929622
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "22da1acb_0125_03393552",
+            "22da1acb_0008_af37409e",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0131_17cfbb6c",
+            "afc3bec1_0066_24858a8b"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.5,
+            "ndcg@5": 0.6131471927654584
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "22da1acb_0125_03393552",
+            "22da1acb_0015_569cde2c",
+            "22da1acb_0131_17cfbb6c",
+            "a6cbb0d2_0042_a74fd1f3",
+            "22da1acb_0130_5f7b7e0c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 1.0,
+            "recall@5": 0.5,
+            "ndcg@5": 0.6131471927654584
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "22da1acb_0125_03393552",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -1.7732348442077637,
+            "input_token_count": 262,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "22da1acb_0126_a4a4a1bf",
+            "not_in_rerank_pool": true
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "22da1acb_0015_569cde2c",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": -1.5442982912063599,
+            "input_token_count": 259,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0125_03393552",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -1.7732348442077637,
+            "input_token_count": 262,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "22da1acb_0131_17cfbb6c",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -1.9907488822937012,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0130_5f7b7e0c",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 4,
+            "combined_rank": 5,
+            "cross_encoder_score": -3.640089988708496,
+            "input_token_count": 143,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0042_a74fd1f3",
+            "fusion_rank": 6,
+            "cross_encoder_rank": 5,
+            "combined_rank": 4,
+            "cross_encoder_score": -3.823610782623291,
+            "input_token_count": 191,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "iso_42001_certification_audit_steps",
+      "query": "What exact audit steps and evidence are required to obtain ISO/IEC 42001 certification?",
+      "category": "unanswerable",
+      "split": "test",
+      "answerable": false,
+      "relevant_ids": [],
+      "relevant_ranks": {
+        "dense": {},
+        "sparse": {},
+        "fusion": {},
+        "rerank": {}
+      },
+      "candidate_failure": null,
+      "query_expansion": null,
+      "rerank_query": "What exact audit steps and evidence are required to obtain ISO/IEC 42001 certification?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0238_e2ddcd71",
+            "ed47770d_0104_8c98d9be",
+            "ed47770d_0023_c2905979",
+            "ed47770d_0049_b6a8e38c",
+            "95e05ede_0165_f6dcfa1a"
+          ],
+          "metrics": null
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "582a908c_0241_cb00b2b8",
+            "ed47770d_0105_684fff84",
+            "ed47770d_0114_67fa4a93",
+            "ed47770d_0106_6f679608",
+            "ed47770d_0110_01fc6d82"
+          ],
+          "metrics": null
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0241_cb00b2b8",
+            "ed47770d_0105_684fff84",
+            "582a908c_0238_e2ddcd71",
+            "582a908c_0239_292f8518",
+            "ed47770d_0104_8c98d9be"
+          ],
+          "metrics": null
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0241_cb00b2b8",
+            "ed47770d_0114_67fa4a93",
+            "582a908c_0238_e2ddcd71",
+            "ed47770d_0106_6f679608",
+            "ed47770d_0053_a6f8997c"
+          ],
+          "metrics": null
+        }
+      },
+      "rerank_mrr_delta": null,
+      "fusion_candidate_relevant_count": null,
+      "rerank_retained_relevant_count": null,
+      "rerank_candidate_retention": null,
+      "rerank_lost_relevant_ids": null,
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "ed47770d_0114_67fa4a93",
+            "fusion_rank": 7,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": -0.9195945262908936,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0241_cb00b2b8",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -3.3472952842712402,
+            "input_token_count": 185,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0053_a6f8997c",
+            "fusion_rank": 13,
+            "cross_encoder_rank": 3,
+            "combined_rank": 5,
+            "cross_encoder_score": -3.6790013313293457,
+            "input_token_count": 189,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0106_6f679608",
+            "fusion_rank": 9,
+            "cross_encoder_rank": 4,
+            "combined_rank": 4,
+            "cross_encoder_score": -4.626558303833008,
+            "input_token_count": 236,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "ed47770d_0119_30fba772",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 5,
+            "combined_rank": 8,
+            "cross_encoder_score": -6.189866542816162,
+            "input_token_count": 249,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "most_important_ai_risk_all_sectors",
+      "query": "What is the single most important AI risk for every organization and sector?",
+      "category": "unanswerable",
+      "split": "test",
+      "answerable": false,
+      "relevant_ids": [],
+      "relevant_ranks": {
+        "dense": {},
+        "sparse": {},
+        "fusion": {},
+        "rerank": {}
+      },
+      "candidate_failure": null,
+      "query_expansion": null,
+      "rerank_query": "What is the single most important AI risk for every organization and sector?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "95e05ede_0018_01fce51b",
+            "afc3bec1_0138_7a041beb",
+            "22da1acb_0003_1b84336a",
+            "afc3bec1_0027_fac77d04",
+            "afc3bec1_0031_20843337"
+          ],
+          "metrics": null
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "f051552b_0153_72af3fb8",
+            "f051552b_0202_ce94de04",
+            "22da1acb_0187_25c4bc15",
+            "ed47770d_0092_923d3378",
+            "95e05ede_0060_8943164b"
+          ],
+          "metrics": null
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0024_7805b671",
+            "95e05ede_0018_01fce51b",
+            "f051552b_0153_72af3fb8",
+            "afc3bec1_0138_7a041beb",
+            "f051552b_0202_ce94de04"
+          ],
+          "metrics": null
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "95e05ede_0018_01fce51b",
+            "afc3bec1_0024_7805b671",
+            "afc3bec1_0031_20843337",
+            "afc3bec1_0138_7a041beb",
+            "afc3bec1_0032_ab22d186"
+          ],
+          "metrics": null
+        }
+      },
+      "rerank_mrr_delta": null,
+      "fusion_candidate_relevant_count": null,
+      "rerank_retained_relevant_count": null,
+      "rerank_candidate_retention": null,
+      "rerank_lost_relevant_ids": null,
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0032_ab22d186",
+            "fusion_rank": 19,
+            "cross_encoder_rank": 1,
+            "combined_rank": 5,
+            "cross_encoder_score": 1.13612961769104,
+            "input_token_count": 271,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "95e05ede_0018_01fce51b",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": -0.6189329624176025,
+            "input_token_count": 219,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0031_20843337",
+            "fusion_rank": 11,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": -0.6255378723144531,
+            "input_token_count": 124,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0022_1943981e",
+            "fusion_rank": 20,
+            "cross_encoder_rank": 4,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.6968914270401,
+            "input_token_count": 270,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0050_4bdb3809",
+            "fusion_rank": 18,
+            "cross_encoder_rank": 5,
+            "combined_rank": 8,
+            "cross_encoder_score": -1.7003718614578247,
+            "input_token_count": 98,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    }
+  ],
+  "latency_note": "P50/P95 use one run per selected query; add warmup and repeated runs before treating them as reportable latency benchmarks."
+}

@@ -1,0 +1,611 @@
+{
+  "benchmark": "nist_ai_governance_golden_40",
+  "collection": "nist_ai_governance",
+  "split": "dev",
+  "query_count": 3,
+  "answerable_query_count": 3,
+  "unanswerable_query_count": 0,
+  "metric_cutoff": 5,
+  "query_expansion": false,
+  "llm_query_expansion": true,
+  "llm_query_hard_fallback": true,
+  "candidate_top_k": {
+    "dense": 20,
+    "sparse": 20,
+    "fusion": 20,
+    "rerank": 5
+  },
+  "aggregate": {
+    "dense": {
+      "hit_rate@5": 0.0,
+      "mrr@5": 0.0,
+      "recall@5": 0.0,
+      "ndcg@5": 0.0,
+      "p50_ms": 889.4672090536915,
+      "p95_ms": 1537.8182080865372
+    },
+    "sparse": {
+      "hit_rate@5": 0.6666666666666666,
+      "mrr@5": 0.3333333333333333,
+      "recall@5": 0.6666666666666666,
+      "ndcg@5": 0.4183267578584318,
+      "p50_ms": 138.61033297143877,
+      "p95_ms": 498.3506838965695
+    },
+    "fusion": {
+      "hit_rate@5": 0.3333333333333333,
+      "mrr@5": 0.06666666666666667,
+      "recall@5": 0.3333333333333333,
+      "ndcg@5": 0.1289509357448472,
+      "p50_ms": 0.1697090337984264,
+      "p95_ms": 0.262558413669467
+    },
+    "rerank": {
+      "hit_rate@5": 0.3333333333333333,
+      "mrr@5": 0.16666666666666666,
+      "recall@5": 0.3333333333333333,
+      "ndcg@5": 0.2103099178571525,
+      "p50_ms": 605.2979169762693,
+      "p95_ms": 910.5206167034339
+    }
+  },
+  "latency": {
+    "end_to_end_search_p50_ms": 4231.264125031885,
+    "end_to_end_search_p95_ms": 5220.823161886074,
+    "query_expansion_p50_ms": 2538.9252710156143,
+    "query_expansion_p95_ms": 2647.086727421265
+  },
+  "rerank_analysis": {
+    "mean_mrr_delta": 0.09999999999999999,
+    "improved_queries": 1,
+    "unchanged_queries": 2,
+    "degraded_queries": 0,
+    "candidate_retention_mean": 0.3333333333333333,
+    "candidate_retention_eligible_queries": 3,
+    "candidate_opportunity_loss_queries": 2
+  },
+  "fusion_weight_sweep": {},
+  "candidate_failure_counts": {
+    "dual_retrieval_miss": 0,
+    "fusion_drop": 0,
+    "partial_fusion_recall": 0,
+    "fusion_recalled": 3
+  },
+  "fallback_rate": 0.0,
+  "llm_query_expansion_fallback_rate": 0.0,
+  "unanswerable_diagnostics": [],
+  "queries": [
+    {
+      "id": "transparency_without_guaranteed_trust",
+      "query": "Why can knowing where a digital item came from still fail to make it trustworthy?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "582a908c_0011_8074573f"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "582a908c_0011_8074573f": 16
+        },
+        "sparse": {
+          "582a908c_0011_8074573f": null
+        },
+        "fusion": {
+          "582a908c_0011_8074573f": 12
+        },
+        "rerank": {
+          "582a908c_0011_8074573f": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "digital provenance authenticity integrity reliability trustworthiness limitations",
+        "elapsed_ms": 2659.104667021893,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "rerank_query": "Why can knowing where a digital item came from still fail to make it trustworthy? digital provenance authenticity integrity reliability trustworthiness limitations",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "582a908c_0147_0591e817",
+            "582a908c_0146_5eb2eca3",
+            "582a908c_0153_a9ec3803",
+            "582a908c_0026_afd8d84c",
+            "95e05ede_0182_2b7a60d2"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "95e05ede_0182_2b7a60d2",
+            "582a908c_0269_d842eb05",
+            "582a908c_0026_afd8d84c",
+            "95e05ede_0107_8475c8ce",
+            "582a908c_0268_7487ead8"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "582a908c_0026_afd8d84c",
+            "582a908c_0147_0591e817",
+            "582a908c_0294_7a1f55a6",
+            "582a908c_0293_463cf767",
+            "582a908c_0146_5eb2eca3"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "582a908c_0147_0591e817",
+            "582a908c_0293_463cf767",
+            "582a908c_0146_5eb2eca3",
+            "582a908c_0026_afd8d84c",
+            "582a908c_0294_7a1f55a6"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "582a908c_0011_8074573f"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "582a908c_0011_8074573f",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 1.1288936138153076,
+            "input_token_count": 198,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "582a908c_0293_463cf767",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 1,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.7576632499694824,
+            "input_token_count": 202,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0147_0591e817",
+            "fusion_rank": 2,
+            "cross_encoder_rank": 2,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.265529751777649,
+            "input_token_count": 94,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0146_5eb2eca3",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.2193762063980103,
+            "input_token_count": 197,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "582a908c_0011_8074573f",
+            "fusion_rank": 12,
+            "cross_encoder_rank": 4,
+            "combined_rank": 6,
+            "cross_encoder_score": 1.1288936138153076,
+            "input_token_count": 198,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "582a908c_0294_7a1f55a6",
+            "fusion_rank": 3,
+            "cross_encoder_rank": 5,
+            "combined_rank": 5,
+            "cross_encoder_score": -0.3870024085044861,
+            "input_token_count": 219,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "tailor_outputs_to_user_differences",
+      "query": "Why should the way a machine-learning system communicates its reasoning be adapted for different audiences?",
+      "category": "semantic_paraphrase",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "4fcc5244_0003_5dbfe540",
+        "4fcc5244_0004_43fb8431"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "4fcc5244_0003_5dbfe540": null,
+          "4fcc5244_0004_43fb8431": null
+        },
+        "sparse": {
+          "4fcc5244_0003_5dbfe540": 2,
+          "4fcc5244_0004_43fb8431": 5
+        },
+        "fusion": {
+          "4fcc5244_0003_5dbfe540": 17,
+          "4fcc5244_0004_43fb8431": 20
+        },
+        "rerank": {
+          "4fcc5244_0003_5dbfe540": null,
+          "4fcc5244_0004_43fb8431": null
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": {
+        "rewrite": "adapting machine-learning reasoning explanations to audience expertise, skills, preferences, personality traits, communication detail, and interpretation",
+        "elapsed_ms": 2418.7458750093356,
+        "used_fallback": false,
+        "fallback_reason": null
+      },
+      "rerank_query": "Why should the way a machine-learning system communicates its reasoning be adapted for different audiences? adapting machine-learning reasoning explanations to audience expertise, skills, preferences, personality traits, communication detail, and interpretation",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "4fcc5244_0171_d72744ac",
+            "a6cbb0d2_0007_e729660a",
+            "4fcc5244_0166_24226e18",
+            "a6cbb0d2_0027_ff485e31",
+            "4fcc5244_0035_175d5164"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "a6cbb0d2_0032_02129475",
+            "4fcc5244_0003_5dbfe540",
+            "a6cbb0d2_0029_cbf3fd6a",
+            "4fcc5244_0086_e86ed5da",
+            "4fcc5244_0004_43fb8431"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6240505200038379
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "a6cbb0d2_0032_02129475",
+            "a6cbb0d2_0027_ff485e31",
+            "a6cbb0d2_0059_93cd9a14",
+            "4fcc5244_0171_d72744ac",
+            "a6cbb0d2_0029_cbf3fd6a"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "a6cbb0d2_0029_cbf3fd6a",
+            "4fcc5244_0171_d72744ac",
+            "a6cbb0d2_0032_02129475",
+            "a6cbb0d2_0027_ff485e31",
+            "4fcc5244_0168_26ad23b0"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.0,
+      "fusion_candidate_relevant_count": 2,
+      "rerank_retained_relevant_count": 0,
+      "rerank_candidate_retention": 0.0,
+      "rerank_lost_relevant_ids": [
+        "4fcc5244_0003_5dbfe540",
+        "4fcc5244_0004_43fb8431"
+      ],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "4fcc5244_0003_5dbfe540",
+            "fusion_rank": 17,
+            "cross_encoder_rank": 3,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.6663849353790283,
+            "input_token_count": 278,
+            "model_max_length": 512,
+            "input_truncated": false
+          },
+          {
+            "chunk_id": "4fcc5244_0004_43fb8431",
+            "fusion_rank": 20,
+            "cross_encoder_rank": 17,
+            "combined_rank": 20,
+            "cross_encoder_score": -8.05526351928711,
+            "input_token_count": 270,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "a6cbb0d2_0029_cbf3fd6a",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 0.3603166937828064,
+            "input_token_count": 221,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0171_d72744ac",
+            "fusion_rank": 4,
+            "cross_encoder_rank": 2,
+            "combined_rank": 2,
+            "cross_encoder_score": -1.4604231119155884,
+            "input_token_count": 259,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "4fcc5244_0003_5dbfe540",
+            "fusion_rank": 17,
+            "cross_encoder_rank": 3,
+            "combined_rank": 7,
+            "cross_encoder_score": -1.6663849353790283,
+            "input_token_count": 278,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "a6cbb0d2_0057_38828ba1",
+            "fusion_rank": 16,
+            "cross_encoder_rank": 4,
+            "combined_rank": 8,
+            "cross_encoder_score": -2.093441963195801,
+            "input_token_count": 225,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "a6cbb0d2_0032_02129475",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 5,
+            "combined_rank": 3,
+            "cross_encoder_score": -3.0566463470458984,
+            "input_token_count": 134,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    },
+    {
+      "id": "trustworthy_attribute_tradeoffs",
+      "query": "Why does AI RMF 1.0 reject treating a highly accurate but opaque system as trustworthy merely because it performs well?",
+      "category": "cross_document",
+      "split": "dev",
+      "answerable": true,
+      "relevant_ids": [
+        "afc3bec1_0047_6112e28c"
+      ],
+      "relevant_ranks": {
+        "dense": {
+          "afc3bec1_0047_6112e28c": null
+        },
+        "sparse": {
+          "afc3bec1_0047_6112e28c": 2
+        },
+        "fusion": {
+          "afc3bec1_0047_6112e28c": 5
+        },
+        "rerank": {
+          "afc3bec1_0047_6112e28c": 2
+        }
+      },
+      "candidate_failure": "fusion_recalled",
+      "query_expansion": null,
+      "rerank_query": "Why does AI RMF 1.0 reject treating a highly accurate but opaque system as trustworthy merely because it performs well?",
+      "stages": {
+        "dense": {
+          "retrieved_ids": [
+            "f051552b_0222_70a4cf7a",
+            "582a908c_0163_1be4b6b6",
+            "afc3bec1_0058_f1e0af7b",
+            "f051552b_0221_aa5103ae",
+            "22da1acb_0053_1dc805da"
+          ],
+          "metrics": {
+            "hit_rate@5": 0.0,
+            "mrr@5": 0.0,
+            "recall@5": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "sparse": {
+          "retrieved_ids": [
+            "afc3bec1_0000_40caeb6b",
+            "afc3bec1_0047_6112e28c",
+            "afc3bec1_0019_9116c211",
+            "95e05ede_0005_4e23ad13",
+            "afc3bec1_0058_f1e0af7b"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        },
+        "fusion": {
+          "retrieved_ids": [
+            "afc3bec1_0058_f1e0af7b",
+            "afc3bec1_0000_40caeb6b",
+            "f051552b_0222_70a4cf7a",
+            "582a908c_0163_1be4b6b6",
+            "afc3bec1_0047_6112e28c"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.2,
+            "recall@5": 1.0,
+            "ndcg@5": 0.38685280723454163
+          }
+        },
+        "rerank": {
+          "retrieved_ids": [
+            "afc3bec1_0058_f1e0af7b",
+            "afc3bec1_0047_6112e28c",
+            "f051552b_0221_aa5103ae",
+            "f051552b_0222_70a4cf7a",
+            "afc3bec1_0000_40caeb6b"
+          ],
+          "metrics": {
+            "hit_rate@5": 1.0,
+            "mrr@5": 0.5,
+            "recall@5": 1.0,
+            "ndcg@5": 0.6309297535714575
+          }
+        }
+      },
+      "rerank_mrr_delta": 0.3,
+      "fusion_candidate_relevant_count": 1,
+      "rerank_retained_relevant_count": 1,
+      "rerank_candidate_retention": 1.0,
+      "rerank_lost_relevant_ids": [],
+      "rerank_fallback": false,
+      "rerank_diagnostics": {
+        "relevant_chunks": [
+          {
+            "chunk_id": "afc3bec1_0047_6112e28c",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.2666161060333252,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false
+          }
+        ],
+        "cross_encoder_top5": [
+          {
+            "chunk_id": "afc3bec1_0058_f1e0af7b",
+            "fusion_rank": 1,
+            "cross_encoder_rank": 1,
+            "combined_rank": 1,
+            "cross_encoder_score": 1.9879682064056396,
+            "input_token_count": 263,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "f051552b_0221_aa5103ae",
+            "fusion_rank": 8,
+            "cross_encoder_rank": 2,
+            "combined_rank": 3,
+            "cross_encoder_score": 1.3158875703811646,
+            "input_token_count": 241,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "afc3bec1_0047_6112e28c",
+            "fusion_rank": 5,
+            "cross_encoder_rank": 3,
+            "combined_rank": 2,
+            "cross_encoder_score": 1.2666161060333252,
+            "input_token_count": 237,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": true
+          },
+          {
+            "chunk_id": "95e05ede_0058_93cd4f2d",
+            "fusion_rank": 15,
+            "cross_encoder_rank": 4,
+            "combined_rank": 9,
+            "cross_encoder_score": 0.9423355460166931,
+            "input_token_count": 224,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          },
+          {
+            "chunk_id": "22da1acb_0024_c50be86e",
+            "fusion_rank": 18,
+            "cross_encoder_rank": 5,
+            "combined_rank": 10,
+            "cross_encoder_score": 0.8427934646606445,
+            "input_token_count": 236,
+            "model_max_length": 512,
+            "input_truncated": false,
+            "is_relevant": false
+          }
+        ]
+      },
+      "fusion_weight_sweep": {}
+    }
+  ],
+  "latency_note": "P50/P95 use one run per selected query; add warmup and repeated runs before treating them as reportable latency benchmarks."
+}
