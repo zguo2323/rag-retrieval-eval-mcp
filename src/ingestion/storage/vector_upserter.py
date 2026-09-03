@@ -40,6 +40,12 @@ class VectorUpserter:
         - Same content → same ID (idempotent)
         - Content change → different ID (versioning)
         - Human-readable with source traceability
+
+    A separate ``stable_chunk_key`` is stored in metadata as
+    ``{source_path_hash}_{chunk_index:04d}``. It intentionally excludes the
+    content hash so benchmark and audit tools can compare ingestion variants
+    that make small text repairs without treating every affected chunk as a
+    different evidence position.
     
     Example:
         >>> upserter = VectorUpserter(settings)
@@ -111,8 +117,10 @@ class VectorUpserter:
         chunk_ids = []
         
         for chunk, vector in zip(chunks, vectors):
-            # Generate deterministic chunk ID
-            chunk_id = self._generate_chunk_id(chunk)
+            # Generate deterministic chunk ID and a stable position key.
+            source_hash, chunk_index, content_hash = self._chunk_identity_parts(chunk)
+            chunk_id = f"{source_hash}_{chunk_index:04d}_{content_hash}"
+            stable_chunk_key = f"{source_hash}_{chunk_index:04d}"
             chunk_ids.append(chunk_id)
             
             # Build storage record
@@ -123,6 +131,9 @@ class VectorUpserter:
                     **chunk.metadata,  # Preserve all original metadata
                     "text": chunk.text,  # Store text for retrieval
                     "chunk_id": chunk_id,  # Redundant but useful for queries
+                    "stable_chunk_key": stable_chunk_key,
+                    "source_path_hash": source_hash,
+                    "content_hash": content_hash,
                 },
             }
             records.append(record)
@@ -149,23 +160,25 @@ class VectorUpserter:
         Raises:
             ValueError: If required metadata fields are missing.
         """
-        # Validate required metadata
+        source_hash, chunk_index, content_hash = self._chunk_identity_parts(chunk)
+        return f"{source_hash}_{chunk_index:04d}_{content_hash}"
+
+    def _chunk_identity_parts(self, chunk: Chunk) -> tuple[str, int, str]:
+        """Return source hash, numeric chunk index, and content hash."""
         if "source_path" not in chunk.metadata:
             raise ValueError("Chunk metadata must contain 'source_path'")
         if "chunk_index" not in chunk.metadata:
             raise ValueError("Chunk metadata must contain 'chunk_index'")
-        
-        source_path = chunk.metadata["source_path"]
-        chunk_index = chunk.metadata["chunk_index"]
-        
-        # Compute stable hashes
+
+        source_path = str(chunk.metadata["source_path"])
+        try:
+            chunk_index = int(chunk.metadata["chunk_index"])
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Chunk metadata 'chunk_index' must be an integer") from exc
+
         source_hash = hashlib.sha256(source_path.encode("utf-8")).hexdigest()[:8]
         content_hash = hashlib.sha256(chunk.text.encode("utf-8")).hexdigest()[:8]
-        
-        # Format: {source_hash}_{index:04d}_{content_hash}
-        chunk_id = f"{source_hash}_{chunk_index:04d}_{content_hash}"
-        
-        return chunk_id
+        return source_hash, chunk_index, content_hash
     
     def upsert_batch(
         self,

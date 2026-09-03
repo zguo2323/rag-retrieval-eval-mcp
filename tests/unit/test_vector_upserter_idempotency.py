@@ -193,6 +193,12 @@ def test_upsert_single_chunk(upserter_with_mock_store, sample_chunk, sample_vect
     assert records[0]["id"] == chunk_ids[0]
     assert records[0]["vector"] == sample_vector
     assert records[0]["metadata"]["text"] == sample_chunk.text
+    assert records[0]["metadata"]["chunk_id"] == chunk_ids[0]
+    assert records[0]["metadata"]["stable_chunk_key"] == "_".join(
+        chunk_ids[0].split("_")[:2]
+    )
+    assert records[0]["metadata"]["source_path_hash"] == chunk_ids[0].split("_")[0]
+    assert records[0]["metadata"]["content_hash"] == chunk_ids[0].split("_")[2]
 
 
 def test_upsert_multiple_chunks(upserter_with_mock_store):
