@@ -34,6 +34,11 @@ from src.libs.vector_store.vector_store_factory import VectorStoreFactory
 # Ingestion layer imports
 from src.ingestion.chunking.document_chunker import DocumentChunker
 from src.ingestion.transform.chunk_refiner import ChunkRefiner
+from src.ingestion.transform.text_spacing_repair import (
+    TextSpacingRepairConfig,
+    TextSpacingRepairer,
+)
+from src.ingestion.transform.text_quality import assess_chunk_quality, assess_text_quality
 from src.ingestion.transform.metadata_enricher import MetadataEnricher
 from src.ingestion.transform.image_captioner import ImageCaptioner
 from src.ingestion.embedding.dense_encoder import DenseEncoder
@@ -151,6 +156,24 @@ class IngestionPipeline:
         # Stage 3: Chunker
         self.chunker = DocumentChunker(settings)
         logger.info("  ✓ DocumentChunker initialized")
+
+        repair_settings = (
+            getattr(settings.ingestion, "text_spacing_repair", None)
+            if settings.ingestion is not None
+            else None
+        ) or {}
+        self.text_spacing_repairer = TextSpacingRepairer(
+            TextSpacingRepairConfig(
+                enabled=bool(repair_settings.get("enabled", False)),
+                min_run_length=int(repair_settings.get("min_run_length", 20)),
+                max_run_length=int(repair_settings.get("max_run_length", 120)),
+                max_repairs=int(repair_settings.get("max_repairs", 1000)),
+            )
+        )
+        logger.info(
+            "  ✓ TextSpacingRepairer initialized (enabled=%s)",
+            self.text_spacing_repairer.config.enabled,
+        )
         
         # Stage 4: Transforms
         self.chunk_refiner = ChunkRefiner(settings)
@@ -271,6 +294,71 @@ class IngestionPipeline:
                 "text_length": len(document.text),
                 "image_count": image_count
             }
+            text_quality = assess_text_quality(document.text)
+            document.metadata["text_quality"] = {
+                key: value for key, value in text_quality.items() if key != "samples"
+            }
+            stages["text_quality"] = text_quality
+            if trace is not None:
+                trace.record_stage("text_quality", {
+                    "method": "concatenated_token_audit",
+                    **text_quality,
+                }, elapsed_ms=0.0)
+            if text_quality["needs_review"]:
+                logger.warning(
+                    "Possible missing-space extraction corruption: %d runs (ratio=%.3f)",
+                    text_quality["concatenated_run_count"],
+                    text_quality["concatenated_character_ratio"],
+                )
+            text_spacing_repairer = getattr(
+                self,
+                "text_spacing_repairer",
+                TextSpacingRepairer(TextSpacingRepairConfig(enabled=False)),
+            )
+            if text_spacing_repairer.config.enabled:
+                _repair_t0 = time.monotonic()
+                repair_result = text_spacing_repairer.repair(document.text)
+                repair_elapsed = (time.monotonic() - _repair_t0) * 1000.0
+                if repair_result.changed:
+                    document.text = repair_result.text
+                repaired_quality = assess_text_quality(document.text)
+                document.metadata["text_spacing_repair"] = {
+                    "enabled": True,
+                    "changed": repair_result.changed,
+                    "repair_count": len(repair_result.repairs),
+                    "skipped_count": len(repair_result.skipped),
+                    "concatenated_character_ratio_before": text_quality[
+                        "concatenated_character_ratio"
+                    ],
+                    "concatenated_character_ratio_after": repaired_quality[
+                        "concatenated_character_ratio"
+                    ],
+                }
+                document.metadata["text_quality"] = {
+                    key: value for key, value in repaired_quality.items() if key != "samples"
+                }
+                stages["text_spacing_repair"] = {
+                    **document.metadata["text_spacing_repair"],
+                    "repairs": repair_result.repairs[:10],
+                    "skipped": repair_result.skipped[:10],
+                }
+                stages["text_quality_after_repair"] = repaired_quality
+                if trace is not None:
+                    trace.record_stage(
+                        "text_spacing_repair",
+                        {
+                            "method": "deterministic_lexicon_segmentation",
+                            **stages["text_spacing_repair"],
+                        },
+                        elapsed_ms=repair_elapsed,
+                    )
+                logger.info(
+                    "  Text spacing repair: %d accepted, %d skipped, ratio %.3f -> %.3f",
+                    len(repair_result.repairs),
+                    len(repair_result.skipped),
+                    text_quality["concatenated_character_ratio"],
+                    repaired_quality["concatenated_character_ratio"],
+                )
             if trace is not None:
                 trace.record_stage("load", {
                     "method": "markitdown",
@@ -291,6 +379,16 @@ class IngestionPipeline:
             _elapsed = (time.monotonic() - _t0) * 1000.0
             
             logger.info(f"  Chunks generated: {len(chunks)}")
+            target_chunk_size = getattr(
+                getattr(self, "settings", None).ingestion, "chunk_size", 1000
+            ) if getattr(self, "settings", None) is not None else 1000
+            chunk_quality = assess_chunk_quality(chunks, target_chunk_size)
+            stages["chunk_quality"] = chunk_quality
+            if trace is not None:
+                trace.record_stage("chunk_quality", {
+                    "method": "chunk_length_and_concatenation_audit",
+                    **chunk_quality,
+                }, elapsed_ms=0.0)
             if chunks:
                 logger.info(f"  First chunk ID: {chunks[0].id}")
                 logger.info(f"  First chunk preview: {chunks[0].text[:100]}...")
@@ -445,10 +543,11 @@ class IngestionPipeline:
 
             # 6b: BM25 Index
             logger.info("  6b. BM25 Index...")
+            bm25_doc_id = vector_ids[0].split("_", 1)[0] if vector_ids else document.id
             self.bm25_indexer.add_documents(
                 sparse_stats,
                 collection=self.collection,
-                doc_id=document.id,
+                doc_id=bm25_doc_id,
                 trace=trace,
             )
             logger.info(f"      Index built for {len(sparse_stats)} documents")
